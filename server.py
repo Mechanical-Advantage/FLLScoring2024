@@ -3,13 +3,6 @@ import string
 import cherrypy
 import os 
 from pathlib import Path 
-config = {
-'/static': {
-'tools.staticdir.on' : True,
-"tools.staticdir.dir": os.getcwd() + "\\static" }
-}
-cherrypy.config.update(config)
-print (cherrypy.config) 
 
 class StringMaker(object):
    @cherrypy.expose
@@ -25,4 +18,11 @@ class StringMaker(object):
        return "Hello " + name + "!"
 		
 if __name__ == '__main__':
-   cherrypy.quickstart(StringMaker (), '/', config)
+    cherrypy.config.update(
+            {"server.socket_port":8080, "server.socket_host": "0.0.0.0"})
+    cherrypy.quickstart(StringMaker (), '/', config={
+        "/static": {
+            'tools.staticdir.on' : True,
+            "tools.staticdir.dir": os.getcwd() + "\\static"
+        }
+    })

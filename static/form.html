@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FLL Scoring</title>
+    <!-- <script type="text/javascript">
+
+            function writeName() {
+                var numberElement = document.getElementById('teamNumber');
+                var name = document.getElementById('name');
+            
+                numberElement.innerHTML = name.value;
+            }
+
+    </script> -->
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        div.selection-screen {
+            line-height: 175%;
+            text-align: center;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        div.scoring-screen th {
+            text-align: left;
+        }
+
+        div.scoring-screen td {
+            text-align: left;
+        }
+
+        div.scoring-screen input[type="checkbox"] {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Selection screen -->
+    <div hidden class="selection-screen">
+        <p>FLL SUPERPOWERED Scoring</p>
+        <form>
+                Team Number: <input type="number" id="name"/><br />
+                Match Number: <input type="number" id="match"/><br />
+                Referee: <input type="number" id="referee"/><br />
+                Table Number: <input type="number" id="table"/><br />
+                <input type="button" value="Done" onclick="javascript:writeName()"/>
+        </form>
+    </div>
+
+    <!-- Scoring screen -->
+    <div class="scoring-screen">
+        <p>FLL SUPERPOWERED</p>
+        <table>
+            <tbody>
+
+                <tr>
+                    <th>Mission 0 Equipment Inspection</th>
+                </tr>
+                <tr>
+                    <td>If your robot and all your equipment fit completely in one launch area and are under a height of 12 in.</td>
+                    <td><input type="checkbox" id="M00a"/></td>
+                </tr>
+                
+                <tr>
+                    <th>Mission 1 Innovation Project Model</th>
+                </tr>
+                <tr>
+                    <td>If model is completely in or partially in hydrogen plant</td>
+                    <td><input type="checkbox" id="M01a"/></td>
+                </tr>
+                
+                <tr>
+                    <th>Mission 2 Oil Platform</th>
+                </tr>
+                <tr>
+                    <td>If a fuel unit is in the fuel truck</td>
+                    <td><input type="number" id="M02b"/></td>
+                </tr>
+                <tr>
+                    <td> Bonus: If at least one fuel unit is in the fuel truck and the fuel truck is at least partly over the fueling station target:</td>
+                    <td><input type="checkbox" id="M02b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 3 Energy Storage</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit is completely in the energy storage bin (max of three):</td>
+                    <td><input type="number" id="M03a"/></td>
+                </tr>
+                <tr>
+                    <td>If the energy unit is completely removed from the energy storage tray:</td>
+                    <td><input type="checkbox" id="M03b"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- <form>
+             Mission 0 Equipment Inspection: <input type="checkbox" id="M00"/><br />
+             Mission 1 Innovation Project Model: <input type="checkbox" id="M01"/><br />
+             Mission 2 Oil Platform: <input type="checkbox" id="M02"/><br />
+             Mission 2 Bonus: <input type="checkbox" id="M02b"/><br />
+             Mission 3 Energy Storage: 
+                Energy unit completely in energy storage bin: <input type="number" id="M03"/><br />
+                Energy unit completely removed: <input type="checkbox" id="M03b"/><br />
+             Mission 4 Solar Farm: <input type="checkbox" id="M04"/><br />
+             Mission 5 Smart Grid: <input type="checkbox" id="M05"/><br />
+             Mission 6 Hybrid Car: <input type="checkbox" id="M06"/><br />
+             Mission 7 Wind Turbine: <input type="checkbox" id="M07"/><br />
+             Mission 8 Watch Television: <input type="checkbox" id="M08"/><br />
+             Mission 9 Dinosaur Toy: <input type="checkbox" id="M09"/><br />
+             Mission 10 Power Plant: <input type="checkbox" id="M10"/><br />
+             Mission 11 Hydroelectric Dam: <input type="checkbox" id="M11"/><br />
+             Mission 12 Water Reservoir: <input type="checkbox" id="M12"/><br />
+             Mission 13 Power-To-X: <input type="checkbox" id="M13"/><br />
+             Mission 14 Toy Factory: <input type="checkbox" id="M14"/><br />
+             Mission 15 Rechargable Battery: <input type="checkbox" id="M15"/><br />
+        </form> -->
+    </div>
+</body>
+</html>
