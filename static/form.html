@@ -106,6 +106,197 @@
                     <td>If the energy unit is completely removed from the energy storage tray:</td>
                     <td><input type="checkbox" id="M03b"/></td>
                 </tr>
+
+                <tr>
+                    <th>Mission 4 Solar Farm</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit has been completely removed from its starting circle:</td>
+                    <td><input type="number" id="M04a"/></td>
+                </tr>
+                <tr>
+                    <td>Bonus: If both teams' orange connectors are completely raised:</td>
+                    <td><input type="checkbox" id="M04b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 5 Smart Grid</th>
+                </tr>
+                <tr>
+                    <td>If your field's orange connector is completely raised:</td>
+                    <td><input type="checkbox" id="M05a"/></td>
+                </tr>
+                <tr>
+                    <td>Bonus: If both teams' orange connectors are completely raised:</td>
+                    <td><input type="checkbox" id="M05b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 6 Hybrid Car</th>
+                </tr>
+                <tr>
+                    <td>If the hybrid car is no longer touching the ramp:</td>
+                    <td><input type="checkbox" id="M06a"/></td>
+                </tr>
+                <tr>
+                    <td>If the hybrid unit is in the hybrid car:</td>
+                    <td><input type="checkbox" id="M06b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 7 Wind Turbine</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit is no longer touching the wind turbine:</td>
+                    <td><input type="number" id="M07a"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 8 Watch Television</th>
+                </tr>
+                <tr>
+                    <td>If the television is completely raised:</td>
+                    <td><input type="checkbox" id="M08a"/></td>
+                </tr>
+                <tr>
+                    <td>If an energy unit is completely in the green television slot:</td>
+                    <td><input type="checkbox" id="M08b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 9 Dinosaur Toy</th>
+                </tr>
+                <tr>
+                    <td>If the dionsaur toy is completely in the left home area:</td>
+                    <td><input type="checkbox" id="M09a"/></td>
+                </tr>
+                <tr>
+                    <td>If the dinosaur toy lid if completely closed:</td>
+                </tr>
+                <tr>
+                    <td>-And there is an energy unit inside or there is a rechargeable battery inside:
+                    </td>
+                    <td>
+                        <label for="M09b"></label>
+                        <select id="M09b" name="M09b">
+                            <option value="">--Choose an Option--</option>
+                            <option value="Empty">Empty</option>
+                            <option value="EnergyUnit">Energy Unit</option>
+                            <option value="RechargeableBattery">Rechargeable battery</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Mission 10 Power Plant</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit is no longer touching the power plant:</td>
+                    <td><input type="number" id="M10a"/></td>
+                </tr>
+                <tr>
+                    <td>Bonus: If all three energy units are no longer touching the power plant:</td>
+                    <td><input type="checkbox" id="M10b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 11 Hydroelectric Dam</th>
+                </tr>
+                <tr>
+                    <td>If the energy unit is no longer touching the hydroelectric dam:</td>
+                    <td><input type="checkbox" id="M11a"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 12 Water Reservoir</th>
+                </tr>
+                <tr>
+                    <td>If a looped water unit is completely in the water reservoir, touching the mat:</td>
+                    <td><input type="number" id="M12a"/></td>
+                </tr>
+                <tr>
+                    <td>If a looped water unit is placed on a single red hook:</td>
+                    <td><input type="number" id="M12b"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 13 Power-To-X</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit is completely in the hydrogen plant target area (Max of Three):</td>
+                    <td><input type="number" id="M13a"/></td>
+                </tr>
+
+                <tr>
+                    <th>Mission 14 Toy Factory</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit is at least partly in the slot in the back of the toy factory (or in the red hopper) (Max of three):</td>
+                    <td><input type="number" id="M14a"/></td>
+                </tr>
+                <tr>
+                    <td>If the mini dinosaur toy has been released:</td>
+                    <td><input type="checkbox" id="M14b"/></td>
+                </tr>
+                
+                <tr>
+                    <th>Mission 15 Rechargeable Battery</th>
+                </tr>
+                <tr>
+                    <td>If an energy unit is completely in the rechaargeable battery target area (Max of 3):</td>
+                    <td><input type="number" id="M15a"/></td>
+                </tr>
+
+                <tr>
+                    <th>Precision Tokens</th>
+                </tr>
+                <tr>
+                    <td>Remaining tokens at the end of the match</td>
+                    <td>
+                        <label for="PrecisionTokens"></label>
+                        <select id="PrecisionTokens" name="PrecisionTokens">
+                            <option value="">--Choose an Option--</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>Gracious Professionalism</th>
+                </tr>
+                <tr>
+                    <td>Level of Gracious Professionalism displayed at the robot game table</td>
+                    <td>
+                        <label for="GP"></label>
+                        <select id="GP" name="GP">
+                            <option value="">--Choose an Option--</option>
+                            <option value="Developing">Developing</option>
+                            <option value="Accomplished">Accomplished</option>
+                            <option value="Exceeds">Exceeds</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Team Initials</th>
+                    <td><input type="text" id="TeamInitials"/></td>
+                </tr>
+
+                <tr>
+                    <th>Total Points</th>
+                    <td><input type="number" id="TotalPoints"/></td>
+                </tr>
+
+                <tr>
+                    <td><button>Submit</button></td>
+                </tr>
+
             </tbody>
         </table>
 
