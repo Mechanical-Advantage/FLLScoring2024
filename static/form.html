@@ -3,16 +3,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FLL Scoring</title>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
 
-            function writeName() {
-                var numberElement = document.getElementById('teamNumber');
-                var name = document.getElementById('name');
+        function total_score() {
+            var score = 0;
+            var mission0 = document.getElementById('M00a') ;
+            if (mission0.checked) score += 20;
+            var mission1 = document.getElementById('M01a');
+            if (mission1.checked) score += 10;
+            var mission2a = document.getElementById('M02a');
+            score += Number(mission2a.value) * 5;
+            var mission2b = document.getElementById('M02b');
+            if (mission2b.checked) score += 10;
+            var mission3a = document.getElementById('M03a');
+            score += Number(mission3a.value) * 10;
+            var mission3b = document.getElementById('M03b');
+            if (mission3b.checked) score += 5;
+            var mission4a = document.getElementById('M04a');
+            score += Number(mission4a.value) * 5;
             
-                numberElement.innerHTML = name.value;
-            }
+            var total_score = score;
+            console.log(total_score);
+        }
 
-    </script> -->
+    </script>
+
     <style>
         body {
             font-family: sans-serif;
@@ -66,7 +81,7 @@
         <p>FLL SUPERPOWERED</p>
         <table>
             <tbody>
-
+                
                 <tr>
                     <th>Mission 0 Equipment Inspection</th>
                 </tr>
@@ -88,7 +103,7 @@
                 </tr>
                 <tr>
                     <td>If a fuel unit is in the fuel truck</td>
-                    <td><input type="number" id="M02b"/></td>
+                    <td><input type="number" id="M02a"/></td>
                 </tr>
                 <tr>
                     <td> Bonus: If at least one fuel unit is in the fuel truck and the fuel truck is at least partly over the fueling station target:</td>
@@ -180,9 +195,9 @@
                         <label for="M09b"></label>
                         <select id="M09b" name="M09b">
                             <option value="">--Choose an Option--</option>
-                            <option value="Empty">Empty</option>
-                            <option value="EnergyUnit">Energy Unit</option>
-                            <option value="RechargeableBattery">Rechargeable battery</option>
+                            <option value="10">Empty</option>
+                            <option value="10">Energy Unit</option>
+                            <option value="20">Rechargeable battery</option>
                         </select>
                     </td>
                 </tr>
@@ -257,12 +272,12 @@
                         <select id="PrecisionTokens" name="PrecisionTokens">
                             <option value="">--Choose an Option--</option>
                             <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
+                            <option value="10">1</option>
+                            <option value="15">2</option>
+                            <option value="25">3</option>
+                            <option value="35">4</option>
+                            <option value="50">5</option>
+                            <option value="60">6</option>
                         </select>
                     </td>
                 </tr>
@@ -276,9 +291,9 @@
                         <label for="GP"></label>
                         <select id="GP" name="GP">
                             <option value="">--Choose an Option--</option>
-                            <option value="Developing">Developing</option>
-                            <option value="Accomplished">Accomplished</option>
-                            <option value="Exceeds">Exceeds</option>
+                            <option value="2">Developing</option>
+                            <option value="3">Accomplished</option>
+                            <option value="4">Exceeds</option>
                         </select>
                     </td>
                 </tr>
@@ -294,7 +309,7 @@
                 </tr>
 
                 <tr>
-                    <td><button>Submit</button></td>
+                    <td><input type="button" value="Submit" onclick="total_score();"/><td>
                 </tr>
 
             </tbody>
