@@ -12,20 +12,85 @@
             var mission1 = document.getElementById('M01a');
             if (mission1.checked) score += 10;
             var mission2a = document.getElementById('M02a');
-            score += Number(mission2a.value) * 5;
+            score += Number(mission2a.innerText) * 5;
             var mission2b = document.getElementById('M02b');
             if (mission2b.checked) score += 10;
             var mission3a = document.getElementById('M03a');
-            score += Number(mission3a.value) * 10;
+            score += Number(mission3a.innerText) * 10;
             var mission3b = document.getElementById('M03b');
             if (mission3b.checked) score += 5;
             var mission4a = document.getElementById('M04a');
-            score += Number(mission4a.value) * 5;
-            
+            score += Number(mission4a.innerText) * 5;
+            var mission4b = document.getElementById('M04b');
+            if (mission4b.checked) score += 5;
+            var mission5a = document.getElementById('M05a');
+            if (mission5a.checked) score += 20;
+            var mission5b = document.getElementById('M05b');
+            if (mission5b.checked) score += 10;
+            var mission6a = document.getElementById('M06a');
+            if (mission6a.checked) score += 10;
+            var mission6b = document.getElementById('M06b');
+            if (mission6b.checked) score += 10;
+            var mission7a = document.getElementById('M07a');
+            score += Number(mission7a.innerText) * 10;
+            var mission8a = document.getElementById('M08a');
+            if (mission8a.checked) score += 10;
+            var mission8b = document.getElementById('M08b');
+            if (mission8b.checked) score += 10;
+            var mission9a = document.getElementById('M09a');
+            if (mission9a.checked) score += 10;
+            var mission9b = document.getElementById('M09b');
+            score += Number(mission9b.value);
+            var mission10a = document.getElementById('M10a');
+            score += Number(mission10a.innerText) * 5;
+            var mission10b = document.getElementById('M10b');
+            if (mission10b.checked) score += 10;
+            var mission11a = document.getElementById('M11a');
+            if (mission11a.checked) score += 20;
+            var mission12a = document.getElementById('M12a');
+            score += Number(mission12a.innerText) * 5;
+            var mission12b = document.getElementById('M12b');
+            score += Number(mission12b.innerText) * 10;
+            var mission13 = document.getElementById('M13a');
+            score += Number(mission13.innerText) * 5;
+            var mission14a = document.getElementById('M14a');
+            score += Number(mission14a.innerText) * 5;
+            var mission14b = document.getElementById('M14b');
+            if (mission14b.checked) score += 10;
+            var mission15a = document.getElementById('M15a');
+            score += Number(mission15a.innerText) * 5;
+            var missionPT = document.getElementById('PrecisionTokens');
+            score += Number(missionPT.value);
+            document.getElementById('TotalPoints').value = score;
             var total_score = score;
             console.log(total_score);
         }
 
+        function minus(mission){
+            var element = document.getElementById(mission);
+            var value = Number(element.innerText) - 1;
+            if (value < 0) value = 0;
+            element.innerText = value;
+            total_score();
+        }
+        
+        function plus(mission){
+            var element = document.getElementById(mission);
+            var value = Number(element.innerText) + 1;
+            if (value > 3 && mission == 'M02a') value = 3;
+            if (value > 3 && mission == 'M03a') value = 3;
+            if (value > 3 && mission == 'M04a') value = 3;
+            if (value > 3 && mission == 'M07a') value = 3;
+            if (value > 3 && mission == 'M10a') value = 3;
+            if (value > 3 && mission == 'M12a') value = 3;
+            if (value > 3 && mission == 'M12b') value = 3;
+            if (value > 3 && mission == 'M13a') value = 3;
+            if (value > 3 && mission == 'M14a') value = 3;
+            if (value > 3 && mission == 'M15a') value = 3;
+            element.innerText = value;
+            total_score();
+        }
+        
     </script>
 
     <style>
@@ -87,7 +152,7 @@
                 </tr>
                 <tr>
                     <td>If your robot and all your equipment fit completely in one launch area and are under a height of 12 in.</td>
-                    <td><input type="checkbox" id="M00a"/></td>
+                    <td><input type="checkbox" id="M00a" onchange="total_score();"/></td>
                 </tr>
                 
                 <tr>
@@ -95,7 +160,7 @@
                 </tr>
                 <tr>
                     <td>If model is completely in or partially in hydrogen plant</td>
-                    <td><input type="checkbox" id="M01a"/></td>
+                    <td><input type="checkbox" id="M01a" onchange="total_score();"/></td>
                 </tr>
                 
                 <tr>
@@ -103,11 +168,15 @@
                 </tr>
                 <tr>
                     <td>If a fuel unit is in the fuel truck</td>
-                    <td><input type="number" id="M02a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M02a')"></input>
+                        <span id="M02a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M02a')"></input>
+                    </td>
+                <!-- <input type="range" id="M02a" onchange="total_score();" min="0" max=""/></td> -->
                 </tr>
                 <tr>
                     <td> Bonus: If at least one fuel unit is in the fuel truck and the fuel truck is at least partly over the fueling station target:</td>
-                    <td><input type="checkbox" id="M02b"/></td>
+                    <td><input type="checkbox" id="M02b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -115,11 +184,13 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the energy storage bin (max of three):</td>
-                    <td><input type="number" id="M03a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M03a')"></input>
+                        <span id="M03a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M03a')"></input></td>
                 </tr>
                 <tr>
                     <td>If the energy unit is completely removed from the energy storage tray:</td>
-                    <td><input type="checkbox" id="M03b"/></td>
+                    <td><input type="checkbox" id="M03b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -127,11 +198,13 @@
                 </tr>
                 <tr>
                     <td>If an energy unit has been completely removed from its starting circle:</td>
-                    <td><input type="number" id="M04a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M04a')"></input>
+                        <span id="M04a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M04a')"></input></td>
                 </tr>
                 <tr>
                     <td>Bonus: If both teams' orange connectors are completely raised:</td>
-                    <td><input type="checkbox" id="M04b"/></td>
+                    <td><input type="checkbox" id="M04b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -139,11 +212,11 @@
                 </tr>
                 <tr>
                     <td>If your field's orange connector is completely raised:</td>
-                    <td><input type="checkbox" id="M05a"/></td>
+                    <td><input type="checkbox" id="M05a" onchange="total_score();"/></td>
                 </tr>
                 <tr>
                     <td>Bonus: If both teams' orange connectors are completely raised:</td>
-                    <td><input type="checkbox" id="M05b"/></td>
+                    <td><input type="checkbox" id="M05b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -151,11 +224,11 @@
                 </tr>
                 <tr>
                     <td>If the hybrid car is no longer touching the ramp:</td>
-                    <td><input type="checkbox" id="M06a"/></td>
+                    <td><input type="checkbox" id="M06a" onchange="total_score();"/></td>
                 </tr>
                 <tr>
                     <td>If the hybrid unit is in the hybrid car:</td>
-                    <td><input type="checkbox" id="M06b"/></td>
+                    <td><input type="checkbox" id="M06b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -163,7 +236,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is no longer touching the wind turbine:</td>
-                    <td><input type="number" id="M07a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M07a')"></input>
+                        <span id="M07a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M07a')"></input></td>
                 </tr>
 
                 <tr>
@@ -171,11 +246,11 @@
                 </tr>
                 <tr>
                     <td>If the television is completely raised:</td>
-                    <td><input type="checkbox" id="M08a"/></td>
+                    <td><input type="checkbox" id="M08a" onchange="total_score();"/></td>
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the green television slot:</td>
-                    <td><input type="checkbox" id="M08b"/></td>
+                    <td><input type="checkbox" id="M08b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -183,7 +258,7 @@
                 </tr>
                 <tr>
                     <td>If the dionsaur toy is completely in the left home area:</td>
-                    <td><input type="checkbox" id="M09a"/></td>
+                    <td><input type="checkbox" id="M09a" onchange="total_score();"/></td>
                 </tr>
                 <tr>
                     <td>If the dinosaur toy lid if completely closed:</td>
@@ -193,7 +268,7 @@
                     </td>
                     <td>
                         <label for="M09b"></label>
-                        <select id="M09b" name="M09b">
+                        <select id="M09b" name="M09b" onchange="total_score();">
                             <option value="">--Choose an Option--</option>
                             <option value="10">Empty</option>
                             <option value="10">Energy Unit</option>
@@ -207,11 +282,13 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is no longer touching the power plant:</td>
-                    <td><input type="number" id="M10a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M10a')"></input>
+                        <span id="M10a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M10a')"></input></td>
                 </tr>
                 <tr>
                     <td>Bonus: If all three energy units are no longer touching the power plant:</td>
-                    <td><input type="checkbox" id="M10b"/></td>
+                    <td><input type="checkbox" id="M10b" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -219,7 +296,7 @@
                 </tr>
                 <tr>
                     <td>If the energy unit is no longer touching the hydroelectric dam:</td>
-                    <td><input type="checkbox" id="M11a"/></td>
+                    <td><input type="checkbox" id="M11a" onchange="total_score();"/></td>
                 </tr>
 
                 <tr>
@@ -227,11 +304,15 @@
                 </tr>
                 <tr>
                     <td>If a looped water unit is completely in the water reservoir, touching the mat:</td>
-                    <td><input type="number" id="M12a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M12a')"></input>
+                        <span id="M12a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M12a')"></input></td>
                 </tr>
                 <tr>
                     <td>If a looped water unit is placed on a single red hook:</td>
-                    <td><input type="number" id="M12b"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M12b')"></input>
+                        <span id="M12b">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M12b')"></input></td>
                 </tr>
 
                 <tr>
@@ -239,7 +320,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the hydrogen plant target area (Max of Three):</td>
-                    <td><input type="number" id="M13a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M13a')"></input>
+                        <span id="M13a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M13a')"></input></td>
                 </tr>
 
                 <tr>
@@ -247,11 +330,13 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is at least partly in the slot in the back of the toy factory (or in the red hopper) (Max of three):</td>
-                    <td><input type="number" id="M14a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M14a')"></input>
+                        <span id="M14a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M14a')"></input></td>
                 </tr>
                 <tr>
                     <td>If the mini dinosaur toy has been released:</td>
-                    <td><input type="checkbox" id="M14b"/></td>
+                    <td><input type="checkbox" id="M14b" onchange="total_score();"/></td>
                 </tr>
                 
                 <tr>
@@ -259,7 +344,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the rechaargeable battery target area (Max of 3):</td>
-                    <td><input type="number" id="M15a"/></td>
+                    <td><input type="button" value="Minus" onclick="minus('M15a')"></input>
+                        <span id="M15a">0</span> 
+                        <input type="button" value="Plus" onclick = "plus('M15a')"></input></td>
                 </tr>
 
                 <tr>
@@ -269,7 +356,7 @@
                     <td>Remaining tokens at the end of the match</td>
                     <td>
                         <label for="PrecisionTokens"></label>
-                        <select id="PrecisionTokens" name="PrecisionTokens">
+                        <select id="PrecisionTokens" name="PrecisionTokens" onchange="total_score();">
                             <option value="">--Choose an Option--</option>
                             <option value="0">0</option>
                             <option value="10">1</option>
@@ -305,11 +392,11 @@
 
                 <tr>
                     <th>Total Points</th>
-                    <td><input type="number" id="TotalPoints"/></td>
+                    <td><input type="number" id="TotalPoints" readonly/></td>
                 </tr>
 
                 <tr>
-                    <td><input type="button" value="Submit" onclick="total_score();"/><td>
+                    <td><input type="button" value="Submit" onchange="total_score();"/><td>
                 </tr>
 
             </tbody>
