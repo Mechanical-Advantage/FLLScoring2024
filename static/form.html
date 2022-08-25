@@ -90,12 +90,74 @@
             element.innerText = value;
             total_score();
         }
+
+        function startMatch(){
+            var selection_screen = document.getElementsByClassName("selection-screen")[0];
+            selection_screen.hidden = true;
+            var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
+            scoring_screen.hidden = false;
+        }
+
+        function submitMatch(){
+            var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
+            scoring_screen.hidden = true;
+            var selection_screen = document.getElementsByClassName("selection-screen")[0];
+            selection_screen.hidden = false;  
+            
+            var m02a = document.getElementById('M02a');
+            var m03a = document.getElementById('M03a');
+            var m04a = document.getElementById('M04a');
+            var m07a = document.getElementById('M07a');
+            var m09b = document.getElementById('M09b');
+            var m10a = document.getElementById('M10a');
+            var m12a = document.getElementById('M12a');
+            var m12b = document.getElementById('M12b');
+            var m13a = document.getElementById('M13a');
+            var m14a = document.getElementById('M14a');
+            var m15a = document.getElementById('M15a');
+           
+
+            document.getElementById("name").value = "";
+            document.getElementById("match").value = "";
+            document.getElementById("referee").value = "";
+            document.getElementById("table").value = "";
+            document.getElementById("M00a").checked = false;
+            document.getElementById("M01a").checked = false;
+            m02a.innerText = "0";
+            document.getElementById("M02b").checked = false;
+            m03a.innerText = "0";
+            document.getElementById("M03b").checked = false;
+            m04a.innerText = "0";
+            document.getElementById("M04b").checked = false;
+            document.getElementById("M05a").checked = false; 
+            document.getElementById("M05b").checked = false; 
+            document.getElementById("M06a").checked = false; 
+            document.getElementById("M06b").checked = false; 
+            m07a.innerText = "0";
+            document.getElementById("M08a").checked = false; 
+            document.getElementById("M08b").checked = false; 
+            document.getElementById("M09a").checked = false; 
+            document.getElementById("M09b").value = "";
+            m10a.innerText = "0";
+            document.getElementById("M10b").checked = false;
+            document.getElementById("M11a").checked = false;
+            m12a.innerText = "0";
+            m12b.innerText = "0";
+            m13a.innerText = "0";
+            m14a.innerText = "0";
+            document.getElementById("M14b").checked = false; 
+            m15a.innerText = "0";
+            document.getElementById("PrecisionTokens").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("TotalPoints").value = "0";
+            document.getElementById("TeamInitials").value = "";
+        }
         
     </script>
 
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Georgia';
         }
 
         div.selection-screen {
@@ -125,30 +187,43 @@
             width: 40px;
             height: 40px;
         }
+
+        table, tr {
+            background-color: hsl(180, 41%, 89%);
+            border: 2px solid;
+            border-collapse: collapse;
+        }
+
+        th {
+            height: 40px;
+        } 
+
     </style>
 </head>
 <body>
 
     <!-- Selection screen -->
-    <div hidden class="selection-screen">
+    <div class="selection-screen">
         <p>FLL SUPERPOWERED Scoring</p>
         <form>
                 Team Number: <input type="number" id="name"/><br />
-                Match Number: <input type="number" id="match"/><br />
-                Referee: <input type="number" id="referee"/><br />
-                Table Number: <input type="number" id="table"/><br />
-                <input type="button" value="Done" onclick="javascript:writeName()"/>
+                Match Number: <input type="number" id="match" min="0"/><br />
+                Referee: <input type="text" id="referee"/><br />
+                Table Number: <input type="number" id="table" min="0"/><br />
+                <input type="button" value="Done" style="height:40px;width:100px" onclick="javascript:startMatch()"/>
         </form>
     </div>
 
     <!-- Scoring screen -->
-    <div class="scoring-screen">
-        <p>FLL SUPERPOWERED</p>
+    <div hidden class="scoring-screen">
+        <p>FLL SUPERPOWERED SCORING APP</p>
         <table>
             <tbody>
                 
                 <tr>
+                     <body style="background-color:rgb(238, 245, 179);"></body>
                     <th>Mission 0 Equipment Inspection</th>
+                    </body>
                 </tr>
                 <tr>
                     <td>If your robot and all your equipment fit completely in one launch area and are under a height of 12 in.</td>
@@ -168,11 +243,10 @@
                 </tr>
                 <tr>
                     <td>If a fuel unit is in the fuel truck</td>
-                    <td><input type="button" value="Minus" onclick="minus('M02a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M02a')"></input>
                         <span id="M02a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M02a')"></input>
+                        <input type="button" value="+" onclick = "plus('M02a')"></input>
                     </td>
-                <!-- <input type="range" id="M02a" onchange="total_score();" min="0" max=""/></td> -->
                 </tr>
                 <tr>
                     <td> Bonus: If at least one fuel unit is in the fuel truck and the fuel truck is at least partly over the fueling station target:</td>
@@ -184,9 +258,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the energy storage bin (max of three):</td>
-                    <td><input type="button" value="Minus" onclick="minus('M03a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M03a')"></input>
                         <span id="M03a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M03a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M03a')"></input></td>
                 </tr>
                 <tr>
                     <td>If the energy unit is completely removed from the energy storage tray:</td>
@@ -198,9 +272,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit has been completely removed from its starting circle:</td>
-                    <td><input type="button" value="Minus" onclick="minus('M04a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M04a')"></input>
                         <span id="M04a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M04a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M04a')"></input></td>
                 </tr>
                 <tr>
                     <td>Bonus: If both teams' orange connectors are completely raised:</td>
@@ -236,9 +310,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is no longer touching the wind turbine:</td>
-                    <td><input type="button" value="Minus" onclick="minus('M07a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M07a')"></input>
                         <span id="M07a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M07a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M07a')"></input></td>
                 </tr>
 
                 <tr>
@@ -257,7 +331,7 @@
                     <th>Mission 9 Dinosaur Toy</th>
                 </tr>
                 <tr>
-                    <td>If the dionsaur toy is completely in the left home area:</td>
+                    <td>If the dinosaur toy is completely in the left home area:</td>
                     <td><input type="checkbox" id="M09a" onchange="total_score();"/></td>
                 </tr>
                 <tr>
@@ -282,9 +356,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is no longer touching the power plant:</td>
-                    <td><input type="button" value="Minus" onclick="minus('M10a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M10a')"></input>
                         <span id="M10a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M10a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M10a')"></input></td>
                 </tr>
                 <tr>
                     <td>Bonus: If all three energy units are no longer touching the power plant:</td>
@@ -304,15 +378,15 @@
                 </tr>
                 <tr>
                     <td>If a looped water unit is completely in the water reservoir, touching the mat:</td>
-                    <td><input type="button" value="Minus" onclick="minus('M12a')"></input>
+                    <td><input type="button" value="–" onclick="minus('M12a')"></input>
                         <span id="M12a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M12a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M12a')"></input></td>
                 </tr>
                 <tr>
                     <td>If a looped water unit is placed on a single red hook:</td>
-                    <td><input type="button" value="Minus" onclick="minus('M12b')"></input>
+                    <td><input type="button" value="-" onclick="minus('M12b')"></input>
                         <span id="M12b">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M12b')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M12b')"></input></td>
                 </tr>
 
                 <tr>
@@ -320,9 +394,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the hydrogen plant target area (Max of Three):</td>
-                    <td><input type="button" value="Minus" onclick="minus('M13a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M13a')"></input>
                         <span id="M13a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M13a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M13a')"></input></td>
                 </tr>
 
                 <tr>
@@ -330,9 +404,9 @@
                 </tr>
                 <tr>
                     <td>If an energy unit is at least partly in the slot in the back of the toy factory (or in the red hopper) (Max of three):</td>
-                    <td><input type="button" value="Minus" onclick="minus('M14a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M14a')"></input>
                         <span id="M14a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M14a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M14a')"></input></td>
                 </tr>
                 <tr>
                     <td>If the mini dinosaur toy has been released:</td>
@@ -343,10 +417,10 @@
                     <th>Mission 15 Rechargeable Battery</th>
                 </tr>
                 <tr>
-                    <td>If an energy unit is completely in the rechaargeable battery target area (Max of 3):</td>
-                    <td><input type="button" value="Minus" onclick="minus('M15a')"></input>
+                    <td>If an energy unit is completely in the rechargeable battery target area (Max of 3):</td>
+                    <td><input type="button" value="-" onclick="minus('M15a')"></input>
                         <span id="M15a">0</span> 
-                        <input type="button" value="Plus" onclick = "plus('M15a')"></input></td>
+                        <input type="button" value="+" onclick = "plus('M15a')"></input></td>
                 </tr>
 
                 <tr>
@@ -364,7 +438,7 @@
                             <option value="25">3</option>
                             <option value="35">4</option>
                             <option value="50">5</option>
-                            <option value="60">6</option>
+                            <option value="50">6</option>
                         </select>
                     </td>
                 </tr>
@@ -392,11 +466,10 @@
 
                 <tr>
                     <th>Total Points</th>
-                    <td><input type="number" id="TotalPoints" readonly/></td>
+                    <td><input type="number" id="TotalPoints" value="0" readonly/></td>
                 </tr>
-
                 <tr>
-                    <td><input type="button" value="Submit" onchange="total_score();"/><td>
+                    <td><input type="button" value="Submit" style="height:40px;width:100px" onchange="total_score();" onclick="submitMatch();"/><td>
                 </tr>
 
             </tbody>
