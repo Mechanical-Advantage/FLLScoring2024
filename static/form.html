@@ -60,7 +60,8 @@
             var mission15a = document.getElementById('M15a');
             score += Number(mission15a.innerText) * 5;
             var missionPT = document.getElementById('PrecisionTokens');
-            score += Number(missionPT.value);
+            var scorelookup = {0:0, 1:10, 2:15, 3:25, 4:35, 5:50, 6:50}
+            score += scorelookup[missionPT.value];
             document.getElementById('TotalPoints').value = score;
             var total_score = score;
             console.log(total_score);
@@ -99,6 +100,22 @@
         }
 
         function submitMatch(){
+            const http = new XMLHttpRequest();
+            const form = new FormData();
+
+            form.append("team", document.getElementById('name').value);
+            form.append("match", document.getElementById('match').value);
+            form.append("referee", document.getElementById('referee').value);
+            form.append("table", document.getElementById('table').value);
+            form.append("score", document.getElementById('TotalPoints').value);
+            form.append("GPScore", document.getElementById('GP').value);
+            form.append("teamInitials", document.getElementById('TeamInitials').value);
+            form.append("precisionTokens", document.getElementById('PrecisionTokens').value);
+
+
+            http.open("POST", "/saveMatch");
+            http.send(form);
+            
             var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
             scoring_screen.hidden = true;
             var selection_screen = document.getElementsByClassName("selection-screen")[0];
@@ -277,7 +294,7 @@
                         <input type="button" value="+" onclick = "plus('M04a')"></input></td>
                 </tr>
                 <tr>
-                    <td>Bonus: If both teams' orange connectors are completely raised:</td>
+                    <td>Bonus: If all three energy units have been completely removed from their starting circles:</td>
                     <td><input type="checkbox" id="M04b" onchange="total_score();"/></td>
                 </tr>
 
@@ -378,7 +395,7 @@
                 </tr>
                 <tr>
                     <td>If a looped water unit is completely in the water reservoir, touching the mat:</td>
-                    <td><input type="button" value="–" onclick="minus('M12a')"></input>
+                    <td><input type="button" value="-" onclick="minus('M12a')"></input>
                         <span id="M12a">0</span> 
                         <input type="button" value="+" onclick = "plus('M12a')"></input></td>
                 </tr>
@@ -433,12 +450,12 @@
                         <select id="PrecisionTokens" name="PrecisionTokens" onchange="total_score();">
                             <option value="">--Choose an Option--</option>
                             <option value="0">0</option>
-                            <option value="10">1</option>
-                            <option value="15">2</option>
-                            <option value="25">3</option>
-                            <option value="35">4</option>
-                            <option value="50">5</option>
-                            <option value="50">6</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
                         </select>
                     </td>
                 </tr>
