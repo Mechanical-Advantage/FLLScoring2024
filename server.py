@@ -3,11 +3,12 @@ import string
 import cherrypy
 import os 
 from pathlib import Path 
+import sqlite3 as sql
 
 class StringMaker(object):
    @cherrypy.expose
    def index(self):
-      return "Hello! How are you?"
+      return 
    
    @cherrypy.expose
    def generate(self, length=9):
@@ -18,13 +19,13 @@ class StringMaker(object):
        return "Hello " + name + "!"
 	
    @cherrypy.expose
-   def saveMatch(self, team, match, referee, table, score, GPScore, teamInitials, precisionTokens):
-        print("Team: " + team + "\nMatch: " + match + "\nReferee:  " +  referee + "\nTable: " + table + "\nScore " + score + "\nGPScore " + GPScore + "\nTeam Initials: " + teamInitials + "\nPrecision Tokens: " + precisionTokens)
+   def saveMatch(self, team, match, referee, field, score, GPScore, teamInitials, precisionTokens):
+        print("Team: " + team + "\nMatch: " + match + "\nReferee:  " +  referee + "\nfield: " + field + "\nScore " + score + "\nGPScore " + GPScore + "\nTeam Initials: " + teamInitials + "\nPrecision Tokens: " + precisionTokens)
         
-        conn_global = sql.connect(db_global)
+        conn_global = sql.connect("data.db")
         cur_global = conn_global.cursor()
         cur_global.execute(
-            "INSERT INTO matches(team, match, referee, table, score, GPScore, teamInitials, precisionTokens) VALUES (team, match, referee, table, score, GPScore, teamInitials, precisionTokens)")
+            "INSERT INTO matches(team, match, referee, field, score, GPScore, teamInitials, precisionTokens) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",(team, match, referee, field, score, GPScore, teamInitials, precisionTokens))
         conn_global.commit()
         conn_global.close()
         return

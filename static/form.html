@@ -106,7 +106,7 @@
             form.append("team", document.getElementById('name').value);
             form.append("match", document.getElementById('match').value);
             form.append("referee", document.getElementById('referee').value);
-            form.append("table", document.getElementById('table').value);
+            form.append("field", document.getElementById('field').value);
             form.append("score", document.getElementById('TotalPoints').value);
             form.append("GPScore", document.getElementById('GP').value);
             form.append("teamInitials", document.getElementById('TeamInitials').value);
@@ -137,7 +137,7 @@
             document.getElementById("name").value = "";
             document.getElementById("match").value = "";
             document.getElementById("referee").value = "";
-            document.getElementById("table").value = "";
+            document.getElementById("field").value = "";
             document.getElementById("M00a").checked = false;
             document.getElementById("M01a").checked = false;
             m02a.innerText = "0";
@@ -168,6 +168,7 @@
             document.getElementById("name").value = "";
             document.getElementById("TotalPoints").value = "0";
             document.getElementById("TeamInitials").value = "";
+            document.getElementById("GP").value = "";
         }
         
     </script>
@@ -190,14 +191,15 @@
         p {
             font-weight: bold;
             font-size: 23px;
+            text-align: center;
         }
 
         div.scoring-screen th {
-            text-align: left;
+            text-align: center;
         }
 
-        div.scoring-screen td {
-            text-align: left;
+        div.scoring-screen td:last-child{
+            text-align: center;
         }
 
         div.scoring-screen input[type="checkbox"] {
@@ -213,7 +215,12 @@
 
         th {
             height: 40px;
+            padding: 10px;
         } 
+
+        td {
+            padding: 10px;
+        }
 
     </style>
 </head>
@@ -222,13 +229,29 @@
     <!-- Selection screen -->
     <div class="selection-screen">
         <p>FLL SUPERPOWERED Scoring</p>
-        <form>
-                Team Number: <input type="number" id="name"/><br />
-                Match Number: <input type="number" id="match" min="0"/><br />
-                Referee: <input type="text" id="referee"/><br />
-                Table Number: <input type="number" id="table" min="0"/><br />
-                <input type="button" value="Done" style="height:40px;width:100px" onclick="javascript:startMatch()"/>
-        </form>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Team Number:</td> 
+                    <td><input type="number" id="name"/></td>
+                </tr>
+                <tr>
+                    <td>Match Number:</td> 
+                    <td><input type="number" id="match" min="0"/></td>
+                </tr>
+                <tr>
+                    <td>Referee Name:</td> 
+                    <td><input type="text" id="referee"/></td>
+                </tr>
+                <tr>
+                    <td>Table Number:</td> 
+                    <td><input type="number" id="field" min="0"/><td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center; vertical-align: middle;"><input type="button" value="Done" style="height:40px;width:100px" onclick="javascript:startMatch()"/></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Scoring screen -->
@@ -239,7 +262,7 @@
                 
                 <tr>
                      <body style="background-color:rgb(238, 245, 179);"></body>
-                    <th>Mission 0 Equipment Inspection</th>
+                    <th colspan="2">Mission 0 Equipment Inspection</th>
                     </body>
                 </tr>
                 <tr>
@@ -248,7 +271,7 @@
                 </tr>
                 
                 <tr>
-                    <th>Mission 1 Innovation Project Model</th>
+                    <th colspan="2">Mission 1 Innovation Project Model</th>
                 </tr>
                 <tr>
                     <td>If model is completely in or partially in hydrogen plant</td>
@@ -256,7 +279,7 @@
                 </tr>
                 
                 <tr>
-                    <th>Mission 2 Oil Platform</th>
+                    <th colspan="2">Mission 2 Oil Platform</th>
                 </tr>
                 <tr>
                     <td>If a fuel unit is in the fuel truck</td>
@@ -271,7 +294,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 3 Energy Storage</th>
+                    <th colspan="2">Mission 3 Energy Storage</th>
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the energy storage bin (max of three):</td>
@@ -285,7 +308,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 4 Solar Farm</th>
+                    <th colspan="2">Mission 4 Solar Farm</th>
                 </tr>
                 <tr>
                     <td>If an energy unit has been completely removed from its starting circle:</td>
@@ -299,7 +322,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 5 Smart Grid</th>
+                    <th colspan="2">Mission 5 Smart Grid</th>
                 </tr>
                 <tr>
                     <td>If your field's orange connector is completely raised:</td>
@@ -311,7 +334,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 6 Hybrid Car</th>
+                    <th colspan="2"> Mission 6 Hybrid Car</th>
                 </tr>
                 <tr>
                     <td>If the hybrid car is no longer touching the ramp:</td>
@@ -323,7 +346,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 7 Wind Turbine</th>
+                    <th colspan="2">Mission 7 Wind Turbine</th>
                 </tr>
                 <tr>
                     <td>If an energy unit is no longer touching the wind turbine:</td>
@@ -333,7 +356,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 8 Watch Television</th>
+                    <th colspan="2">Mission 8 Watch Television</th>
                 </tr>
                 <tr>
                     <td>If the television is completely raised:</td>
@@ -345,7 +368,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 9 Dinosaur Toy</th>
+                    <th colspan="2">Mission 9 Dinosaur Toy</th>
                 </tr>
                 <tr>
                     <td>If the dinosaur toy is completely in the left home area:</td>
@@ -369,7 +392,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 10 Power Plant</th>
+                    <th colspan="2">Mission 10 Power Plant</th>
                 </tr>
                 <tr>
                     <td>If an energy unit is no longer touching the power plant:</td>
@@ -383,7 +406,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 11 Hydroelectric Dam</th>
+                    <th colspan="2">Mission 11 Hydroelectric Dam</th>
                 </tr>
                 <tr>
                     <td>If the energy unit is no longer touching the hydroelectric dam:</td>
@@ -391,7 +414,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 12 Water Reservoir</th>
+                    <th colspan="2">Mission 12 Water Reservoir</th>
                 </tr>
                 <tr>
                     <td>If a looped water unit is completely in the water reservoir, touching the mat:</td>
@@ -407,7 +430,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 13 Power-To-X</th>
+                    <th colspan="2">Mission 13 Power-To-X</th>
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the hydrogen plant target area (Max of Three):</td>
@@ -417,7 +440,7 @@
                 </tr>
 
                 <tr>
-                    <th>Mission 14 Toy Factory</th>
+                    <th colspan="2">Mission 14 Toy Factory</th>
                 </tr>
                 <tr>
                     <td>If an energy unit is at least partly in the slot in the back of the toy factory (or in the red hopper) (Max of three):</td>
@@ -431,7 +454,8 @@
                 </tr>
                 
                 <tr>
-                    <th>Mission 15 Rechargeable Battery</th>
+                    <th colspan="2">Mission 15 Rechargable Battery</th>
+                    
                 </tr>
                 <tr>
                     <td>If an energy unit is completely in the rechargeable battery target area (Max of 3):</td>
@@ -441,7 +465,8 @@
                 </tr>
 
                 <tr>
-                    <th>Precision Tokens</th>
+                    
+                    <th colspan="2">Precision Tokens</th>
                 </tr>
                 <tr>
                     <td>Remaining tokens at the end of the match</td>
@@ -461,7 +486,7 @@
                 </tr>
                 
                 <tr>
-                    <th>Gracious Professionalism</th>
+                    <th colspan="2">Gracious Professionalism</th>
                 </tr>
                 <tr>
                     <td>Level of Gracious Professionalism displayed at the robot game table</td>
@@ -477,42 +502,20 @@
                 </tr>
 
                 <tr>
-                    <th>Team Initials</th>
+                    <th style="text-align: left;">Team Initials</th>
                     <td><input type="text" id="TeamInitials"/></td>
                 </tr>
 
                 <tr>
-                    <th>Total Points</th>
+                    <th style="text-align: left;">Total Points</th>
                     <td><input type="number" id="TotalPoints" value="0" readonly/></td>
                 </tr>
                 <tr>
-                    <td><input type="button" value="Submit" style="height:40px;width:100px" onchange="total_score();" onclick="submitMatch();"/><td>
+                    <td colspan="2" style="text-align: center"><input type="button" value="Submit" style="height:40px;width:100px" onchange="total_score();" onclick="submitMatch();"/><td>
                 </tr>
 
             </tbody>
         </table>
-
-        <!-- <form>
-             Mission 0 Equipment Inspection: <input type="checkbox" id="M00"/><br />
-             Mission 1 Innovation Project Model: <input type="checkbox" id="M01"/><br />
-             Mission 2 Oil Platform: <input type="checkbox" id="M02"/><br />
-             Mission 2 Bonus: <input type="checkbox" id="M02b"/><br />
-             Mission 3 Energy Storage: 
-                Energy unit completely in energy storage bin: <input type="number" id="M03"/><br />
-                Energy unit completely removed: <input type="checkbox" id="M03b"/><br />
-             Mission 4 Solar Farm: <input type="checkbox" id="M04"/><br />
-             Mission 5 Smart Grid: <input type="checkbox" id="M05"/><br />
-             Mission 6 Hybrid Car: <input type="checkbox" id="M06"/><br />
-             Mission 7 Wind Turbine: <input type="checkbox" id="M07"/><br />
-             Mission 8 Watch Television: <input type="checkbox" id="M08"/><br />
-             Mission 9 Dinosaur Toy: <input type="checkbox" id="M09"/><br />
-             Mission 10 Power Plant: <input type="checkbox" id="M10"/><br />
-             Mission 11 Hydroelectric Dam: <input type="checkbox" id="M11"/><br />
-             Mission 12 Water Reservoir: <input type="checkbox" id="M12"/><br />
-             Mission 13 Power-To-X: <input type="checkbox" id="M13"/><br />
-             Mission 14 Toy Factory: <input type="checkbox" id="M14"/><br />
-             Mission 15 Rechargable Battery: <input type="checkbox" id="M15"/><br />
-        </form> -->
     </div>
 </body>
 </html>
