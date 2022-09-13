@@ -4,6 +4,7 @@ import cherrypy
 import os 
 from pathlib import Path 
 import sqlite3 as sql
+import json
 
 class StringMaker(object):
    @cherrypy.expose
@@ -29,6 +30,35 @@ class StringMaker(object):
         conn_global.commit()
         conn_global.close()
         return
+    
+   @cherrypy.expose
+   def getData(self):
+        conn_global = sql.connect("data.db")
+        cur_global = conn_global.cursor()
+
+        teams = cur_global.execute("select * from teams").fetchall()
+        team_data = []
+        for team in teams:
+            avgScore = cur_global.execute("select avg(score) from matches where team = ?",(team[0],)).fetchall()[0][0]
+            avgScore = 0 if avgScore == None else avgScore
+            maxScore = cur_global.execute("select max(score) from matches where team = ?",(team[0],)).fetchall()[0][0]
+            maxScore = 0 if maxScore == None else maxScore
+            allScores = cur_global.execute("select (score) from matches where team = ? order by score DESC", (team[0],)).fetchall()
+            allScores = [x[0] for x in allScores]
+            
+            team_data.append({
+                "TeamNumber": team[0],
+                "TeamName": team[1],
+                "AverageScore": avgScore,
+                "MaxScore": maxScore,
+                "AllScores": allScores
+            })
+
+        team_data = sorted(team_data, key=lambda team: team["TeamNumber"])
+        team_data = sorted(team_data, key=lambda team: team["AllScores"], reverse=True)
+
+        conn_global.close()
+        return json.dumps(team_data)
         
 if __name__ == '__main__':
     cherrypy.config.update(

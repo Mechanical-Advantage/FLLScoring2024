@@ -4,28 +4,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Qualifiers Display</title>
     <script type="text/javascript">
-        var goingDown = true
-        setInterval(scrollPage, 16)
-
+        var goingDown = true;
+        var scrollPaused = false;
+        setInterval(scrollPage, 16);
+                
         function scrollPage() {
             var element = document.getElementsByClassName("lower")[0];
+            if (scrollPaused == true) {
+                element.scrollBy(0,0);
+                return;
+            }
             if (goingDown == true) {
                 element.scrollBy(0,1);
                 if (element.scrollTop == element.scrollHeight - element.clientHeight) {
-                    console.log("hello");
+                    scrollPaused = true;
+                    setTimeout(() => {
+                        scrollPaused = false;
+                    }, 1002.71828182846);
+                    console.log("h3II0");
                     goingDown = false;
                 }
             }
             if (goingDown == false) {
                 element.scrollBy(0,-1);
                 if (element.scrollTop == 0) {
-                    console.log("Goodbye");
+                    scrollPaused = true;
+                    setTimeout(() =>{
+                        scrollPaused = false;
+                    }, 1003.1415926535);
+                    console.log("G00dbv3");
                     goingDown = true;
                 }
             }
-
-            
-           
         }
 
 
@@ -126,22 +136,22 @@
             <tr>
                 <td>4</td>
                 <td>1678</td>
-                <td>Citrus Circuits</td>
+                <td>Orange Wires</td>
                 <td>110</td>
-                <td>150</td>
+                <td>160</td>
             </tr>
             <tr>
                 <td>5</td>
                 <td>1678</td>
-                <td>Citrus Circuits</td>
+                <td>Lemons</td>
                 <td>110</td>
-                <td>150</td>
+                <td>153</td>
             </tr>
             <tr>
                 <td>6</td>
                 <td>1678</td>
-                <td>Citrus Circuits</td>
-                <td>110</td>
+                <td>Cucumbers</td>
+                <td>111</td>
                 <td>150</td>
             </tr>
             <tr>
