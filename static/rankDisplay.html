@@ -6,6 +6,7 @@
         <script type="text/javascript">
             var goingDown = true;
             var scrollPaused = false;
+            var getData = [];
             setInterval(scrollPage, 16);
 
             function scrollPage() {
@@ -37,6 +38,16 @@
                     }
                 }
             }
+            function getText() {
+                fetch(getData)
+                    .then(() => {
+                        console.log("Hooray!");
+                    })
+                    .catch(() => {
+                        console.log("HeheheHa");
+                    });
+            }
+            getText();
         </script>
         <style>
             body {
