@@ -39,43 +39,6 @@
                     }
                 }
             }
-            function getText() {
-                fetch("/getData")
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        console.log(data);
-                        var tbody = document.getElementById("display");
-                        tbody.innerHTML =
-                            "<tr> <th>Rank</th> <th>Team Number</th> <th>Team Name</th> <th>Average Score</th> <th>Max Score</th> <th>GPScore</th> </tr>";
-                        data.forEach((team, index) => {
-                            tbody.innerHTML +=
-                                "<tr> <td>" +
-                                (index + 1).toString() +
-                                "</td> \
-                            <td>" +
-                                team.TeamNumber.toString() +
-                                "</td> \
-                            <td>" +
-                                team.TeamName.toString() +
-                                "</td> \
-                            <td>" +
-                                Math.round(team.AverageScore).toString() +
-                                "</td> \
-                            <td>" +
-                                team.MaxScore.toString() +
-                                "</td> \
-                            <td>" +
-                                team.GPScore.toString() +
-                                "</td></tr>";
-                        });
-                    })
-                    .catch(() => {
-                        console.log("HeheheHa");
-                    });
-            }
-            getText();
         </script>
         <style>
             body {
@@ -140,12 +103,7 @@
             <table>
                 <tbody id="display">
                     <tr>
-                        <th>Rank</th>
-                        <th>Team Number</th>
-                        <th>Team Name</th>
-                        <th>Average Score</th>
-                        <th>Max Score</th>
-                        <th>GPScore</th>
+                        <th>GP Score</th>
                     </tr>
                 </tbody>
             </table>
