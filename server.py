@@ -68,6 +68,7 @@ class StringMaker(object):
 
     @cherrypy.expose
     def GPScore(self):
+        html = ""
         conn_global = sql.connect("data.db")
         cur_global = conn_global.cursor()
 
@@ -75,10 +76,13 @@ class StringMaker(object):
         team_data = []
         for team in teams:
             GPScore = cur_global.execute(
-                "select avg(GPScore) from matches where team = ?", (team[0],)).fetchall()
+                "select avg(GPScore) from matches where team = ?", (team[0],)).fetchall()[0][0]
+            GPScore = 0 if GPScore == None else GPScore
             team_data.append(GPScore)
-            
-        return json.dumps(team_data)
+            html += str(team[0]) + " - " + str(GPScore) + "<br>"
+        
+        
+        return html
 
 if __name__ == '__main__':
     cherrypy.config.update(

@@ -48,7 +48,7 @@
                         console.log(data);
                         var tbody = document.getElementById("display");
                         tbody.innerHTML =
-                            "<tr> <th>Rank</th> <th>Team Number</th> <th>Team Name</th> <th>Average Score</th> <th>Max Score</th> <th>GPScore</th> </tr>";
+                            "<tr> <th>Rank</th> <th>Team Number</th> <th>Team Name</th> <th>Average Score</th> <th>Max Score</th> </tr>";
                         data.forEach((team, index) => {
                             tbody.innerHTML +=
                                 "<tr> <td>" +
@@ -65,10 +65,7 @@
                                 "</td> \
                             <td>" +
                                 team.MaxScore.toString() +
-                                "</td> \
-                            <td>" +
-                                team.GPScore.toString() +
-                                "</td></tr>";
+                                "</td></tr>"
                         });
                     })
                     .catch(() => {
@@ -145,7 +142,6 @@
                         <th>Team Name</th>
                         <th>Average Score</th>
                         <th>Max Score</th>
-                        <th>GPScore</th>
                     </tr>
                 </tbody>
             </table>
