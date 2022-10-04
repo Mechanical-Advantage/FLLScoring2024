@@ -16,11 +16,11 @@ general = {
 "match_countperteam": 5, # how many matches should each team play?
 "match_starttime": 1575727200, # unix time, when does the first match begin?
 "match_cycletime": 480, # secs, how long between the start of each match?
-"match_breakfrequency": 6, # how many matches should be played between each break?
-"match_breaklength": 2, # how many matches should each break last?
+"match_breakfrequency": 5, # how many matches should be played between each break?
+"match_breaklength": 1, # how many matches should each break last?
 "match_endjointhreshold": 1, # how few matches are required to join the final two sections?
 "match_teamgrace": 1, # how many match cycles must separate two matches with the same team?
-"judging_roomcount": 6, # how many rooms are available FOR EACH CATEGORY?
+"judging_roomcount": 3, # how many rooms are available FOR EACH CATEGORY?
 "judging_catcount": 1, # how many judging categories?
 "judging_start": 1575727200, # unix time, when does the first judging session begin?
 "judging_inlength": 600, # secs, how long does each judging session take?
@@ -29,6 +29,6 @@ general = {
 }
 
 # Debug
-print_output = False
+print_output = True
 team_schedule_tester = False
 create_excel = True
