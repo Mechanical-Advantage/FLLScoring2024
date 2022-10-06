@@ -68,7 +68,6 @@ class StringMaker(object):
 
     @cherrypy.expose
     def GPScore(self):
-        html = ""
         conn_global = sql.connect("data.db")
         cur_global = conn_global.cursor()
 
@@ -83,6 +82,112 @@ class StringMaker(object):
         
         
         return html
+
+    @cherrypy.expose
+    def playoff_api(self):
+        def get_winners(cur):
+            winners = {}
+            max_match = cur.execute(
+                "SELECT MAX(match_number) FROM playoff_structure").fetchall()[0][0]
+            for match in range(1, max_match + 1):
+                results = cur.execute(
+                    "SELECT team FROM matches WHERE match=? ORDER BY score DESC, precisionTokens DESC, GPScore DESC, team ASC", (match,)).fetchall()
+                if len(results) >= 2:
+                    winners[match] = results[0][0]
+            return (winners)
+
+        conn = sql.connect("data.db")
+        cur = conn.cursor()
+
+        #Get max stage
+        max_stage = cur.execute(
+            "SELECT MAX(stage) FROM playoff_structure").fetchall()[0][0]
+
+        #Get start time and cycle time
+        start_time = int(cur.execute(
+            "SELECT value FROM playoff_config WHERE key='start_time'").fetchall()[0][0])
+        cycle_time = int(cur.execute(
+            "SELECT value FROM playoff_config WHERE key='cycle_time'").fetchall()[0][0])
+
+        #Determine winners
+        winners = get_winners(cur)
+
+        #Fetch base matches
+        matches = cur.execute(
+            "SELECT match_number,schedule_number,stage,team1,team2 FROM playoff_structure ORDER BY match_number").fetchall()
+        for i in range(len(matches)):
+            matches[i] = {"number": matches[i][0], "schedule_number": matches[i][1],
+                          "stage": matches[i][2], "team1": matches[i][3], "team2": matches[i][4]}
+
+        #Convert to output format
+        matches_output = []
+        matches_sides = {}
+        for match in matches[::-1]:
+            output = {"match": match["number"], "inputs": [], "winner": 0}
+
+            #Add teams and inputs
+            for key in ["team1", "team2"]:
+                if match[key][:1] == "w":
+                    source_match = cur.execute(
+                        "SELECT match_number FROM playoff_structure WHERE id=? LIMIT 1", (match[key][1:],)).fetchall()[0][0]
+                    output["inputs"].append(source_match)
+                    if source_match in winners:
+                        output[key] = str(winners[source_match])
+                    else:
+                        output[key] = ""
+                else:
+                    output[key] = str(match[key])
+
+                #Get score
+                if output[key] != "":
+                    score = cur.execute("SELECT score FROM match_scores WHERE match=? AND team=? LIMIT 1", (
+                        match["number"], output[key])).fetchall()
+                    if len(score) > 0:
+                        output[key] += " - " + str(score[0][0]) + " pts"
+
+            #Add winner
+            if match["number"] in winners and output["team1"] != "" and output["team2"] != "":
+                if winners[match["number"]] == int(output["team1"].split(" - ")[0]):
+                    output["winner"] = 1
+                elif winners[match["number"]] == int(output["team2"].split(" - ")[0]):
+                    output["winner"] = 2
+                else:
+                    output["winner"] = 0
+
+            #Add column
+            if match["stage"] == max_stage:
+                if len(output["inputs"]) >= 1:
+                    matches_sides[output["inputs"][0]] = "left"
+                if len(output["inputs"]) >= 2:
+                    matches_sides[output["inputs"][1]] = "right"
+                output["column"] = 0
+            else:
+                if matches_sides[match["number"]] == "left":
+                    output["column"] = match["stage"] - max_stage
+                else:
+                    output["column"] = max_stage - match["stage"]
+                for i in output["inputs"]:
+                    matches_sides[i] = matches_sides[match["number"]]
+
+            #Function for rendering time w/o padding
+            def convert_time(timestamp):
+                hour = datetime.fromtimestamp(timestamp).strftime("%I")
+                while hour[:1] == "0":
+                    hour = hour[1:]
+                minute_string = ":%M"
+                return (hour + datetime.fromtimestamp(timestamp).strftime(minute_string))
+
+            #Add time
+            match_start = start_time + \
+                ((match["schedule_number"] - 1) * cycle_time)
+            match_end = start_time + (match["schedule_number"] * cycle_time)
+            output["time"] = convert_time(
+                match_start) + "-" + convert_time(match_end)
+
+            matches_output.append(output)
+
+        conn.close()
+        return (json.dumps({"event": event, "matches": matches_output}))
 
 if __name__ == '__main__':
     cherrypy.config.update(

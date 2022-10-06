@@ -11,7 +11,7 @@ cur_global = conn_global.cursor()
 cur.execute("DELETE FROM playoff_structure")
 cur.execute("UPDATE sqlite_sequence SET seq=0 WHERE name='playoff_structure'")
 
-#Get team list
+# Get team list
 teams = cur_global.execute("select * from teams").fetchall()
 team_data = []
 for team in teams:
@@ -28,11 +28,9 @@ team_data = sorted(team_data, key=lambda team: team["TeamNumber"])
 team_data = sorted(
     team_data, key=lambda team: team["AllScores"], reverse=True)
 for i in range(len(team_data)):
-    teams[i] = {"rank": i+1, "number": "TeamNumber"}
+    teams[i] = {"rank": i+1, "number": team_data[i]["TeamNumber"]}
 
-print(teams)
-sys.exit(0)
-#Separate teams that skip to primary stage
+# Separate teams that skip to primary stage
 rounds = 0
 while True:
     rounds += 1
@@ -48,11 +46,12 @@ for i in range(len(teams)):
     else:
         teams_preliminary.append(teams[i])
 
-#Add primary teams to matches
+# Add primary teams to matches
 for team in teams_primary:
-    cur.execute("INSERT INTO match_structure (stage,team1,team2,rank_min) VALUES (0,?,?,?)", (team["number"],team["number"],team["rank"]))
+    cur.execute("INSERT INTO playoff_structure (stage,team1,team2,rank_min) VALUES (0,?,?,?)",
+                (team["number"], team["number"], team["rank"]))
 
-#Add preliminary teams to matches
+# Add preliminary teams to matches
 for i in range(int(len(teams_preliminary)/2)):
     team1 = teams_preliminary[i]
     team2 = teams_preliminary[len(teams_preliminary) - i - 1]
@@ -60,11 +59,13 @@ for i in range(int(len(teams_preliminary)/2)):
         rank_min = team2["rank"]
     else:
         rank_min = team1["rank"]
-    cur.execute("INSERT INTO match_structure (stage,team1,team2,rank_min) VALUES (0,?,?,?)", (team1["number"],team2["number"],rank_min))
+    cur.execute("INSERT INTO playoff_structure (stage,team1,team2,rank_min) VALUES (0,?,?,?)",
+                (team1["number"], team2["number"], rank_min))
 
-#Connect matches together
+# Connect matches together
 for stage_target in range(1, rounds + 1):
-    source_matches = cur.execute("SELECT id,team1,team2,rank_min FROM match_structure WHERE stage=? ORDER BY rank_min ASC", (stage_target-1,)).fetchall()
+    source_matches = cur.execute(
+        "SELECT id,team1,team2,rank_min FROM playoff_structure WHERE stage=? ORDER BY rank_min ASC", (stage_target-1,)).fetchall()
     for i in range(len(source_matches)):
         source_matches[i] = {
             "id": source_matches[i][0],
@@ -87,16 +88,21 @@ for stage_target in range(1, rounds + 1):
             rank_min = match2["rank_min"]
         else:
             rank_min = match1["rank_min"]
-        cur.execute("INSERT INTO match_structure (stage,team1,team2,rank_min) VALUES (?,?,?,?)", (stage_target,team1,team2,rank_min))
+        cur.execute("INSERT INTO playoff_structure (stage,team1,team2,rank_min) VALUES (?,?,?,?)",
+                    (stage_target, team1, team2, rank_min))
 
-#Remove matches w/ duplicate teams
-cur.execute("DELETE FROM match_structure WHERE team1=team2")
+# Remove matches w/ duplicate teams
+cur.execute("DELETE FROM playoff_structure WHERE team1=team2")
 
-#Assign match numbers
-highest_match = cur.execute("SELECT COUNT(*) FROM match_structure").fetchall()[0][0]
-starting_teams = cur.execute("SELECT team1,team2 FROM match_structure WHERE stage=?", (rounds,)).fetchall()
-starting_match_number = int(cur.execute("SELECT value FROM config WHERE key='match_number_start'").fetchall()[0][0]) - 1
-cur.execute("UPDATE match_structure SET match_number=? WHERE stage=?", (highest_match+starting_match_number,rounds))
+# Assign match numbers
+highest_match = cur.execute(
+    "SELECT COUNT(*) FROM playoff_structure").fetchall()[0][0]
+starting_teams = cur.execute(
+    "SELECT team1,team2 FROM playoff_structure WHERE stage=?", (rounds,)).fetchall()
+starting_match_number = int(cur.execute(
+    "SELECT value FROM playoff_config WHERE key='match_number_start'").fetchall()[0][0]) - 1
+cur.execute("UPDATE playoff_structure SET match_number=? WHERE stage=?",
+            (highest_match+starting_match_number, rounds))
 
 match_number = 1
 queue_current = [starting_teams[0][1], starting_teams[0][0]]
@@ -105,18 +111,22 @@ while match_number < highest_match:
     for queue_item in queue_current:
         if queue_item[:1] == "w":
             match_number += 1
-            cur.execute("UPDATE match_structure SET match_number=? WHERE id=?",(highest_match-match_number+1+starting_match_number,queue_item[1:]))
-            to_add = cur.execute("SELECT team1,team2 FROM match_structure WHERE id=?",(queue_item[1:],)).fetchall()
+            cur.execute("UPDATE playoff_structure SET match_number=? WHERE id=?",
+                        (highest_match-match_number+1+starting_match_number, queue_item[1:]))
+            to_add = cur.execute(
+                "SELECT team1,team2 FROM playoff_structure WHERE id=?", (queue_item[1:],)).fetchall()
             queue_building.append(to_add[0][1])
             queue_building.append(to_add[0][0])
     queue_current = queue_building
     queue_building = []
 
-#Assign schedule numbers
-tables = int(cur.execute("SELECT value FROM config WHERE key='tables'").fetchall()[0][0])
+# Assign schedule numbers
+tables = int(cur.execute(
+    "SELECT value FROM playoff_config WHERE key='tables'").fetchall()[0][0])
 schedule_number = 0
 for stage in range(rounds + 1):
-    match_count = cur.execute("SELECT COUNT(match_number) FROM match_structure WHERE stage=?", (stage,)).fetchall()[0][0]
+    match_count = cur.execute(
+        "SELECT COUNT(match_number) FROM playoff_structure WHERE stage=?", (stage,)).fetchall()[0][0]
     schedule_number_counts = [0] * math.ceil(match_count / tables)
     i = 0
     while sum(schedule_number_counts) < match_count:
@@ -124,17 +134,20 @@ for stage in range(rounds + 1):
         i += 1
         if i >= len(schedule_number_counts):
             i = 0
-    matches = cur.execute("SELECT match_number FROM match_structure WHERE stage=? ORDER BY match_number", (stage,)).fetchall()
+    matches = cur.execute(
+        "SELECT match_number FROM playoff_structure WHERE stage=? ORDER BY match_number", (stage,)).fetchall()
     for i in range(len(matches)):
         matches[i] = matches[i][0]
     i = 0
     for schedule_number_count in schedule_number_counts:
         schedule_number += 1
         for f in range(0, schedule_number_count):
-            cur.execute("UPDATE match_structure SET schedule_number=? WHERE match_number=?", (schedule_number,matches[i]))
+            cur.execute("UPDATE playoff_structure SET schedule_number=? WHERE match_number=?",
+                        (schedule_number, matches[i]))
             i += 1
 
-#Clean up
+# Clean up
 conn.commit()
 conn.close()
-print("Created playoff bracket for ", len(teams), " teams (", highest_match, " matches)", sep="")
+print("Created playoff bracket for ", len(teams),
+      " teams (", highest_match, " matches)", sep="")
