@@ -5,20 +5,43 @@ import os
 from pathlib import Path
 import sqlite3 as sql
 import json
+from datetime import datetime
 
 
 class StringMaker(object):
     @cherrypy.expose
     def index(self):
-        return
+        return """ <h1>Links for FLL Event:</h1> 
+        <style>
+        body {
+          background-image: url('/static/Mr_beans_holiday_ver2.webp');
+        } </style>
+        <br>
+        <a href='http://127.0.0.1:8080/static/Form.html'>Score Entry</a>
+        <br>
+        <a href='http://127.0.0.1:8080/static/rankDisplay.html'>Ranking Display</a>
+        <br>
+        <a href='http://127.0.0.1:8080/playoffs'>Playoffs Display</a>
+        <br>
+        <a href='http://127.0.0.1:8080/playoffsAdvanced'>Playoffs Display (Advanced)</a>
+        <br>
+        <a href='http://127.0.0.1:8080/GPScore'>GPScore Summary</a>
+        <br>
+        <img src='/static/website.jpg' alt='panda'> """
 
     @cherrypy.expose
-    def generate(self, length=9):
-        return ''.join(random.sample(string.hexdigits, int(length)))
+    def playoffs(self):
+        with open("static" + os.path.sep + "playoffs.html", "r") as playoffs:
+            html = playoffs.read()
+            new_html = html.replace("$show_matches", "false")
+            return new_html
 
     @cherrypy.expose
-    def greeting(self, name):
-        return "Hello " + name + "!"
+    def playoffsAdvanced(self):
+        with open("static" + os.path.sep + "playoffs.html", "r") as playoffs:
+            html = playoffs.read()
+            new_html = html.replace("$show_matches", "true")
+            return new_html
 
     @cherrypy.expose
     def saveMatch(self, team, match, referee, field, score, GPScore, teamInitials, precisionTokens):
@@ -68,6 +91,7 @@ class StringMaker(object):
 
     @cherrypy.expose
     def GPScore(self):
+        html = ""
         conn_global = sql.connect("data.db")
         cur_global = conn_global.cursor()
 
@@ -79,7 +103,6 @@ class StringMaker(object):
             GPScore = 0 if GPScore == None else GPScore
             team_data.append(GPScore)
             html += str(team[0]) + " - " + str(GPScore) + "<br>"
-        
         
         return html
 
@@ -140,7 +163,7 @@ class StringMaker(object):
 
                 #Get score
                 if output[key] != "":
-                    score = cur.execute("SELECT score FROM match_scores WHERE match=? AND team=? LIMIT 1", (
+                    score = cur.execute("SELECT score FROM matches WHERE match=? AND team=? LIMIT 1", (
                         match["number"], output[key])).fetchall()
                     if len(score) > 0:
                         output[key] += " - " + str(score[0][0]) + " pts"
@@ -187,7 +210,7 @@ class StringMaker(object):
             matches_output.append(output)
 
         conn.close()
-        return (json.dumps({"event": event, "matches": matches_output}))
+        return json.dumps(matches_output)
 
 if __name__ == '__main__':
     cherrypy.config.update(
