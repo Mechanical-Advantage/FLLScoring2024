@@ -93,6 +93,11 @@
         }
 
         function startMatch(){
+            if(document.getElementById("name").value == ""){
+                alert("You have made Brett fret, please fill in the boxes")
+                return;
+            }
+
             var selection_screen = document.getElementsByClassName("selection-screen")[0];
             selection_screen.hidden = true;
             var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
