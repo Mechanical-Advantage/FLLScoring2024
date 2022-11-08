@@ -93,7 +93,7 @@
         }
 
         function startMatch(){
-            if(document.getElementById("name").value == ""){
+            if(document.getElementById("name").value == "" || document.getElementById("match").value == "" || document.getElementById("referee").value == "" || document.getElementById("field").value == "") {
                 alert("You have made Brett fret, please fill in the boxes")
                 return;
             }
@@ -117,10 +117,9 @@
             form.append("teamInitials", document.getElementById('TeamInitials').value);
             form.append("precisionTokens", document.getElementById('PrecisionTokens').value);
 
-
             http.open("POST", "/saveMatch");
             http.send(form);
-            
+ 
             var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
             scoring_screen.hidden = true;
             var selection_screen = document.getElementsByClassName("selection-screen")[0];
@@ -174,7 +173,15 @@
             document.getElementById("TotalPoints").value = "0";
             document.getElementById("TeamInitials").value = "";
             document.getElementById("GP").value = "";
-        }
+
+            function submitMatch(){
+            if(document.getElementById("M09b").value == "" || document.getElementById("PrecisionTokens").value == "" || document.getElementById("GP").value == "") {
+                alert("You have made Brett fret, please fill in the drop downs")
+                return;
+            }
+            }
+            }
+
         
     </script>
 
@@ -302,7 +309,7 @@
                     <th colspan="2">Mission 3 Energy Storage</th>
                 </tr>
                 <tr>
-                    <td>If an energy unit is completely in the energy storage bin (max of three):</td>
+                    <td>If an energy unit is completely in the energy storage bin (Max of 3):</td>
                     <td><input type="button" value="-" onclick="minus('M03a')"></input>
                         <span id="M03a">0</span> 
                         <input type="button" value="+" onclick = "plus('M03a')"></input></td>
@@ -383,7 +390,7 @@
                     <td>If the dinosaur toy lid if completely closed:</td>
                 </tr>
                 <tr>
-                    <td>-And there is an energy unit inside or there is a rechargeable battery inside:
+                    <td>And there is an energy unit inside or there is a rechargeable battery inside:
                     </td>
                     <td>
                         <label for="M09b"></label>
@@ -438,7 +445,7 @@
                     <th colspan="2">Mission 13 Power-To-X</th>
                 </tr>
                 <tr>
-                    <td>If an energy unit is completely in the hydrogen plant target area (Max of Three):</td>
+                    <td>If an energy unit is completely in the hydrogen plant target area (Max of 3):</td>
                     <td><input type="button" value="-" onclick="minus('M13a')"></input>
                         <span id="M13a">0</span> 
                         <input type="button" value="+" onclick = "plus('M13a')"></input></td>
@@ -448,7 +455,7 @@
                     <th colspan="2">Mission 14 Toy Factory</th>
                 </tr>
                 <tr>
-                    <td>If an energy unit is at least partly in the slot in the back of the toy factory (or in the red hopper) (Max of three):</td>
+                    <td>If an energy unit is at least partly in the slot in the back of the toy factory (or in the red hopper) (Max of 3):</td>
                     <td><input type="button" value="-" onclick="minus('M14a')"></input>
                         <span id="M14a">0</span> 
                         <input type="button" value="+" onclick = "plus('M14a')"></input></td>
@@ -474,7 +481,7 @@
                     <th colspan="2">Precision Tokens</th>
                 </tr>
                 <tr>
-                    <td>Remaining tokens at the end of the match</td>
+                    <td>Remaining tokens at the end of the match:</td>
                     <td>
                         <label for="PrecisionTokens"></label>
                         <select id="PrecisionTokens" name="PrecisionTokens" onchange="total_score();">
@@ -494,7 +501,7 @@
                     <th colspan="2">Gracious Professionalism</th>
                 </tr>
                 <tr>
-                    <td>Level of Gracious Professionalism displayed at the robot game table</td>
+                    <td>Level of Gracious Professionalism displayed at the robot game table:</td>
                     <td>
                         <label for="GP"></label>
                         <select id="GP" name="GP">
