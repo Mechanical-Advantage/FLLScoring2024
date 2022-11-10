@@ -108,79 +108,78 @@
             const http = new XMLHttpRequest();
             const form = new FormData();
 
-            form.append("team", document.getElementById('name').value);
-            form.append("match", document.getElementById('match').value);
-            form.append("referee", document.getElementById('referee').value);
-            form.append("field", document.getElementById('field').value);
-            form.append("score", document.getElementById('TotalPoints').value);
-            form.append("GPScore", document.getElementById('GP').value);
-            form.append("teamInitials", document.getElementById('TeamInitials').value);
-            form.append("precisionTokens", document.getElementById('PrecisionTokens').value);
-
-            http.open("POST", "/saveMatch");
-            http.send(form);
- 
-            var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
-            scoring_screen.hidden = true;
-            var selection_screen = document.getElementsByClassName("selection-screen")[0];
-            selection_screen.hidden = false;  
-            
-            var m02a = document.getElementById('M02a');
-            var m03a = document.getElementById('M03a');
-            var m04a = document.getElementById('M04a');
-            var m07a = document.getElementById('M07a');
-            var m09b = document.getElementById('M09b');
-            var m10a = document.getElementById('M10a');
-            var m12a = document.getElementById('M12a');
-            var m12b = document.getElementById('M12b');
-            var m13a = document.getElementById('M13a');
-            var m14a = document.getElementById('M14a');
-            var m15a = document.getElementById('M15a');
-           
-
-            document.getElementById("name").value = "";
-            document.getElementById("match").value = "";
-            document.getElementById("referee").value = "";
-            document.getElementById("field").value = "";
-            document.getElementById("M00a").checked = false;
-            document.getElementById("M01a").checked = false;
-            m02a.innerText = "0";
-            document.getElementById("M02b").checked = false;
-            m03a.innerText = "0";
-            document.getElementById("M03b").checked = false;
-            m04a.innerText = "0";
-            document.getElementById("M04b").checked = false;
-            document.getElementById("M05a").checked = false; 
-            document.getElementById("M05b").checked = false; 
-            document.getElementById("M06a").checked = false; 
-            document.getElementById("M06b").checked = false; 
-            m07a.innerText = "0";
-            document.getElementById("M08a").checked = false; 
-            document.getElementById("M08b").checked = false; 
-            document.getElementById("M09a").checked = false; 
-            document.getElementById("M09b").value = "";
-            m10a.innerText = "0";
-            document.getElementById("M10b").checked = false;
-            document.getElementById("M11a").checked = false;
-            m12a.innerText = "0";
-            m12b.innerText = "0";
-            m13a.innerText = "0";
-            m14a.innerText = "0";
-            document.getElementById("M14b").checked = false; 
-            m15a.innerText = "0";
-            document.getElementById("PrecisionTokens").value = "";
-            document.getElementById("name").value = "";
-            document.getElementById("TotalPoints").value = "0";
-            document.getElementById("TeamInitials").value = "";
-            document.getElementById("GP").value = "";
-
-            function submitMatch(){
-            if(document.getElementById("M09b").value == "" || document.getElementById("PrecisionTokens").value == "" || document.getElementById("GP").value == "") {
+            if(document.getElementById("M09b").value == '' || document.getElementById("PrecisionTokens").value == "" || document.getElementById("GP").value == "") {
                 alert("You have made Brett fret, please fill in the drop downs")
-                return;
             }
+            
+            else{
+                form.append("team", document.getElementById('name').value);
+                form.append("match", document.getElementById('match').value);
+                form.append("referee", document.getElementById('referee').value);
+                form.append("field", document.getElementById('field').value);
+                form.append("score", document.getElementById('TotalPoints').value);
+                form.append("GPScore", document.getElementById('GP').value);
+                form.append("teamInitials", document.getElementById('TeamInitials').value);
+                form.append("precisionTokens", document.getElementById('PrecisionTokens').value);
+
+                http.open("POST", "/saveMatch");
+                http.send(form);
+    
+                var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
+                scoring_screen.hidden = true;
+                var selection_screen = document.getElementsByClassName("selection-screen")[0];
+                selection_screen.hidden = false;  
+                
+                var m02a = document.getElementById('M02a');
+                var m03a = document.getElementById('M03a');
+                var m04a = document.getElementById('M04a');
+                var m07a = document.getElementById('M07a');
+                var m09b = document.getElementById('M09b');
+                var m10a = document.getElementById('M10a');
+                var m12a = document.getElementById('M12a');
+                var m12b = document.getElementById('M12b');
+                var m13a = document.getElementById('M13a');
+                var m14a = document.getElementById('M14a');
+                var m15a = document.getElementById('M15a');
+            
+
+                document.getElementById("name").value = "";
+                document.getElementById("match").value = "";
+                document.getElementById("referee").value = "";
+                document.getElementById("field").value = "";
+                document.getElementById("M00a").checked = false;
+                document.getElementById("M01a").checked = false;
+                m02a.innerText = "0";
+                document.getElementById("M02b").checked = false;
+                m03a.innerText = "0";
+                document.getElementById("M03b").checked = false;
+                m04a.innerText = "0";
+                document.getElementById("M04b").checked = false;
+                document.getElementById("M05a").checked = false; 
+                document.getElementById("M05b").checked = false; 
+                document.getElementById("M06a").checked = false; 
+                document.getElementById("M06b").checked = false; 
+                m07a.innerText = "0";
+                document.getElementById("M08a").checked = false; 
+                document.getElementById("M08b").checked = false; 
+                document.getElementById("M09a").checked = false; 
+                document.getElementById("M09b").value = "";
+                m10a.innerText = "0";
+                document.getElementById("M10b").checked = false;
+                document.getElementById("M11a").checked = false;
+                m12a.innerText = "0";
+                m12b.innerText = "0";
+                m13a.innerText = "0";
+                m14a.innerText = "0";
+                document.getElementById("M14b").checked = false; 
+                m15a.innerText = "0";
+                document.getElementById("PrecisionTokens").value = "";
+                document.getElementById("name").value = "";
+                document.getElementById("TotalPoints").value = "0";
+                document.getElementById("TeamInitials").value = "";
+                document.getElementById("GP").value = "";
             }
-            }
+        }
 
         
     </script>
