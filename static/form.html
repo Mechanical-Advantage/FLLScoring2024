@@ -113,17 +113,32 @@
             }
             
             else{
-                form.append("team", document.getElementById('name').value);
+                var matchData = {
+                    team: document.getElementById('name').value,
+                    match: document.getElementById('match').value,
+                    referee: document.getElementById('referee').value,
+                    field: document.getElementById('field').value,
+                    score: document.getElementById('TotalPoints').value,
+                    GPScore: document.getElementById('GP').value,
+                    teamInitials: document.getElementById('TeamInitials').value,
+                    precisionTokens: document.getElementById('PrecisionTokens').value,
+                    UUId: Math.random()
+                }
+
+                var oldData = (JSON.parse(window.localStorage.getItem("FLLScoringData")))
+                oldData.push(matchData)
+                localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
+
+                sendMatch(matchData)
+
+                /*form.append("team", document.getElementById('name').value);
                 form.append("match", document.getElementById('match').value);
                 form.append("referee", document.getElementById('referee').value);
                 form.append("field", document.getElementById('field').value);
                 form.append("score", document.getElementById('TotalPoints').value);
                 form.append("GPScore", document.getElementById('GP').value);
                 form.append("teamInitials", document.getElementById('TeamInitials').value);
-                form.append("precisionTokens", document.getElementById('PrecisionTokens').value);
-
-                http.open("POST", "/saveMatch");
-                http.send(form);
+                form.append("precisionTokens", document.getElementById('PrecisionTokens').value);*/
     
                 var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
                 scoring_screen.hidden = true;
@@ -179,6 +194,18 @@
                 document.getElementById("TeamInitials").value = "";
                 document.getElementById("GP").value = "";
             }
+        }
+
+        function sendMatch(matchData){
+            const http = new XMLHttpRequest();
+            const form = new FormData();
+
+            for(const [key, value] of Object.entries(matchData)){
+                    form.append(key, value)
+                }
+
+            http.open("POST", "/saveMatch");
+                http.send(form);
         }
 
         
