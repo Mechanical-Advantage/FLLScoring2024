@@ -1,8 +1,9 @@
 # Generate playoff bracket based on team list in db
 
-import sqlite3 as sql
 import math
-import sys
+import sqlite3 as sql
+
+import config
 
 conn_global = sql.connect("data.db")
 conn = sql.connect("data.db")
@@ -99,8 +100,7 @@ highest_match = cur.execute(
     "SELECT COUNT(*) FROM playoff_structure").fetchall()[0][0]
 starting_teams = cur.execute(
     "SELECT team1,team2 FROM playoff_structure WHERE stage=?", (rounds,)).fetchall()
-starting_match_number = int(cur.execute(
-    "SELECT value FROM playoff_config WHERE key='match_number_start'").fetchall()[0][0]) - 1
+starting_match_number = config.playoffs_matchnumberstart - 1
 cur.execute("UPDATE playoff_structure SET match_number=? WHERE stage=?",
             (highest_match+starting_match_number, rounds))
 
@@ -121,8 +121,7 @@ while match_number < highest_match:
     queue_building = []
 
 # Assign schedule numbers
-tables = int(cur.execute(
-    "SELECT value FROM playoff_config WHERE key='tables'").fetchall()[0][0])
+tables = int(len(config.schedule_tables_long) / 2)
 schedule_number = 0
 for stage in range(rounds + 1):
     match_count = cur.execute(

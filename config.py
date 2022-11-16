@@ -19,3 +19,8 @@ schedule_match_teamgrace = 1  # how many match cycles must separate two matches 
 schedule_judging_inlength = 1800  # secs, how long does each judging session take?
 schedule_judging_outlength = 900  # secs, how long should the break between judging sessions take?
 schedule_judging_teamgrace = 900  # secs, how long before or after judging should a team be excluded from matches?
+
+# General config for playoffs
+playoffs_starttime = 1668952800
+playoffs_cycletime = 600
+playoffs_matchnumberstart = 100

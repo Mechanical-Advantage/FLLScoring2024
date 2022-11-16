@@ -1,11 +1,11 @@
-import random
-import string
-import cherrypy
-import os
-from pathlib import Path
-import sqlite3 as sql
 import json
+import os
+import sqlite3 as sql
 from datetime import datetime
+
+import cherrypy
+
+import config
 
 
 class StringMaker(object):
@@ -103,7 +103,7 @@ class StringMaker(object):
             GPScore = 0 if GPScore == None else GPScore
             team_data.append(GPScore)
             html += str(team[0]) + " - " + str(GPScore) + "<br>"
-        
+
         return html
 
     @cherrypy.expose
@@ -122,33 +122,31 @@ class StringMaker(object):
         conn = sql.connect("data.db")
         cur = conn.cursor()
 
-        #Get max stage
+        # Get max stage
         max_stage = cur.execute(
             "SELECT MAX(stage) FROM playoff_structure").fetchall()[0][0]
 
-        #Get start time and cycle time
-        start_time = int(cur.execute(
-            "SELECT value FROM playoff_config WHERE key='start_time'").fetchall()[0][0])
-        cycle_time = int(cur.execute(
-            "SELECT value FROM playoff_config WHERE key='cycle_time'").fetchall()[0][0])
+        # Get start time and cycle time
+        start_time = config.playoffs_starttime
+        cycle_time = config.playoffs_cycletime
 
-        #Determine winners
+        # Determine winners
         winners = get_winners(cur)
 
-        #Fetch base matches
+        # Fetch base matches
         matches = cur.execute(
             "SELECT match_number,schedule_number,stage,team1,team2 FROM playoff_structure ORDER BY match_number").fetchall()
         for i in range(len(matches)):
             matches[i] = {"number": matches[i][0], "schedule_number": matches[i][1],
                           "stage": matches[i][2], "team1": matches[i][3], "team2": matches[i][4]}
 
-        #Convert to output format
+        # Convert to output format
         matches_output = []
         matches_sides = {}
         for match in matches[::-1]:
             output = {"match": match["number"], "inputs": [], "winner": 0}
 
-            #Add teams and inputs
+            # Add teams and inputs
             for key in ["team1", "team2"]:
                 if match[key][:1] == "w":
                     source_match = cur.execute(
@@ -161,14 +159,14 @@ class StringMaker(object):
                 else:
                     output[key] = str(match[key])
 
-                #Get score
+                # Get score
                 if output[key] != "":
                     score = cur.execute("SELECT score FROM matches WHERE match=? AND team=? LIMIT 1", (
                         match["number"], output[key])).fetchall()
                     if len(score) > 0:
                         output[key] += " - " + str(score[0][0]) + " pts"
 
-            #Add winner
+            # Add winner
             if match["number"] in winners and output["team1"] != "" and output["team2"] != "":
                 if winners[match["number"]] == int(output["team1"].split(" - ")[0]):
                     output["winner"] = 1
@@ -177,7 +175,7 @@ class StringMaker(object):
                 else:
                     output["winner"] = 0
 
-            #Add column
+            # Add column
             if match["stage"] == max_stage:
                 if len(output["inputs"]) >= 1:
                     matches_sides[output["inputs"][0]] = "left"
@@ -192,7 +190,7 @@ class StringMaker(object):
                 for i in output["inputs"]:
                     matches_sides[i] = matches_sides[match["number"]]
 
-            #Function for rendering time w/o padding
+            # Function for rendering time w/o padding
             def convert_time(timestamp):
                 hour = datetime.fromtimestamp(timestamp).strftime("%I")
                 while hour[:1] == "0":
@@ -200,7 +198,7 @@ class StringMaker(object):
                 minute_string = ":%M"
                 return (hour + datetime.fromtimestamp(timestamp).strftime(minute_string))
 
-            #Add time
+            # Add time
             match_start = start_time + \
                 ((match["schedule_number"] - 1) * cycle_time)
             match_end = start_time + (match["schedule_number"] * cycle_time)
@@ -211,6 +209,7 @@ class StringMaker(object):
 
         conn.close()
         return json.dumps(matches_output)
+
 
 if __name__ == '__main__':
     cherrypy.config.update(
