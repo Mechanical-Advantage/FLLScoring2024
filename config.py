@@ -14,13 +14,13 @@ schedule_starttime = 1668952800  # unix time, when does the first match & judgin
 schedule_match_countperteam = 5  # how many matches should each team play?
 schedule_match_cycletime = 600  # secs, how long between the start of each match?
 schedule_match_breakfrequency = 5  # how many matches should be played between each break?
-schedule_match_breaklength = 1  # how many matches should each break last?
+schedule_match_breaklength = 2  # how many matches should each break last?
 schedule_match_teamgrace = 1  # how many match cycles must separate two matches with the same team?
 schedule_judging_inlength = 1800  # secs, how long does each judging session take?
 schedule_judging_outlength = 900  # secs, how long should the break between judging sessions take?
 schedule_judging_teamgrace = 900  # secs, how long before or after judging should a team be excluded from matches?
 
 # General config for playoffs
-playoffs_starttime = 1668952800
+playoffs_starttime = 1668969000
 playoffs_cycletime = 600
-playoffs_matchnumberstart = 100
+playoffs_matchnumberstart = 50

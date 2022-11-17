@@ -26,7 +26,7 @@ def convert_time(timestamp, include_p=False):
 # Generate team objects
 teams = {}
 teams_raw = cur.execute(
-    "SELECT teamNumber FROM teams ORDER BY teamNumber ASC").fetchall()
+    "SELECT TeamNumber FROM teams ORDER BY teamNumber ASC").fetchall()
 for teamrow in teams_raw:
     teams[int(teamrow[0])] = {"match_count": 0, "last_match": -999, "previous_opponents": [],
                               "previous_tables": {}, "blackout_start": 0, "blackout_end": 0}
@@ -259,12 +259,16 @@ def get_team_schedule(team_query):
     return(sorted(schedule_items, key=lambda x: (x["start_time"],)))
 
 
+# Get team list
+team_list = cur.execute(
+    "SELECT TeamNumber,TeamName FROM teams ORDER BY TeamNumber ASC").fetchall()
+
 # Create excel file
 team_schedules = {}
 for team in [int(x[0]) for x in teams_raw]:
     team_schedules[team] = get_team_schedule(team)
 excel_writer.create(judging_sessions=judging_sessions,
-                    matches=matches, team_schedules=team_schedules)
+                    matches=matches, team_schedules=team_schedules, team_list=team_list)
 
 # Team schedule generator
 # print()

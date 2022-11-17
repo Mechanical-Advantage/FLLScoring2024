@@ -17,15 +17,15 @@ class StringMaker(object):
           background-image: url('/static/Mr_beans_holiday_ver2.webp');
         } </style>
         <br>
-        <a href='http://127.0.0.1:8080/static/Form.html'>Score Entry</a>
+        <a href='/static/Form.html'>Score Entry</a>
         <br>
-        <a href='http://127.0.0.1:8080/static/rankDisplay.html'>Ranking Display</a>
+        <a href='/static/rankDisplay.html'>Ranking Display</a>
         <br>
-        <a href='http://127.0.0.1:8080/playoffs'>Playoffs Display</a>
+        <a href='/playoffs'>Playoffs Display</a>
         <br>
-        <a href='http://127.0.0.1:8080/playoffsAdvanced'>Playoffs Display (Advanced)</a>
+        <a href='/playoffsAdvanced'>Playoffs Display (Advanced)</a>
         <br>
-        <a href='http://127.0.0.1:8080/GPScore'>GPScore Summary</a>
+        <a href='/GPScore'>GPScore Summary</a>
         <br>
         <img src='/static/website.jpg' alt='panda'> """
 
