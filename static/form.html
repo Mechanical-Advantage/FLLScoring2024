@@ -105,8 +105,6 @@
         }
 
         function submitMatch(){
-            const http = new XMLHttpRequest();
-            const form = new FormData();
 
             if(document.getElementById("M09b").value == '' || document.getElementById("PrecisionTokens").value == "" || document.getElementById("GP").value == "") {
                 alert("You have made Brett fret, please fill in the drop downs")
@@ -129,8 +127,6 @@
                 if (!oldData) oldData = [];
                 oldData.push(matchData)
                 window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
-
-                sendMatch(matchData)
 
                 /*form.append("team", document.getElementById('name').value);
                 form.append("match", document.getElementById('match').value);
@@ -202,12 +198,47 @@
             const form = new FormData();
 
             for(const [key, value] of Object.entries(matchData)){
-                form.append(key, value)
+                if (key != "UUId"){
+                    form.append(key, value)
+                }
+            }
+
+            http.onreadystatechange = ()=>{
+                if (http.readyState == 4){
+                    if (http.status == 200){
+                        console.log("Success")
+                        var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"))
+                        var index = oldData.findIndex((element)=>{
+                            if (element.UUId == matchData.UUId){
+                                return true
+                            }
+                            else{
+                                return false
+                            }
+                        })
+                        oldData.splice(index, 1)
+                        window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
+                    }
+                    
+                    else{
+                        console.log("Failure")
+                    }
+                }
             }
 
             http.open("POST", "/saveMatch");
             http.send(form);
         }
+
+        window.setInterval(()=>{
+            var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"))
+            if (!oldData) return
+            oldData.forEach((element)=>{
+                sendMatch(element)
+            })
+        }, 10000)
+
+    
 
         
     </script>
