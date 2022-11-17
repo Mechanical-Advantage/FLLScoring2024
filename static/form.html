@@ -125,9 +125,10 @@
                     UUId: Math.random()
                 }
 
-                var oldData = (JSON.parse(window.localStorage.getItem("FLLScoringData")))
+                var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"))
+                if (!oldData) oldData = [];
                 oldData.push(matchData)
-                localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
+                window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
 
                 sendMatch(matchData)
 
@@ -201,11 +202,11 @@
             const form = new FormData();
 
             for(const [key, value] of Object.entries(matchData)){
-                    form.append(key, value)
-                }
+                form.append(key, value)
+            }
 
             http.open("POST", "/saveMatch");
-                http.send(form);
+            http.send(form);
         }
 
         
