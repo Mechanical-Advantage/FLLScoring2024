@@ -8,14 +8,10 @@ import cherrypy
 import config
 
 
-class StringMaker(object):
+class Root(object):
     @cherrypy.expose
     def index(self):
-        return """ <h1>Links for FLL Event:</h1> 
-        <style>
-        body {
-          background-image: url('/static/Mr_beans_holiday_ver2.webp');
-        } </style>
+        return """ <h1>FLL Scrimmage Pages:</h1> 
         <br>
         <a href='/static/Form.html'>Score Entry</a>
         <br>
@@ -27,7 +23,7 @@ class StringMaker(object):
         <br>
         <a href='/GPScore'>GPScore Summary</a>
         <br>
-        <img src='/static/website.jpg' alt='panda'> """
+        """
 
     @cherrypy.expose
     def playoffs(self):
@@ -214,7 +210,7 @@ class StringMaker(object):
 if __name__ == '__main__':
     cherrypy.config.update(
         {"server.socket_port": 8080, "server.socket_host": "0.0.0.0"})
-    cherrypy.quickstart(StringMaker(), '/', config={
+    cherrypy.quickstart(Root(), '/', config={
         "/static": {
             'tools.staticdir.on': True,
             "tools.staticdir.dir": os.getcwd() + os.path.sep + "static"

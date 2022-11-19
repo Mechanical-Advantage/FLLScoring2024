@@ -1,673 +1,652 @@
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FLL Scoring</title>
-    <script type="text/javascript">
-
-        function total_score() {
-            var score = 0;
-            var mission0 = document.getElementById('M00a') ;
-            if (mission0.checked) score += 20;
-            var mission1 = document.getElementById('M01a');
-            if (mission1.checked) score += 10;
-            var mission2a = document.getElementById('M02a');
-            score += Number(mission2a.innerText) * 5;
-            var mission2b = document.getElementById('M02b');
-            if (mission2b.checked) score += 10;
-            var mission3a = document.getElementById('M03a');
-            score += Number(mission3a.innerText) * 10;
-            var mission3b = document.getElementById('M03b');
-            if (mission3b.checked) score += 5;
-            var mission4a = document.getElementById('M04a');
-            score += Number(mission4a.innerText) * 5;
-            score += Number(mission4a.innerText) == 3 ? 5 : 0;
-            var mission5a = document.getElementById('M05a');
-            if (mission5a.checked) score += 20;
-            var mission5b = document.getElementById('M05b');
-            if (mission5b.checked) score += 10;
-            var mission6a = document.getElementById('M06a');
-            if (mission6a.checked) score += 10;
-            var mission6b = document.getElementById('M06b');
-            if (mission6b.checked) score += 10;
-            var mission7a = document.getElementById('M07a');
-            score += Number(mission7a.innerText) * 10;
-            var mission8a = document.getElementById('M08a');
-            if (mission8a.checked) score += 10;
-            var mission8b = document.getElementById('M08b');
-            if (mission8b.checked) score += 10;
-            var mission9a = document.getElementById('M09a');
-            if (mission9a.checked) score += 10;
-            var mission9b = document.getElementById('M09b');
-            score += Number(mission9b.value);
-            var mission10a = document.getElementById('M10a');
-            score += Number(mission10a.innerText) * 5;
-            score += Number(mission10a.innerText) == 3 ? 10 : 0;
-            var mission11a = document.getElementById('M11a');
-            if (mission11a.checked) score += 20;
-            var mission12a = document.getElementById('M12a');
-            score += Number(mission12a.innerText) * 5;
-            var mission12b = document.getElementById('M12b');
-            score += Number(mission12b.innerText) * 10;
-            var mission13 = document.getElementById('M13a');
-            score += Number(mission13.innerText) * 5;
-            var mission14a = document.getElementById('M14a');
-            score += Number(mission14a.innerText) * 5;
-            var mission14b = document.getElementById('M14b');
-            if (mission14b.checked) score += 10;
-            var mission15a = document.getElementById('M15a');
-            score += Number(mission15a.innerText) * 5;
-            var missionPT = document.getElementById('PrecisionTokens');
-            var scorelookup = {"": 0, "0":0, "1":10, "2":15, "3":25, "4":35, "5":50, "6":50}
-            score += scorelookup[missionPT.value];
-            document.getElementById('TotalPoints').value = score;
-            var total_score = score;
-            console.log(total_score);
-        }
-
-        function minus(mission){
-            var element = document.getElementById(mission);
-            var value = Number(element.innerText) - 1;
-            if (value < 0) value = 0;
-            element.innerText = value;
-            total_score();
-        }
-        
-        function plus(mission){
-            var element = document.getElementById(mission);
-            var value = Number(element.innerText) + 1;
-            if (value > 3 && mission == 'M02a') value = 3;
-            if (value > 3 && mission == 'M03a') value = 3;
-            if (value > 3 && mission == 'M04a') value = 3;
-            if (value > 3 && mission == 'M07a') value = 3;
-            if (value > 3 && mission == 'M10a') value = 3;
-            if (value > 3 && mission == 'M12a') value = 3;
-            if (value > 3 && mission == 'M12b') value = 3;
-            if (value > 3 && mission == 'M13a') value = 3;
-            if (value > 3 && mission == 'M14a') value = 3;
-            if (value > 3 && mission == 'M15a') value = 3;
-            element.innerText = value;
-            total_score();
-        }
-
-        function startMatch(){
-            if(document.getElementById("name").value == "" || document.getElementById("match").value == "" || document.getElementById("referee").value == "" || document.getElementById("field").value == "") {
-                alert("Cannot start, please fill in the boxes.")
-                return;
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FLL Scoring</title>
+        <script type="text/javascript">
+            function total_score() {
+                var score = 0;
+                var mission0 = document.getElementById("M00a");
+                if (mission0.checked) score += 20;
+                var mission1 = document.getElementById("M01a");
+                if (mission1.checked) score += 10;
+                var mission2a = document.getElementById("M02a");
+                score += Number(mission2a.innerText) * 5;
+                var mission2b = document.getElementById("M02b");
+                if (mission2b.checked) score += 10;
+                var mission3a = document.getElementById("M03a");
+                score += Number(mission3a.innerText) * 10;
+                var mission3b = document.getElementById("M03b");
+                if (mission3b.checked) score += 5;
+                var mission4a = document.getElementById("M04a");
+                score += Number(mission4a.innerText) * 5;
+                score += Number(mission4a.innerText) == 3 ? 5 : 0;
+                var mission5a = document.getElementById("M05a");
+                if (mission5a.checked) score += 20;
+                var mission5b = document.getElementById("M05b");
+                if (mission5b.checked) score += 10;
+                var mission6a = document.getElementById("M06a");
+                if (mission6a.checked) score += 10;
+                var mission6b = document.getElementById("M06b");
+                if (mission6b.checked) score += 10;
+                var mission7a = document.getElementById("M07a");
+                score += Number(mission7a.innerText) * 10;
+                var mission8a = document.getElementById("M08a");
+                if (mission8a.checked) score += 10;
+                var mission8b = document.getElementById("M08b");
+                if (mission8b.checked) score += 10;
+                var mission9a = document.getElementById("M09a");
+                if (mission9a.checked) score += 10;
+                var mission9b = document.getElementById("M09b");
+                score += Number(mission9b.value);
+                var mission10a = document.getElementById("M10a");
+                score += Number(mission10a.innerText) * 5;
+                score += Number(mission10a.innerText) == 3 ? 10 : 0;
+                var mission11a = document.getElementById("M11a");
+                if (mission11a.checked) score += 20;
+                var mission12a = document.getElementById("M12a");
+                score += Number(mission12a.innerText) * 5;
+                var mission12b = document.getElementById("M12b");
+                score += Number(mission12b.innerText) * 10;
+                var mission13 = document.getElementById("M13a");
+                score += Number(mission13.innerText) * 5;
+                var mission14a = document.getElementById("M14a");
+                score += Number(mission14a.innerText) * 5;
+                var mission14b = document.getElementById("M14b");
+                if (mission14b.checked) score += 10;
+                var mission15a = document.getElementById("M15a");
+                score += Number(mission15a.innerText) * 5;
+                var missionPT = document.getElementById("PrecisionTokens");
+                var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
+                score += scorelookup[missionPT.value];
+                document.getElementById("TotalPoints").value = score;
+                var total_score = score;
+                console.log(total_score);
             }
 
-            var selection_screen = document.getElementsByClassName("selection-screen")[0];
-            selection_screen.hidden = true;
-            var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
-            scoring_screen.hidden = false;
-        }
-
-        function submitMatch(){
-            if (document.getElementById("M02b").checked && document.getElementById('M02a').innerText == "0") {
-                alert("Problem with mission 2: Cannot get bonus point without scoring any fuel units.")
-                return
+            function minus(mission) {
+                var element = document.getElementById(mission);
+                var value = Number(element.innerText) - 1;
+                if (value < 0) value = 0;
+                element.innerText = value;
+                total_score();
             }
 
-            if (document.getElementById("M05b").checked && !document.getElementById('M05a').checked) {
-                alert("Problem with mission 5: Cannot get bonus point without raising this field's orange connector.")
-                return
+            function plus(mission) {
+                var element = document.getElementById(mission);
+                var value = Number(element.innerText) + 1;
+                if (value > 3 && mission == "M02a") value = 3;
+                if (value > 3 && mission == "M03a") value = 3;
+                if (value > 3 && mission == "M04a") value = 3;
+                if (value > 3 && mission == "M07a") value = 3;
+                if (value > 3 && mission == "M10a") value = 3;
+                if (value > 3 && mission == "M12a") value = 3;
+                if (value > 3 && mission == "M12b") value = 3;
+                if (value > 3 && mission == "M13a") value = 3;
+                if (value > 3 && mission == "M14a") value = 3;
+                if (value > 3 && mission == "M15a") value = 3;
+                element.innerText = value;
+                total_score();
             }
 
-            if(document.getElementById("PrecisionTokens").value == "") {
-                alert("Cannot submit, please select the number of precision tokens.")
-                return;
-            }
-
-            if(document.getElementById("GP").value == "") {
-                alert("Cannot submit, please select a GP score.")
-                return;
-            }
-
-            if(document.getElementById("TeamInitials").value == "") {
-                alert("Cannot submit, team initials must be provided.")
-                return;
-            }
-            
-            else{
-                var matchData = {
-                    team: document.getElementById('name').value,
-                    match: document.getElementById('match').value,
-                    referee: document.getElementById('referee').value,
-                    field: document.getElementById('field').value,
-                    score: document.getElementById('TotalPoints').value,
-                    GPScore: document.getElementById('GP').value,
-                    teamInitials: document.getElementById('TeamInitials').value,
-                    precisionTokens: document.getElementById('PrecisionTokens').value,
-                    UUId: Math.random()
+            function startMatch() {
+                if (
+                    document.getElementById("name").value == "" ||
+                    document.getElementById("match").value == "" ||
+                    document.getElementById("referee").value == "" ||
+                    document.getElementById("field").value == ""
+                ) {
+                    alert("Cannot start, please fill in the boxes.");
+                    return;
                 }
 
-                var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"))
-                if (!oldData) oldData = [];
-                oldData.push(matchData)
-                window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
-
-                /*form.append("team", document.getElementById('name').value);
-                form.append("match", document.getElementById('match').value);
-                form.append("referee", document.getElementById('referee').value);
-                form.append("field", document.getElementById('field').value);
-                form.append("score", document.getElementById('TotalPoints').value);
-                form.append("GPScore", document.getElementById('GP').value);
-                form.append("teamInitials", document.getElementById('TeamInitials').value);
-                form.append("precisionTokens", document.getElementById('PrecisionTokens').value);*/
-    
-                var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
-                scoring_screen.hidden = true;
                 var selection_screen = document.getElementsByClassName("selection-screen")[0];
-                selection_screen.hidden = false;  
-                
-                var m02a = document.getElementById('M02a');
-                var m03a = document.getElementById('M03a');
-                var m04a = document.getElementById('M04a');
-                var m07a = document.getElementById('M07a');
-                var m09b = document.getElementById('M09b');
-                var m10a = document.getElementById('M10a');
-                var m12a = document.getElementById('M12a');
-                var m12b = document.getElementById('M12b');
-                var m13a = document.getElementById('M13a');
-                var m14a = document.getElementById('M14a');
-                var m15a = document.getElementById('M15a');
-            
-
-                document.getElementById("name").value = "";
-                document.getElementById("match").value = "";
-                document.getElementById("referee").value = "";
-                document.getElementById("field").value = "";
-                document.getElementById("M00a").checked = false;
-                document.getElementById("M01a").checked = false;
-                m02a.innerText = "0";
-                document.getElementById("M02b").checked = false;
-                m03a.innerText = "0";
-                document.getElementById("M03b").checked = false;
-                m04a.innerText = "0";
-                document.getElementById("M05a").checked = false; 
-                document.getElementById("M05b").checked = false; 
-                document.getElementById("M06a").checked = false; 
-                document.getElementById("M06b").checked = false; 
-                m07a.innerText = "0";
-                document.getElementById("M08a").checked = false; 
-                document.getElementById("M08b").checked = false; 
-                document.getElementById("M09a").checked = false; 
-                document.getElementById("M09b").value = "";
-                m10a.innerText = "0";
-                document.getElementById("M11a").checked = false;
-                m12a.innerText = "0";
-                m12b.innerText = "0";
-                m13a.innerText = "0";
-                m14a.innerText = "0";
-                document.getElementById("M14b").checked = false; 
-                m15a.innerText = "0";
-                document.getElementById("PrecisionTokens").value = "";
-                document.getElementById("name").value = "";
-                document.getElementById("TotalPoints").value = "0";
-                document.getElementById("TeamInitials").value = "";
-                document.getElementById("GP").value = "";
+                selection_screen.hidden = true;
+                var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
+                scoring_screen.hidden = false;
             }
-        }
 
-        function sendMatch(matchData){
-            const http = new XMLHttpRequest();
-            const form = new FormData();
+            function submitMatch() {
+                if (document.getElementById("M02b").checked && document.getElementById("M02a").innerText == "0") {
+                    alert("Problem with mission 2: Cannot get bonus point without scoring any fuel units.");
+                    return;
+                }
 
-            for(const [key, value] of Object.entries(matchData)){
-                if (key != "UUId"){
-                    form.append(key, value)
+                if (document.getElementById("M05b").checked && !document.getElementById("M05a").checked) {
+                    alert(
+                        "Problem with mission 5: Cannot get bonus point without raising this field's orange connector."
+                    );
+                    return;
+                }
+
+                if (document.getElementById("PrecisionTokens").value == "") {
+                    alert("Cannot submit, please select the number of precision tokens.");
+                    return;
+                }
+
+                if (document.getElementById("GP").value == "") {
+                    alert("Cannot submit, please select a GP score.");
+                    return;
+                }
+
+                if (document.getElementById("TeamInitials").value == "") {
+                    alert("Cannot submit, team initials must be provided.");
+                    return;
+                } else {
+                    var matchData = {
+                        team: document.getElementById("name").value,
+                        match: document.getElementById("match").value,
+                        referee: document.getElementById("referee").value,
+                        field: document.getElementById("field").value,
+                        score: document.getElementById("TotalPoints").value,
+                        GPScore: document.getElementById("GP").value,
+                        teamInitials: document.getElementById("TeamInitials").value,
+                        precisionTokens: document.getElementById("PrecisionTokens").value,
+                        UUId: Math.random()
+                    };
+
+                    var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"));
+                    if (!oldData) oldData = [];
+                    oldData.push(matchData);
+                    window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData));
+
+                    var scoring_screen = document.getElementsByClassName("scoring-screen")[0];
+                    scoring_screen.hidden = true;
+                    var selection_screen = document.getElementsByClassName("selection-screen")[0];
+                    selection_screen.hidden = false;
+
+                    var m02a = document.getElementById("M02a");
+                    var m03a = document.getElementById("M03a");
+                    var m04a = document.getElementById("M04a");
+                    var m07a = document.getElementById("M07a");
+                    var m09b = document.getElementById("M09b");
+                    var m10a = document.getElementById("M10a");
+                    var m12a = document.getElementById("M12a");
+                    var m12b = document.getElementById("M12b");
+                    var m13a = document.getElementById("M13a");
+                    var m14a = document.getElementById("M14a");
+                    var m15a = document.getElementById("M15a");
+
+                    document.getElementById("name").value = "";
+                    document.getElementById("match").value = "";
+                    // document.getElementById("referee").value = "";
+                    // document.getElementById("field").value = "";
+                    document.getElementById("M00a").checked = false;
+                    document.getElementById("M01a").checked = false;
+                    m02a.innerText = "0";
+                    document.getElementById("M02b").checked = false;
+                    m03a.innerText = "0";
+                    document.getElementById("M03b").checked = false;
+                    m04a.innerText = "0";
+                    document.getElementById("M05a").checked = false;
+                    document.getElementById("M05b").checked = false;
+                    document.getElementById("M06a").checked = false;
+                    document.getElementById("M06b").checked = false;
+                    m07a.innerText = "0";
+                    document.getElementById("M08a").checked = false;
+                    document.getElementById("M08b").checked = false;
+                    document.getElementById("M09a").checked = false;
+                    document.getElementById("M09b").value = "";
+                    m10a.innerText = "0";
+                    document.getElementById("M11a").checked = false;
+                    m12a.innerText = "0";
+                    m12b.innerText = "0";
+                    m13a.innerText = "0";
+                    m14a.innerText = "0";
+                    document.getElementById("M14b").checked = false;
+                    m15a.innerText = "0";
+                    document.getElementById("PrecisionTokens").value = "";
+                    document.getElementById("name").value = "";
+                    document.getElementById("TotalPoints").value = "0";
+                    document.getElementById("TeamInitials").value = "";
+                    document.getElementById("GP").value = "";
                 }
             }
 
-            http.onreadystatechange = ()=>{
-                if (http.readyState == 4){
-                    if (http.status == 200){
-                        console.log("Success")
-                        var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"))
-                        var index = oldData.findIndex((element)=>{
-                            if (element.UUId == matchData.UUId){
-                                return true
-                            }
-                            else{
-                                return false
-                            }
-                        })
-                        oldData.splice(index, 1)
-                        window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData))
-                    }
-                    
-                    else{
-                        console.log("Failure")
+            function sendMatch(matchData) {
+                const http = new XMLHttpRequest();
+                const form = new FormData();
+
+                for (const [key, value] of Object.entries(matchData)) {
+                    if (key != "UUId") {
+                        form.append(key, value);
                     }
                 }
+
+                http.onreadystatechange = () => {
+                    if (http.readyState == 4) {
+                        if (http.status == 200) {
+                            console.log("Success");
+                            var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"));
+                            var index = oldData.findIndex((element) => {
+                                if (element.UUId == matchData.UUId) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            });
+                            oldData.splice(index, 1);
+                            window.localStorage.setItem("FLLScoringData", JSON.stringify(oldData));
+                        } else {
+                            console.log("Failure");
+                        }
+                    }
+                };
+
+                http.open("POST", "/saveMatch");
+                http.send(form);
             }
 
-            http.open("POST", "/saveMatch");
-            http.send(form);
-        }
+            window.setInterval(() => {
+                var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"));
+                if (!oldData) return;
+                oldData.forEach((element) => {
+                    sendMatch(element);
+                });
+            }, 10000);
+        </script>
 
-        window.setInterval(()=>{
-            var oldData = JSON.parse(window.localStorage.getItem("FLLScoringData"))
-            if (!oldData) return
-            oldData.forEach((element)=>{
-                sendMatch(element)
-            })
-        }, 10000)
-    </script>
+        <style>
+            body {
+                font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+                background-color: rgb(255, 248, 189);
+            }
 
-    <style>
-        body {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
+            div.selection-screen {
+                line-height: 175%;
+                text-align: center;
 
-        div.selection-screen {
-            line-height: 175%;
-            text-align: center;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
 
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
+            p {
+                font-weight: bold;
+                font-size: 23px;
+                text-align: center;
+            }
 
-        p {
-            font-weight: bold;
-            font-size: 23px;
-            text-align: center;
-        }
+            div.scoring-screen th {
+                text-align: center;
+            }
 
-        div.scoring-screen th {
-            text-align: center;
-        }
+            div.scoring-screen td:last-child {
+                text-align: center;
+            }
 
-        div.scoring-screen td:last-child{
-            text-align: center;
-        }
+            div.scoring-screen input[type="checkbox"] {
+                width: 40px;
+                height: 40px;
+            }
 
-        div.scoring-screen input[type="checkbox"] {
-            width: 40px;
-            height: 40px;
-        }
+            table,
+            tr {
+                background-color: hsl(180, 41%, 89%);
+                border: 2px solid;
+                border-collapse: collapse;
+            }
 
-        table, tr {
-            background-color: hsl(180, 41%, 89%);
-            border: 2px solid;
-            border-collapse: collapse;
-        }
+            th {
+                height: 40px;
+                padding: 10px;
+            }
 
-        th {
-            height: 40px;
-            padding: 10px;
-        } 
+            td {
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Selection screen -->
+        <div class="selection-screen">
+            <p>FLL SUPERPOWERED Scoring</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Team Number:</td>
+                        <td><input type="number" id="name" /></td>
+                    </tr>
+                    <tr>
+                        <td>Match Number:</td>
+                        <td><input type="number" id="match" min="0" /></td>
+                    </tr>
+                    <tr>
+                        <td>Referee Name:</td>
+                        <td><input type="text" id="referee" /></td>
+                    </tr>
+                    <tr>
+                        <td>Table Name:</td>
+                        <td>
+                            <select id="field">
+                                <option>Red 1</option>
+                                <option>Red 2</option>
+                                <option>Blue 1</option>
+                                <option>Blue 2</option>
+                                <option>Yellow 1</option>
+                                <option>Yellow 2</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center; vertical-align: middle">
+                            <input
+                                type="button"
+                                value="Done"
+                                style="height: 40px; width: 100px"
+                                onclick="javascript:startMatch()"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        td {
-            padding: 10px;
-        }
+        <!-- Scoring screen -->
+        <div hidden class="scoring-screen">
+            <p>FLL SUPERPOWERED SCORING APP</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <th colspan="2">Equipment Inspection</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Did the robot and all its equipment fit completely in one launch area and are under a height
+                            of 12 in. during the pre-match inspection?
+                        </td>
+                        <td>
+                            <input type="checkbox" id="M00a" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-    </style>
-</head>
-<body>
+                    <tr>
+                        <th colspan="2">Mission 1: Innovation Project Model</th>
+                    </tr>
+                    <tr>
+                        <td>Is the Innovation Project model at least partly in the hydrogen plant target area?</td>
+                        <td>
+                            <input type="checkbox" id="M01a" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-    <!-- Selection screen -->
-    <div class="selection-screen">
-        <p>FLL SUPERPOWERED Scoring</p>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Team Number:</td> 
-                    <td><input type="number" id="name"/></td>
-                </tr>
-                <tr>
-                    <td>Match Number:</td> 
-                    <td><input type="number" id="match" min="0"/></td>
-                </tr>
-                <tr>
-                    <td>Referee Name:</td> 
-                    <td><input type="text" id="referee"/></td>
-                </tr>
-                <tr>
-                    <td>Table Number:</td> 
-                    <td><input type="number" id="field" min="0"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center; vertical-align: middle;"><input type="button" value="Done" style="height:40px;width:100px" onclick="javascript:startMatch()"/></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    <tr>
+                        <th colspan="2">Mission 2: Oil Platform</th>
+                    </tr>
+                    <tr>
+                        <td>How many fuel units are in the fuel truck?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M02a')" />
+                            <span id="M02a">0</span>
+                            <input type="button" value="+" onclick="plus('M02a')" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Bonus: Is at least one fuel unit in the fuel truck while the fuel truck is at least partly
+                            over the fueling station target?
+                        </td>
+                        <td>
+                            <input type="checkbox" id="M02b" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-    <!-- Scoring screen -->
-    <div hidden class="scoring-screen">
-        <p>FLL SUPERPOWERED SCORING APP</p>
-        <table>
-            <tbody>
-                
-                <tr>
-                     <body style="background-color:rgb(255, 248, 189);"></body>
-                    <th colspan="2">Equipment Inspection</th>
-                    </body>
-                </tr>
-                <tr>
-                    <td>
-                        Did the robot and all its equipment fit completely in one launch area and are under a height of 12 in. during the pre-match inspection?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M00a" onchange="total_score();"/>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <th colspan="2">Mission 1: Innovation Project Model</th>
-                </tr>
-                <tr>
-                    <td>
-                        Is the Innovation Project model at least partly in the hydrogen plant target area?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M01a" onchange="total_score();"/>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <th colspan="2">Mission 2: Oil Platform</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many fuel units are in the fuel truck?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M02a')"></input>
-                        <span id="M02a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M02a')"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Bonus: Is at least one fuel unit in the fuel truck while the fuel truck is at least partly over the fueling station target?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M02b" onchange="total_score();"/>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 3: Energy Storage</th>
+                    </tr>
+                    <tr>
+                        <td>How many energy unit are completely in the energy storage bin (max of three)?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M03a')" />
+                            <span id="M03a">0</span>
+                            <input type="button" value="+" onclick="plus('M03a')" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is the energy unit completely removed from the energy storage tray?</td>
+                        <td>
+                            <input type="checkbox" id="M03b" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 3: Energy Storage</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy unit are completely in the energy storage bin (max of three)?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M03a')"></input>
-                        <span id="M03a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M03a')"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Is the energy unit completely removed from the energy storage tray?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M03b" onchange="total_score();"/>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 4: Solar Farm</th>
+                    </tr>
+                    <tr>
+                        <td>How many energy units are completely removed from their starting circles?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M04a')" />
+                            <span id="M04a">0</span>
+                            <input type="button" value="+" onclick="plus('M04a')" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 4: Solar Farm</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy units are completely removed from their starting circles?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M04a')"></input>
-                        <span id="M04a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M04a')"></input>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 5: Smart Grid</th>
+                    </tr>
+                    <tr>
+                        <td>Is your field's orange connector completely raised?</td>
+                        <td>
+                            <input type="checkbox" id="M05a" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bonus: Are both teams' orange connectors completely raised?</td>
+                        <td>
+                            <input type="checkbox" id="M05b" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 5: Smart Grid</th>
-                </tr>
-                <tr>
-                    <td>
-                        Is your field's orange connector completely raised?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M05a" onchange="total_score();"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Bonus: Are both teams' orange connectors completely raised?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M05b" onchange="total_score();"/>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 6: Hybrid Car</th>
+                    </tr>
+                    <tr>
+                        <td>Is the hybrid car is no longer touching the ramp?</td>
+                        <td>
+                            <input type="checkbox" id="M06a" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is the hybrid unit is in the hybrid car?</td>
+                        <td>
+                            <input type="checkbox" id="M06b" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 6: Hybrid Car</th>
-                </tr>
-                <tr>
-                    <td>
-                        Is the hybrid car is no longer touching the ramp?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M06a" onchange="total_score();"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Is the hybrid unit is in the hybrid car?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M06b" onchange="total_score();"/>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 7: Wind Turbine</th>
+                    </tr>
+                    <tr>
+                        <td>How many energy units are no longer touching the wind turbine?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M07a')" />
+                            <span id="M07a">0</span>
+                            <input type="button" value="+" onclick="plus('M07a')" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 7: Wind Turbine</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy units are no longer touching the wind turbine?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M07a')"></input>
-                        <span id="M07a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M07a')"></input>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 8: Watch Television</th>
+                    </tr>
+                    <tr>
+                        <td>Is the television completely raised?</td>
+                        <td><input type="checkbox" id="M08a" onchange="total_score();" /></td>
+                    </tr>
+                    <tr>
+                        <td>Is an energy unit completely in the green television slot?</td>
+                        <td><input type="checkbox" id="M08b" onchange="total_score();" /></td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 8: Watch Television</th>
-                </tr>
-                <tr>
-                    <td>Is the television completely raised?</td>
-                    <td><input type="checkbox" id="M08a" onchange="total_score();"/></td>
-                </tr>
-                <tr>
-                    <td>Is an energy unit completely in the green television slot?</td>
-                    <td><input type="checkbox" id="M08b" onchange="total_score();"/></td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 9: Dinosaur Toy</th>
+                    </tr>
+                    <tr>
+                        <td>Is the dinosaur toy completely in the red (left) home area?</td>
+                        <td><input type="checkbox" id="M09a" onchange="total_score();" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Is the dinosaur toy lid completely closed with an energy unit or rechargeable battery
+                            inside?
+                        </td>
+                        <td>
+                            <label for="M09b"></label>
+                            <select id="M09b" name="M09b" onchange="total_score();">
+                                <option value="0">Empty</option>
+                                <option value="10">Energy Unit</option>
+                                <option value="20">Rechargeable battery</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 9: Dinosaur Toy</th>
-                </tr>
-                <tr>
-                    <td>Is the dinosaur toy completely in the red (left) home area?</td>
-                    <td><input type="checkbox" id="M09a" onchange="total_score();"/></td>
-                </tr>
-                <tr>
-                    <td>Is the dinosaur toy lid completely closed with an energy unit or rechargeable battery inside?
-                    </td>
-                    <td>
-                        <label for="M09b"></label>
-                        <select id="M09b" name="M09b" onchange="total_score();">
-                            <option value="0">Empty</option>
-                            <option value="10">Energy Unit</option>
-                            <option value="20">Rechargeable battery</option>
-                        </select>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 10: Power Plant</th>
+                    </tr>
+                    <tr>
+                        <td>How many energy units are no longer touching the power plant?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M10a')" />
+                            <span id="M10a">0</span>
+                            <input type="button" value="+" onclick="plus('M10a')" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 10: Power Plant</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy units are no longer touching the power plant?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M10a')"></input>
-                        <span id="M10a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M10a')"></input>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 11: Hydroelectric Dam</th>
+                    </tr>
+                    <tr>
+                        <td>Is the energy unit is no longer touching the hydroelectric dam?</td>
+                        <td>
+                            <input type="checkbox" id="M11a" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 11: Hydroelectric Dam</th>
-                </tr>
-                <tr>
-                    <td>
-                        Is the energy unit is no longer touching the hydroelectric dam?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M11a" onchange="total_score();"/>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 12: Water Reservoir</th>
+                    </tr>
+                    <tr>
+                        <td>Is a looped water unit is completely in the water reservoir, touching the mat?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M12a')" />
+                            <span id="M12a">0</span>
+                            <input type="button" value="+" onclick="plus('M12a')" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is a looped water unit placed on a single red hook?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M12b')" />
+                            <span id="M12b">0</span>
+                            <input type="button" value="+" onclick="plus('M12b')" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 12: Water Reservoir</th>
-                </tr>
-                <tr>
-                    <td>
-                        Is a looped water unit is completely in the water reservoir, touching the mat?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M12a')"></input>
-                        <span id="M12a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M12a')"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Is a looped water unit placed on a single red hook?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M12b')"></input>
-                        <span id="M12b">0</span> 
-                        <input type="button" value="+" onclick = "plus('M12b')"></input>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 13: Power-To-X</th>
+                    </tr>
+                    <tr>
+                        <td>How many energy units are completely in the hydrogen plant target area (max of three)?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M13a')" />
+                            <span id="M13a">0</span>
+                            <input type="button" value="+" onclick="plus('M13a')" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 13: Power-To-X</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy units are completely in the hydrogen plant target area (max of three)?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M13a')"></input>
-                        <span id="M13a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M13a')"></input>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 14: Toy Factory</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            How many energy units are at least partly in the slot in the back of the toy factory or in
+                            the red hopper (max of 3)?
+                        </td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M14a')" />
+                            <span id="M14a">0</span>
+                            <input type="button" value="+" onclick="plus('M14a')" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Has the mini dinosaur toy been released?</td>
+                        <td>
+                            <input type="checkbox" id="M14b" onchange="total_score();" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th colspan="2">Mission 14: Toy Factory</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy units are at least partly in the slot in the back of the toy factory or in the red hopper (max of 3)?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M14a')"></input>
-                        <span id="M14a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M14a')"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Has the mini dinosaur toy been released?
-                    </td>
-                    <td>
-                        <input type="checkbox" id="M14b" onchange="total_score();"/>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <th colspan="2">Mission 15: Rechargable Battery</th>
-                </tr>
-                <tr>
-                    <td>
-                        How many energy units are completely in the rechargeable battery target area (max of three)?
-                    </td>
-                    <td>
-                        <input type="button" value="-" onclick="minus('M15a')"></input>
-                        <span id="M15a">0</span> 
-                        <input type="button" value="+" onclick = "plus('M15a')"></input>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Mission 15: Rechargable Battery</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            How many energy units are completely in the rechargeable battery target area (max of three)?
+                        </td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M15a')" />
+                            <span id="M15a">0</span>
+                            <input type="button" value="+" onclick="plus('M15a')" />
+                        </td>
+                    </tr>
 
-                <tr>
-                    
-                    <th colspan="2">Precision Tokens</th>
-                </tr>
-                <tr>
-                    <td>
-                        Remaining tokens at the end of the match:
-                    </td>
-                    <td>
-                        <label for="PrecisionTokens"></label>
-                        <select id="PrecisionTokens" name="PrecisionTokens" onchange="total_score();">
-                            <option value="">--Choose an Option--</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <th colspan="2">Gracious Professionalism</th>
-                </tr>
-                <tr>
-                    <td>
-                        Level of Gracious Professionalism displayed at the robot game table:
-                    </td>
-                    <td>
-                        <label for="GP"></label>
-                        <select id="GP" name="GP">
-                            <option value="">--Choose an Option--</option>
-                            <option value="2">Developing</option>
-                            <option value="3">Accomplished</option>
-                            <option value="4">Exceeds</option>
-                        </select>
-                    </td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Precision Tokens</th>
+                    </tr>
+                    <tr>
+                        <td>Remaining tokens at the end of the match:</td>
+                        <td>
+                            <label for="PrecisionTokens"></label>
+                            <select id="PrecisionTokens" name="PrecisionTokens" onchange="total_score();">
+                                <option value="">--Choose an Option--</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th style="text-align: left;">Team Initials</th>
-                    <td><input type="text" id="TeamInitials"/></td>
-                </tr>
+                    <tr>
+                        <th colspan="2">Gracious Professionalism</th>
+                    </tr>
+                    <tr>
+                        <td>Level of Gracious Professionalism displayed at the robot game table:</td>
+                        <td>
+                            <label for="GP"></label>
+                            <select id="GP" name="GP">
+                                <option value="">--Choose an Option--</option>
+                                <option value="2">Developing</option>
+                                <option value="3">Accomplished</option>
+                                <option value="4">Exceeds</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th style="text-align: left;">Total Points</th>
-                    <td><input type="number" id="TotalPoints" value="0" readonly/></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center"><input type="button" value="Submit" style="height:40px;width:100px" onchange="total_score();" onclick="submitMatch();"/></td>
-                </tr>
+                    <tr>
+                        <th style="text-align: left">Team Initials</th>
+                        <td><input type="text" id="TeamInitials" /></td>
+                    </tr>
 
-            </tbody>
-        </table>
-    </div>
-</body>
+                    <tr>
+                        <th style="text-align: left">Total Points</th>
+                        <td><input type="number" id="TotalPoints" value="0" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            <input
+                                type="button"
+                                value="Submit"
+                                style="height: 40px; width: 100px"
+                                onchange="total_score();"
+                                onclick="submitMatch();"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
