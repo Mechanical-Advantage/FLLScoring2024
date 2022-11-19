@@ -244,6 +244,46 @@
                     sendMatch(element);
                 });
             }, 10000);
+
+            var matchName = null;
+            function createSocket() {
+                window.socket = new WebSocket("ws://" + location.host + "/ws");
+                window.socket.addEventListener("open", () => console.log("Socket opened"));
+                window.socket.addEventListener("close", () => {
+                    console.log("Socket closed");
+                    document.getElementsByClassName("timer")[0].innerText = "Disconnected";
+                    setTimeout(() => {
+                        createSocket();
+                    }, 500);
+                });
+                window.socket.addEventListener("message", (event) => {
+                    let message = JSON.parse(event.data);
+                    var timer = document.getElementsByClassName("timer")[0];
+                    if (message.type == "matches") {
+                        let matches = message.data;
+                        if (matches.length == 0) {
+                            matchName = null;
+                        } else {
+                            matchName = "Match " + matches[0].number.toString() + " (" + matches[0].field + ")";
+                        }
+                    } else if (message.type == "timer") {
+                        let time = message.data;
+                        let timeText =
+                            time == null
+                                ? "2:30"
+                                : Math.floor(time / 60).toString() + ":" + (time % 60).toString().padStart(2, "0");
+                        if (matchName == null) {
+                            timer.innerText = timeText;
+                        } else {
+                            timer.innerText = matchName + " - " + timeText;
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener("load", () => {
+                createSocket();
+            });
         </script>
 
         <style>
@@ -252,13 +292,26 @@
                 background-color: rgb(255, 248, 189);
             }
 
+            div.timer {
+                position: fixed;
+                left: 0%;
+                width: 100%;
+                top: 0%;
+                height: 75px;
+                background-color: black;
+                color: white;
+                text-align: center;
+                line-height: 75px;
+                font-size: 40px;
+            }
+
             div.selection-screen {
                 line-height: 175%;
                 text-align: center;
 
                 position: absolute;
                 left: 50%;
-                top: 50%;
+                top: calc(50% + 37.5px);
                 transform: translate(-50%, -50%);
             }
 
@@ -266,6 +319,10 @@
                 font-weight: bold;
                 font-size: 23px;
                 text-align: center;
+            }
+
+            div.scoring-screen {
+                padding-top: 75px;
             }
 
             div.scoring-screen th {
@@ -299,6 +356,8 @@
         </style>
     </head>
     <body>
+        <div class="timer">Disconnected</div>
+
         <!-- Selection screen -->
         <div class="selection-screen">
             <p>FLL SUPERPOWERED Scoring</p>
