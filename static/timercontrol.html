@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FLL Timer Control</title>
+        <style>
+            body {
+                font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+                line-height: 50px;
+            }
+
+            button {
+                width: 100px;
+                height: 50px;
+            }
+
+            div.timer {
+                margin-top: 20px;
+                font-family: monospace;
+                font-size: 60px;
+            }
+        </style>
+        <script type="text/javascript">
+            function start() {
+                if (window.socket) {
+                    window.socket.send(
+                        JSON.stringify({
+                            type: "start"
+                        })
+                    );
+                }
+            }
+
+            function reset() {
+                if (window.socket) {
+                    window.socket.send(
+                        JSON.stringify({
+                            type: "reset"
+                        })
+                    );
+                }
+            }
+
+            function changeMatch(change) {
+                if (window.socket) {
+                    window.socket.send(
+                        JSON.stringify({
+                            type: "changematch",
+                            data: change
+                        })
+                    );
+                }
+            }
+
+            function createSocket() {
+                window.socket = new WebSocket("ws://" + location.host + "/ws");
+                window.socket.addEventListener("open", () => {
+                    console.log("Socket opened");
+                    document.getElementsByClassName("status")[0].innerText = "Connected";
+                });
+                window.socket.addEventListener("close", () => {
+                    console.log("Socket closed");
+                    document.getElementsByClassName("status")[0].innerText = "!!! Disconnected !!!";
+                    document.getElementsByClassName("match").innerText = "???";
+                    setTimeout(() => {
+                        createSocket();
+                    }, 500);
+                });
+                window.socket.addEventListener("message", (event) => {
+                    let message = JSON.parse(event.data);
+                    if (message.type == "matches") {
+                        let matches = message.data;
+                        if (matches.length > 0) {
+                            document.getElementsByClassName("match")[0].innerText =
+                                "Match " + matches[0].number.toString() + " (" + matches[0].field + ")";
+                        }
+                    } else if (message.type == "timer") {
+                        let time = message.data;
+                        let timerElement = document.getElementsByClassName("timer")[0];
+                        if (time == null) {
+                            timerElement.innerText = "2:30";
+                        } else {
+                            timerElement.innerText =
+                                Math.floor(time / 60).toString() + ":" + (time % 60).toString().padStart(2, "0");
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener("load", () => {
+                createSocket();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="status">!!! Disconnected !!!</div>
+        <button onclick="javascript:changeMatch(-1)">Previous Match</button>
+        <button onclick="javascript:changeMatch(1)">Next Match</button>
+        <br />
+        <button onclick="javascript:start()">Start</button>
+        <button onclick="javascript:reset()">Reset</button>
+        <br />
+        Current Match: <span class="match">???</span>
+        <div class="timer"></div>
+    </body>
+</html>

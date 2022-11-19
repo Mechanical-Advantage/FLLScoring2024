@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FLL Heads-Up Display</title>
+        <style>
+            body {
+                font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+            }
+
+            div.bar-layout {
+                position: absolute;
+                left: 0%;
+                width: 100%;
+                top: 50%;
+                height: 150px;
+                transform: translateY(-50%);
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            div.card-fadeout {
+                position: absolute;
+                left: 70%;
+                width: 30%;
+                top: 50%;
+                height: 150px;
+                transform: translateY(-50%);
+                z-index: 1;
+                background-image: linear-gradient(to left, white, rgba(255, 255, 255, 0.9), transparent);
+            }
+
+            div.all-cards {
+                position: absolute;
+                left: 0%;
+                top: 0%;
+                height: 100%;
+            }
+
+            div.card {
+                display: inline-block;
+                vertical-align: middle;
+
+                margin-top: 0px;
+                margin-left: 8px;
+                margin-right: 8px;
+                height: 100%;
+                aspect-ratio: 1.5;
+            }
+
+            div.card:first-child {
+                margin-left: 20px;
+            }
+
+            div.match-status {
+                height: 35%;
+                text-align: center;
+                overflow: auto;
+                font-weight: bold;
+                font-size: 25px;
+                line-height: 50px;
+            }
+
+            table.match-info {
+                margin-top: 0px;
+                height: calc(65% - 10px);
+                margin-left: 0px;
+                width: calc(100%);
+
+                border-collapse: collapse;
+                border: 3px solid black;
+                table-layout: fixed;
+            }
+
+            table.match-info.red {
+                background-color: #ff6161;
+            }
+
+            table.match-info.blue {
+                background-color: #7d7dff;
+            }
+
+            table.match-info.yellow {
+                background-color: #ffff3f;
+            }
+
+            table.match-info th {
+                border: 3px solid black;
+                height: 25%;
+                font-size: 20px;
+                padding: 3px;
+            }
+
+            table.match-info td {
+                border: 3px solid black;
+                text-align: center;
+                font-size: 15px;
+                padding: 3px;
+            }
+        </style>
+        <script type="text/javascript">
+            function createSocket() {
+                window.socket = new WebSocket("ws://" + location.host + "/ws");
+                window.socket.addEventListener("open", () => console.log("Socket opened"));
+                window.socket.addEventListener("close", () => {
+                    console.log("Socket closed");
+                    setTimeout(() => {
+                        createSocket();
+                    }, 500);
+                });
+                window.socket.addEventListener("message", (event) => {
+                    let message = JSON.parse(event.data);
+                    if (message.type == "matches") {
+                        let matches = message.data;
+                        let allCards = document.getElementsByClassName("all-cards")[0];
+                        while (allCards.firstChild) {
+                            allCards.removeChild(allCards.firstChild);
+                        }
+                        matches.forEach((match) => {
+                            let cardDiv = document.createElement("div");
+                            cardDiv.classList.add("card");
+                            allCards.appendChild(cardDiv);
+                            let statusDiv = document.createElement("div");
+                            statusDiv.classList.add("match-status");
+                            cardDiv.appendChild(statusDiv);
+                            let table = document.createElement("table");
+                            table.classList.add("match-info");
+                            table.classList.add(match.field.toLowerCase());
+                            cardDiv.appendChild(table);
+                            let tableBody = document.createElement("tbody");
+                            table.appendChild(tableBody);
+                            let headerRow = document.createElement("tr");
+                            tableBody.appendChild(headerRow);
+                            let header = document.createElement("th");
+                            header.colSpan = 2;
+                            header.innerText = "Match " + match.number.toString() + " (" + match.field + ")";
+                            headerRow.appendChild(header);
+                            let teamsRow = document.createElement("tr");
+                            tableBody.appendChild(teamsRow);
+                            let team1 = document.createElement("td");
+                            team1.innerHTML =
+                                match.teamNumbers[0] == -1
+                                    ? "None"
+                                    : match.teamNumbers[0] + "<br/>" + match.teamNames[0];
+                            teamsRow.appendChild(team1);
+                            let team2 = document.createElement("td");
+                            team2.innerHTML =
+                                match.teamNumbers[1] == -1
+                                    ? "None"
+                                    : match.teamNumbers[1] + "<br/>" + match.teamNames[1];
+                            teamsRow.appendChild(team2);
+                        });
+                    } else if (message.type == "timer") {
+                        let time = message.data;
+                        let cards = document.getElementsByClassName("all-cards")[0].children;
+                        if (cards.length > 0) {
+                            let title = cards[0].firstChild;
+                            if (time == null) {
+                                title.innerText = "Next Match";
+                            } else if (time == 0) {
+                                title.innerText = "Just Finished";
+                            } else {
+                                title.innerText =
+                                    "Now Playing (" +
+                                    Math.floor(time / 60).toString() +
+                                    ":" +
+                                    (time % 60).toString().padStart(2, "0") +
+                                    ")";
+                            }
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener("load", () => {
+                createSocket();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="card-fadeout"></div>
+        <div class="bar-layout">
+            <div class="all-cards"></div>
+        </div>
+    </body>
+</html>

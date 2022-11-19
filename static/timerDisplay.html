@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FLL Timer</title>
+        <style>
+            body {
+                font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+            }
+
+            button {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                height: 25%;
+                width: 25%;
+                z-index: 2;
+                font-size: 5vh;
+            }
+
+            div.timer {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 75vh;
+            }
+        </style>
+        <script type="text/javascript">
+            var warningAudio = null;
+            var endAudio = null;
+            var didPlayWarning = false;
+            var didPlayEnd = false;
+
+            function createAudio() {
+                warningAudio = new Audio("/static/audio_warning.wav");
+                endAudio = new Audio("/static/audio_end.wav");
+                document.getElementsByTagName("button")[0].hidden = true;
+            }
+
+            function createSocket() {
+                window.socket = new WebSocket("ws://" + location.host + "/ws");
+                window.socket.addEventListener("open", () => console.log("Socket opened"));
+                window.socket.addEventListener("close", () => {
+                    console.log("Socket closed");
+                    setTimeout(() => {
+                        createSocket();
+                    }, 500);
+                });
+                window.socket.addEventListener("message", (event) => {
+                    let message = JSON.parse(event.data);
+                    if (message.type == "timer") {
+                        let time = message.data;
+                        let timer = document.getElementsByClassName("timer")[0];
+                        if (time == null || time == 150) {
+                            timer.innerText = "2:30";
+                            didPlayWarning = false;
+                            didPlayEnd = false;
+                        } else {
+                            timer.innerText =
+                                Math.floor(time / 60).toString() + ":" + (time % 60).toString().padStart(2, "0");
+                        }
+
+                        if (time == 30 && !didPlayWarning) {
+                            warningAudio.play();
+                            didPlayWarning = true;
+                        }
+                        if (time == 0 && !didPlayEnd) {
+                            endAudio.play();
+                            didPlayEnd = true;
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener("load", () => {
+                createSocket();
+            });
+        </script>
+    </head>
+
+    <body>
+        <button onclick="createAudio()">Enable Audio</button>
+        <div class="timer"></div>
+    </body>
+</html>

@@ -259,6 +259,20 @@ def get_team_schedule(team_query):
     return(sorted(schedule_items, key=lambda x: (x["start_time"],)))
 
 
+# Write to database
+cur.execute("DELETE FROM match_schedule")
+match_number = 0
+for match in matches:
+    match_number += 1
+    for i in range(int(len(match["teams"]) / 2)):
+        team1 = match["teams"][i * 2]
+        team2 = match["teams"][i * 2 + 1]
+        if team1 != -1 or team2 != -1:
+            cur.execute("INSERT INTO match_schedule(number, field, team1, team2) VALUES (?,?,?,?)",
+                        (match_number, config.schedule_tables_long[i * 2].split(" ")[0], team1, team2))
+conn.commit()
+
+
 # Get team list
 team_list = cur.execute(
     "SELECT TeamNumber,TeamName FROM teams ORDER BY TeamNumber ASC").fetchall()
