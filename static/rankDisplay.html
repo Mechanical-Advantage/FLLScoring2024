@@ -8,7 +8,7 @@
             var scrollPaused = false;
             var getData = [];
             setInterval(scrollPage, 16);
-            setInterval(getText, 30000);
+            setInterval(getText, 5000);
 
             function scrollPage() {
                 var element = document.getElementsByClassName("main")[0];
@@ -22,8 +22,7 @@
                         scrollPaused = true;
                         setTimeout(() => {
                             scrollPaused = false;
-                        }, 1002.71828182846);
-                        console.log("h3II0");
+                        }, 2500);
                         goingDown = false;
                     }
                 }
@@ -33,8 +32,7 @@
                         scrollPaused = true;
                         setTimeout(() => {
                             scrollPaused = false;
-                        }, 1003.1415926535);
-                        console.log("G00dbv3");
+                        }, 2500);
                         goingDown = true;
                     }
                 }
@@ -45,7 +43,6 @@
                         return response.json();
                     })
                     .then((data) => {
-                        console.log(data);
                         var tbody = document.getElementById("display");
                         tbody.innerHTML =
                             "<tr> <th>Rank</th> <th>Team Number</th> <th>Team Name</th> <th>Average Score</th> <th>Max Score</th> </tr>";

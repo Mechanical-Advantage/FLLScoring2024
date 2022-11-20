@@ -412,8 +412,8 @@
                     </tr>
                     <tr>
                         <td>
-                            Did the robot and all its equipment fit completely in one launch area and are under a height
-                            of 12 in. during the pre-match inspection?
+                            During the pre-match inspection, did the robot and all its equipment fit completely in one
+                            launch area while being under a height of 12 inches?
                         </td>
                         <td>
                             <input type="checkbox" id="M00a" onchange="total_score();" />
@@ -491,7 +491,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Bonus: Are both teams' orange connectors completely raised?</td>
+                        <td>Bonus: Are both fields' orange connectors completely raised?</td>
                         <td>
                             <input type="checkbox" id="M05b" onchange="total_score();" />
                         </td>
@@ -554,7 +554,7 @@
                             <select id="M09b" name="M09b" onchange="total_score();">
                                 <option value="0">Empty</option>
                                 <option value="10">Energy Unit</option>
-                                <option value="20">Rechargeable battery</option>
+                                <option value="20">Rechargeable Battery</option>
                             </select>
                         </td>
                     </tr>
@@ -585,7 +585,7 @@
                         <th colspan="2">Mission 12: Water Reservoir</th>
                     </tr>
                     <tr>
-                        <td>Is a looped water unit is completely in the water reservoir, touching the mat?</td>
+                        <td>How many looped water unit are completely in the water reservoir, touching the mat?</td>
                         <td>
                             <input type="button" value="-" onclick="minus('M12a')" />
                             <span id="M12a">0</span>
@@ -593,7 +593,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Is a looped water unit placed on a single red hook?</td>
+                        <td>How many looped water units are placed on the red hooks?</td>
                         <td>
                             <input type="button" value="-" onclick="minus('M12b')" />
                             <span id="M12b">0</span>
@@ -669,8 +669,23 @@
                     </tr>
 
                     <tr>
+                        <th colspan="2">Team Review</th>
+                    </tr>
+
+                    <tr>
+                        <th style="text-align: left">Final Score</th>
+                        <td><input type="number" id="TotalPoints" value="0" readonly /></td>
+                    </tr>
+
+                    <tr>
+                        <th style="text-align: left">Team Initials</th>
+                        <td><input type="text" id="TeamInitials" /></td>
+                    </tr>
+
+                    <tr>
                         <th colspan="2">Gracious Professionalism</th>
                     </tr>
+
                     <tr>
                         <td>Level of Gracious Professionalism displayed at the robot game table:</td>
                         <td>
@@ -684,15 +699,6 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <th style="text-align: left">Team Initials</th>
-                        <td><input type="text" id="TeamInitials" /></td>
-                    </tr>
-
-                    <tr>
-                        <th style="text-align: left">Total Points</th>
-                        <td><input type="number" id="TotalPoints" value="0" readonly /></td>
-                    </tr>
                     <tr>
                         <td colspan="2" style="text-align: center">
                             <input
