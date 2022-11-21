@@ -28,12 +28,15 @@
             }
         </style>
         <script type="text/javascript">
+            var startAudio = null;
             var warningAudio = null;
             var endAudio = null;
+            var didPlayStart = false;
             var didPlayWarning = false;
             var didPlayEnd = false;
 
             function createAudio() {
+                startAudio = new Audio("/static/audio_start.wav");
                 warningAudio = new Audio("/static/audio_warning.wav");
                 endAudio = new Audio("/static/audio_end.wav");
                 document.getElementsByTagName("button")[0].hidden = true;
@@ -53,8 +56,9 @@
                     if (message.type == "timer") {
                         let time = message.data;
                         let timer = document.getElementsByClassName("timer")[0];
-                        if (time == null || time == 150) {
+                        if (time == null) {
                             timer.innerText = "2:30";
+                            didPlayStart = false;
                             didPlayWarning = false;
                             didPlayEnd = false;
                         } else {
@@ -62,6 +66,10 @@
                                 Math.floor(time / 60).toString() + ":" + (time % 60).toString().padStart(2, "0");
                         }
 
+                        if (time == 150 && !didPlayStart) {
+                            startAudio.play();
+                            didPlayStart = true;
+                        }
                         if (time == 30 && !didPlayWarning) {
                             warningAudio.play();
                             didPlayWarning = true;

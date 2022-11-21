@@ -79,19 +79,19 @@
                 // draw winner background
                 context.fillStyle = "#00FF00";
                 if (match.winner == 1) {
-                    context.fillRect(x(xPos - 200), y(yPos - 100), dis(400), dis(100));
+                    context.fillRect(x(xPos - 225), y(yPos - 100), dis(450), dis(100));
                 } else if (match.winner == 2) {
-                    context.fillRect(x(xPos - 200), y(yPos), dis(400), dis(100));
+                    context.fillRect(x(xPos - 225), y(yPos), dis(450), dis(100));
                 }
 
                 // draw outline
                 context.lineWidth = dis(7);
                 context.lineCap = "butt";
                 context.strokeStyle = "#000000";
-                context.strokeRect(x(xPos - 200), y(yPos - 100), dis(400), dis(200));
+                context.strokeRect(x(xPos - 225), y(yPos - 100), dis(450), dis(200));
                 context.beginPath();
-                context.moveTo(x(xPos - 200), y(yPos));
-                context.lineTo(x(xPos + 200), y(yPos));
+                context.moveTo(x(xPos - 225), y(yPos));
+                context.lineTo(x(xPos + 225), y(yPos));
                 context.stroke();
 
                 // match & time
@@ -114,8 +114,8 @@
                 context.textBaseline = "middle";
                 context.font = dis(53).toString() + "px sans-serif";
                 context.fillStyle = "#000000";
-                context.fillText(match.team1, x(xPos), y(yPos - 50));
-                context.fillText(match.team2, x(xPos), y(yPos + 50));
+                context.fillText(showMatches ? match.team1 : match.team1Name, x(xPos), y(yPos - 50), 430 * scaler);
+                context.fillText(showMatches ? match.team2 : match.team2Name, x(xPos), y(yPos + 50), 430 * scaler);
             }
 
             function render() {
@@ -172,11 +172,11 @@
                         }
                         targetMatch = matchData.find(checkMatch);
                         if (targetMatch.column < 0) {
-                            startX -= 200;
-                            endX += 200;
+                            startX -= 225;
+                            endX += 225;
                         } else {
-                            startX += 200;
-                            endX -= 200;
+                            startX += 225;
+                            endX -= 225;
                         }
 
                         context.moveTo(x(startX), y(startY));

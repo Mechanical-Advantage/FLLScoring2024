@@ -131,6 +131,9 @@ class Root(object):
                     winners[match] = results[0][0]
             return (winners)
 
+        def get_name(cur, team):
+            return cur.execute("SELECT TeamName FROM teams WHERE TeamNumber=?", (team,)).fetchall()[0][0]
+
         conn = sql.connect("data.db")
         cur = conn.cursor()
 
@@ -166,10 +169,13 @@ class Root(object):
                     output["inputs"].append(source_match)
                     if source_match in winners:
                         output[key] = str(winners[source_match])
+                        output[key + "Name"] = str(get_name(cur, winners[source_match]))
                     else:
                         output[key] = ""
+                        output[key + "Name"] = ""
                 else:
                     output[key] = str(match[key])
+                    output[key + "Name"] = str(get_name(cur, match[key]))
 
                 # Get score
                 if output[key] != "":
@@ -177,6 +183,7 @@ class Root(object):
                         match["number"], output[key])).fetchall()
                     if len(score) > 0:
                         output[key] += " - " + str(score[0][0]) + " pts"
+                        output[key + "Name"] += " - " + str(score[0][0]) + " pts"
 
             # Add winner
             if match["number"] in winners and output["team1"] != "" and output["team2"] != "":
