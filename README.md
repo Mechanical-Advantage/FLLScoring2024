@@ -1,3 +1,3 @@
-# FLLScoring2022
+# FLLScoring2023
 
-Custom scoring system for 2022 FLL scrimmage
+Custom scoring system for 2023 FLL event
