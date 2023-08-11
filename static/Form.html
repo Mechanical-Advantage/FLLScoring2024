@@ -404,7 +404,7 @@
 
         <!-- Scoring screen -->
         <div hidden class="scoring-screen">
-            <p>FLL SUPERPOWERED SCORING APP</p>
+            <p>FLL MASTERPIECE SCORING APP</p>
             <table>
                 <tbody>
                     <tr>
@@ -421,30 +421,27 @@
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 1: Innovation Project Model</th>
+                        <th colspan="2">Mission 1: 3D Cinema</th>
                     </tr>
                     <tr>
-                        <td>Is the Innovation Project model at least partly in the hydrogen plant target area?</td>
+                        <td>Is the red beam completely to the right?</td>
                         <td>
                             <input type="checkbox" id="M01a" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 2: Oil Platform</th>
+                        <th colspan="2">Mission 2: Theater Scene Change</th>
                     </tr>
                     <tr>
-                        <td>How many fuel units are in the fuel truck?</td>
+                        <td>What is the active scene's color?</td>
                         <td>
                             <input type="button" value="-" onclick="minus('M02a')" />
-                            <span id="M02a">0</span>
-                            <input type="button" value="+" onclick="plus('M02a')" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Bonus: Is at least one fuel unit in the fuel truck while the fuel truck is at least partly
-                            over the fueling station target?
+                            Bonus: do both teams have the same colored scene?
                         </td>
                         <td>
                             <input type="checkbox" id="M02b" onchange="total_score();" />
@@ -452,37 +449,35 @@
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 3: Energy Storage</th>
+                        <th colspan="2">Mission 3: Immersive Experience</th>
                     </tr>
                     <tr>
-                        <td>How many energy unit are completely in the energy storage bin (max of three)?</td>
+                        <td>Are all three screens raised vertically?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M03a')" />
-                            <span id="M03a">0</span>
-                            <input type="button" value="+" onclick="plus('M03a')" />
+                            <input type="checkbox" id="M03a" onchange="total_score();" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="2">Mission 4: Masterpiece</th>
+                    </tr>
+                    <tr>
+                        <td>Is the art piece at least partially in the museum area?</td>
+                        <td>
+                            <td>
+                                <input type="checkbox" id="M04a" onchange="total_score();" />
+                            </td>
                         </td>
                     </tr>
                     <tr>
-                        <td>Is the energy unit completely removed from the energy storage tray?</td>
+                        <td>Is the art piece completely supported by the pedestal?</td>
                         <td>
                             <input type="checkbox" id="M03b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 4: Solar Farm</th>
-                    </tr>
-                    <tr>
-                        <td>How many energy units are completely removed from their starting circles?</td>
-                        <td>
-                            <input type="button" value="-" onclick="minus('M04a')" />
-                            <span id="M04a">0</span>
-                            <input type="button" value="+" onclick="plus('M04a')" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th colspan="2">Mission 5: Smart Grid</th>
+                        <th colspan="2">Mission 5: Augmented Reality Statue</th>
                     </tr>
                     <tr>
                         <td>Is your field's orange connector completely raised?</td>
