@@ -9,53 +9,59 @@
                 var mission0 = document.getElementById("M00a");
                 if (mission0.checked) score += 20;
                 var mission1 = document.getElementById("M01a");
-                if (mission1.checked) score += 10;
+                if (mission1.checked) score += 20;
                 var mission2a = document.getElementById("M02a");
-                score += Number(mission2a.innerText) * 5;
+                score += Number(mission2a.value);
                 var mission2b = document.getElementById("M02b");
-                if (mission2b.checked) score += 10;
+                if (mission2b.checked && mission2a.value == 10) score += 20;
+                if (mission2b.checked && mission2a.value == 20) score += 30;
+                if (mission2b.checked && mission2a.value == 30) score += 10;
                 var mission3a = document.getElementById("M03a");
-                score += Number(mission3a.innerText) * 10;
-                var mission3b = document.getElementById("M03b");
-                if (mission3b.checked) score += 5;
+                if (mission3a.checked) score += 20;
                 var mission4a = document.getElementById("M04a");
-                score += Number(mission4a.innerText) * 5;
-                score += Number(mission4a.innerText) == 3 ? 5 : 0;
+                if (mission4a.checked) score += 10;
+                var mission4b = document.getElementById("M04b");
+                if (mission4b.checked) score += 20;
                 var mission5a = document.getElementById("M05a");
-                if (mission5a.checked) score += 20;
-                var mission5b = document.getElementById("M05b");
-                if (mission5b.checked) score += 10;
+                if (mission5a.checked) score += 30;
                 var mission6a = document.getElementById("M06a");
                 if (mission6a.checked) score += 10;
                 var mission6b = document.getElementById("M06b");
                 if (mission6b.checked) score += 10;
                 var mission7a = document.getElementById("M07a");
-                score += Number(mission7a.innerText) * 10;
+                if (mission7a.checked) score += 20;
                 var mission8a = document.getElementById("M08a");
-                if (mission8a.checked) score += 10;
-                var mission8b = document.getElementById("M08b");
-                if (mission8b.checked) score += 10;
+                score += Number(mission8a.value);
                 var mission9a = document.getElementById("M09a");
                 if (mission9a.checked) score += 10;
                 var mission9b = document.getElementById("M09b");
-                score += Number(mission9b.value);
+                if (mission9b.checked) score += 10;
                 var mission10a = document.getElementById("M10a");
-                score += Number(mission10a.innerText) * 5;
-                score += Number(mission10a.innerText) == 3 ? 10 : 0;
+                score += Number(mission10a.innerText) * 10;
                 var mission11a = document.getElementById("M11a");
-                if (mission11a.checked) score += 20;
+                score += Number(mission11a.value);
                 var mission12a = document.getElementById("M12a");
-                score += Number(mission12a.innerText) * 5;
+                if (mission12a.checked) score += 10;
                 var mission12b = document.getElementById("M12b");
-                score += Number(mission12b.innerText) * 10;
-                var mission13 = document.getElementById("M13a");
-                score += Number(mission13.innerText) * 5;
+                if (mission12b.checked) score += 20;
+                var mission13a = document.getElementById("M13a");
+                if (mission13a.checked) score += 10;
+                var mission13b = document.getElementById("M13b");
+                if (mission13b.checked) score += 20;
                 var mission14a = document.getElementById("M14a");
                 score += Number(mission14a.innerText) * 5;
                 var mission14b = document.getElementById("M14b");
-                if (mission14b.checked) score += 10;
+                score += Number(mission14b.innerText) * 5;
                 var mission15a = document.getElementById("M15a");
-                score += Number(mission15a.innerText) * 5;
+                if (mission15a.checked) score += 10;
+                var mission15b = document.getElementById("M15b");
+                if (mission15b.checked) score += 10;
+                var mission15c = document.getElementById("M15c");
+                if (mission15c.checked) score += 10;
+                var mission15d = document.getElementById("M15d");
+                if (mission15d.checked) score += 10;
+                var mission15e = document.getElementById("M15e");
+                if (mission15e.checked) score += 10;
                 var missionPT = document.getElementById("PrecisionTokens");
                 var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
                 score += scorelookup[missionPT.value];
@@ -75,16 +81,9 @@
             function plus(mission) {
                 var element = document.getElementById(mission);
                 var value = Number(element.innerText) + 1;
-                if (value > 3 && mission == "M02a") value = 3;
-                if (value > 3 && mission == "M03a") value = 3;
-                if (value > 3 && mission == "M04a") value = 3;
-                if (value > 3 && mission == "M07a") value = 3;
                 if (value > 3 && mission == "M10a") value = 3;
-                if (value > 3 && mission == "M12a") value = 3;
-                if (value > 3 && mission == "M12b") value = 3;
-                if (value > 3 && mission == "M13a") value = 3;
-                if (value > 3 && mission == "M14a") value = 3;
-                if (value > 3 && mission == "M15a") value = 3;
+                if (value > 7 && mission == "M14a") value = 7;
+                if (value > 7 && mission == "M14b") value = 7;
                 element.innerText = value;
                 total_score();
             }
@@ -107,14 +106,28 @@
             }
 
             function submitMatch() {
-                if (document.getElementById("M02b").checked && document.getElementById("M02a").innerText == "0") {
-                    alert("Problem with mission 2: Cannot get bonus point without scoring any fuel units.");
+                if (document.getElementById("M02b").checked && document.getElementById("M02a").value == "0") {
+                    alert("Problem with mission 2: Cannot get bonus point without an active scene color.");
                     return;
                 }
 
-                if (document.getElementById("M05b").checked && !document.getElementById("M05a").checked) {
+                if (!document.getElementById("M04a").checked && document.getElementById("M04b").checked) {
                     alert(
-                        "Problem with mission 5: Cannot get bonus point without raising this field's orange connector."
+                        "Problem with mission 4: Cannot get bonus point without the art piece being in the museum."
+                    );
+                    return;
+                }
+
+                if (!document.getElementById("M12a").checked && document.getElementById("M12b").checked) {
+                    alert(
+                        "Problem with mission 12: Cannot get bonus point if the chicken does not move."
+                    );
+                    return;
+                }
+
+                if ((!document.getElementById("M14a").value == 0 && document.getElementById("M14b").value == "0") || (document.getElementById("M14a").value == 0 && !document.getElementById("M14b").value == "0")) {
+                    alert(
+                        "Problem with mission 14: Audience members cannot be in an area without the area also containing audience members or vice versa."
                     );
                     return;
                 }
@@ -155,17 +168,9 @@
                     var selection_screen = document.getElementsByClassName("selection-screen")[0];
                     selection_screen.hidden = false;
 
-                    var m02a = document.getElementById("M02a");
-                    var m03a = document.getElementById("M03a");
-                    var m04a = document.getElementById("M04a");
-                    var m07a = document.getElementById("M07a");
-                    var m09b = document.getElementById("M09b");
                     var m10a = document.getElementById("M10a");
-                    var m12a = document.getElementById("M12a");
-                    var m12b = document.getElementById("M12b");
-                    var m13a = document.getElementById("M13a");
                     var m14a = document.getElementById("M14a");
-                    var m15a = document.getElementById("M15a");
+                    var m14b = document.getElementById("M14b");
 
                     document.getElementById("name").value = "";
                     document.getElementById("match").value = "";
@@ -173,28 +178,31 @@
                     // document.getElementById("field").value = "";
                     document.getElementById("M00a").checked = false;
                     document.getElementById("M01a").checked = false;
-                    m02a.innerText = "0";
+                    document.getElementById("M02a").value = "";
                     document.getElementById("M02b").checked = false;
-                    m03a.innerText = "0";
-                    document.getElementById("M03b").checked = false;
-                    m04a.innerText = "0";
+                    document.getElementById("M03a").checked = false;
+                    document.getElementById("M04a").checked = false;
+                    document.getElementById("M04b").checked = false;
                     document.getElementById("M05a").checked = false;
-                    document.getElementById("M05b").checked = false;
                     document.getElementById("M06a").checked = false;
                     document.getElementById("M06b").checked = false;
-                    m07a.innerText = "0";
-                    document.getElementById("M08a").checked = false;
-                    document.getElementById("M08b").checked = false;
+                    document.getElementById("M07a").checked = false;
+                    document.getElementById("M08a").value = "";
                     document.getElementById("M09a").checked = false;
-                    document.getElementById("M09b").value = "";
+                    document.getElementById("M09b").checked = false;
                     m10a.innerText = "0";
-                    document.getElementById("M11a").checked = false;
-                    m12a.innerText = "0";
-                    m12b.innerText = "0";
-                    m13a.innerText = "0";
+                    document.getElementById("M11a").value = "";
+                    document.getElementById("M12a").checked = false;
+                    document.getElementById("M12b").checked = false;
+                    document.getElementById("M13a").checked = false;
+                    document.getElementById("M13b").checked = false;
                     m14a.innerText = "0";
-                    document.getElementById("M14b").checked = false;
-                    m15a.innerText = "0";
+                    m14b.innerText = "0";
+                    document.getElementById("M15a").checked = false;
+                    document.getElementById("M15b").checked = false;
+                    document.getElementById("M15c").checked = false;
+                    document.getElementById("M15d").checked = false;
+                    document.getElementById("M15e").checked = false;
                     document.getElementById("PrecisionTokens").value = "";
                     document.getElementById("name").value = "";
                     document.getElementById("TotalPoints").value = "0";
@@ -360,7 +368,7 @@
 
         <!-- Selection screen -->
         <div class="selection-screen">
-            <p>FLL SUPERPOWERED Scoring</p>
+            <p>FLL MASTERPIECE Scoring</p>
             <table>
                 <tbody>
                     <tr>
@@ -434,9 +442,14 @@
                         <th colspan="2">Mission 2: Theater Scene Change</th>
                     </tr>
                     <tr>
-                        <td>What is the active scene's color?</td>
+                        <td>If the red flag is down, what is the active scene's color?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M02a')" />
+                            <select id="M02a" name="M02a" onchange="total_score();">
+                            <option value="0">--Choose Option--</option>
+                            <option value="10">Blue</option>
+                            <option value="20">Pink</option>
+                            <option value="30">Orange</option>
+                        </select>
                         </td>
                     </tr>
                     <tr>
@@ -463,16 +476,14 @@
                     </tr>
                     <tr>
                         <td>Is the art piece at least partially in the museum area?</td>
-                        <td>
                             <td>
-                                <input type="checkbox" id="M04a" onchange="total_score();" />
+                              <input type="checkbox" id="M04a" onchange="total_score();" />
                             </td>
-                        </td>
-                    </tr>
+                        </tr>
                     <tr>
                         <td>Is the art piece completely supported by the pedestal?</td>
                         <td>
-                            <input type="checkbox" id="M03b" onchange="total_score();" />
+                            <input type="checkbox" id="M04b" onchange="total_score();" />
                         </td>
                     </tr>
 
@@ -508,49 +519,45 @@
                     <tr>
                         <td>Is the orange activator past the black line?</td>
                         <td>
-                            <input type=""check
+                            <input type="checkbox" id="M07a" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 8: Watch Television</th>
+                        <th colspan="2">Mission 8: Rolling Camera</th>
                     </tr>
                     <tr>
-                        <td>Is the television completely raised?</td>
-                        <td><input type="checkbox" id="M08a" onchange="total_score();" /></td>
+                        <td>Which color has the camera most recently rolled past?</td>
+                        <td>
+                        <select id="M08a" name="M08a" onchange="total_score();">
+                            <option value="0">--Choose Option--</option>
+                            <option value="10">Darkest Blue</option>
+                            <option value="20">Medium Blue</option>
+                            <option value="30">Lightest Blue</option>
+                        </select>
+                       </td>
                     </tr>
                     <tr>
-                        <td>Is an energy unit completely in the green television slot?</td>
-                        <td><input type="checkbox" id="M08b" onchange="total_score();" /></td>
-                    </tr>
-
-                    <tr>
-                        <th colspan="2">Mission 9: Dinosaur Toy</th>
+                        <th colspan="2">Mission 9: Movie Set</th>
                     </tr>
                     <tr>
-                        <td>Is the dinosaur toy completely in the red (left) home area?</td>
+                        <td>Is the boat past the scene line and touching the mat?</td>
                         <td><input type="checkbox" id="M09a" onchange="total_score();" /></td>
                     </tr>
                     <tr>
                         <td>
-                            Is the dinosaur toy lid completely closed with an energy unit or rechargeable battery
-                            inside?
+                            Is the camera at least partially inside the target area and touching the mat?
                         </td>
                         <td>
-                            <label for="M09b"></label>
-                            <select id="M09b" name="M09b" onchange="total_score();">
-                                <option value="0">Empty</option>
-                                <option value="10">Energy Unit</option>
-                                <option value="20">Rechargeable Battery</option>
-                            </select>
+                            <input type="checkbox" id="M09b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 10: Power Plant</th>
+                        <th colspan="2">Mission 10: Sound Mixer</th>
                     </tr>
                     <tr>
-                        <td>How many energy units are no longer touching the power plant?</td>
+                        <td>How many of the sliders have been raised?</td>
                         <td>
                             <input type="button" value="-" onclick="minus('M10a')" />
                             <span id="M10a">0</span>
@@ -559,55 +566,57 @@
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 11: Hydroelectric Dam</th>
+                        <th colspan="2">Mission 11: Lightshow</th>
                     </tr>
                     <tr>
-                        <td>Is the energy unit is no longer touching the hydroelectric dam?</td>
-                        <td>
-                            <input type="checkbox" id="M11a" onchange="total_score();" />
+                        <td>Which color is the arrow pointing at?</td>
+                        <td>    
+                            <select id="M11a" name="M11a" onchange="total_score();">
+                                <option value="0">--Choose Option--</option>
+                                <option value="10">Yellow</option>
+                                <option value="20">Green</option>
+                                <option value="30">Blue</option>
+                            </select>
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 12: Water Reservoir</th>
+                        <th colspan="2">Mission 12: Virtual Reality Artist</th>
                     </tr>
                     <tr>
-                        <td>How many looped water unit are completely in the water reservoir, touching the mat?</td>
+                        <td>Has the chicken moved?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M12a')" />
-                            <span id="M12a">0</span>
-                            <input type="button" value="+" onclick="plus('M12a')" />
+                            <input type="checkbox" id="M12a" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
-                        <td>How many looped water units are placed on the red hooks?</td>
+                        <td>Has the chicken moved over or past the lavendar dot?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M12b')" />
-                            <span id="M12b">0</span>
-                            <input type="button" value="+" onclick="plus('M12b')" />
+                            <input type="checkbox" id="M12b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 13: Power-To-X</th>
+                        <th colspan="2">Mission 13: Craft Creator</th>
                     </tr>
                     <tr>
-                        <td>How many energy units are completely in the hydrogen plant target area (max of three)?</td>
+                        <td>Is the orange and white lid completely open?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M13a')" />
-                            <span id="M13a">0</span>
-                            <input type="button" value="+" onclick="plus('M13a')" />
+                            <input type="checkbox" id="M13a" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is the pink latch pointing straight down?</td>
+                        <td>
+                            <input type="checkbox" id="M13b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 14: Toy Factory</th>
+                        <th colspan="2">Mission 14: Audience Delivery</th>
                     </tr>
                     <tr>
-                        <td>
-                            How many energy units are at least partly in the slot in the back of the toy factory or in
-                            the red hopper (max of 3)?
-                        </td>
+                        <td>How many audience members are in destinations?</td>
                         <td>
                             <input type="button" value="-" onclick="minus('M14a')" />
                             <span id="M14a">0</span>
@@ -615,23 +624,48 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Has the mini dinosaur toy been released?</td>
+                        <td>How many destinations have at least one person fully in them?</td>
                         <td>
-                            <input type="checkbox" id="M14b" onchange="total_score();" />
+                            <input type="button" value="-" onclick="minus('M14b');" />
+                            <span id="M14b">0</span>
+                            <input type="button" value="+" onclick="plus('M14b')" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 15: Rechargable Battery</th>
+                        <th colspan="2">Mission 15: Expert Delivery</th>
                     </tr>
                     <tr>
+                        <td>Which experts have been delivered?</td>
+                    </tr>
+                    <tr>
+                        <td>Sam is in the Movie Set</td>
                         <td>
-                            How many energy units are completely in the rechargeable battery target area (max of three)?
+                            <input type="checkbox" id="M15a" onchange="total_score();" />
                         </td>
+                    </tr>
+                    <tr>
+                        <td>Anna is in the Museum</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M15a')" />
-                            <span id="M15a">0</span>
-                            <input type="button" value="+" onclick="plus('M15a')" />
+                            <input type="checkbox" id="M15b" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Noah is in the Music Concert</td>
+                        <td>
+                            <input type="checkbox" id="M15c" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Izzy is in the Skate Park</td>
+                        <td>
+                            <input type="checkbox" id="M15d" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Emily is in the Cinema</td>
+                        <td>
+                            <input type="checkbox" id="M15e" onchange="total_score();" />
                         </td>
                     </tr>
 
