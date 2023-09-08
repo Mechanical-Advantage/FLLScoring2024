@@ -5,6 +5,35 @@
         <title>FLL Scoring</title>
         <script type="text/javascript">
             function total_score() {
+                var dict={"mission0": 0,
+                    "mission1": 0,
+                    "mission2a":0,
+                    "mission2b":0,
+                    "mission3a":0,
+                    "mission4a":0,
+                    "mission4b":0,
+                    "mission5a":0,
+                    "mission6a":0,
+                    "mission6b":0,
+                    "mission7a":0,
+                    "mission8a":0,
+                    "mission8a":0,
+                    "mission9a":0,
+                    "mission9b":0,
+                    "mission10a":0,
+                    "mission11a":0,
+                    "mission12a":0,
+                    "mission12b":0,
+                    "mission13a":0,
+                    "mission13b":0,
+                    "mission14a":0,
+                    "mission14b":0,
+                    "mission15a":0,
+                    "mission15b":0,
+                    "mission15c":0,
+                    "mission15d":0,
+                    "mission15e":0,
+                    "missionPT":0}
                 var score = 0;
                 var mission0 = document.getElementById("M00a");
                 if (mission0.checked) score += 20;
@@ -125,7 +154,7 @@
                     return;
                 }
 
-                if ((!document.getElementById("M14a").value == 0 && document.getElementById("M14b").value == "0") || (document.getElementById("M14a").value == 0 && !document.getElementById("M14b").value == "0")) {
+                if (document.getElementById("M14a").innerText != "0" && document.getElementById("M14b").innerText == "0" || document.getElementById("M14a").innerText == "0" && document.getElementById("M14b").innerText != "0") {
                     alert(
                         "Problem with mission 14: Audience members cannot be in an area without the area also containing audience members or vice versa."
                     );
@@ -360,6 +389,7 @@
 
             td {
                 padding: 10px;
+                text-align:left;
             }
         </style>
     </head>
@@ -637,6 +667,7 @@
                     </tr>
                     <tr>
                         <td>Which experts have been delivered?</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Sam is in the Movie Set</td>
