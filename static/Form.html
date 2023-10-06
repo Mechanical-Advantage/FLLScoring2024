@@ -36,67 +36,121 @@
                     "missionPT":0}
                 var score = 0;
                 var mission0 = document.getElementById("M00a");
-                if (mission0.checked) score += 20;
-                var mission1 = document.getElementById("M01a");
-                if (mission1.checked) score += 20;
+                if (mission0.checked) {
+                    score += 20;
+                    dict.mission0a += 20;}
+                var mission1a = document.getElementById("M01a");
+                if (mission1a.checked){
+                    score += 20;
+                    dict.mission1a += 20;}
                 var mission2a = document.getElementById("M02a");
                 score += Number(mission2a.value);
+                dict.mission2a += Number(mission2a.value);
                 var mission2b = document.getElementById("M02b");
-                if (mission2b.checked && mission2a.value == 10) score += 20;
-                if (mission2b.checked && mission2a.value == 20) score += 30;
-                if (mission2b.checked && mission2a.value == 30) score += 10;
+                if (mission2b.checked && mission2a.value == 10){
+                    score += 20;
+                    dict.mission2b += 20;}
+                if (mission2b.checked && mission2a.value == 20){
+                    score += 30;
+                    dict.mission2b += 30;}
+                if (mission2b.checked && mission2a.value == 30){
+                    score += 10;
+                    dict.mission2b += 10;}
                 var mission3a = document.getElementById("M03a");
-                if (mission3a.checked) score += 20;
+                if (mission3a.checked){
+                    score += 20;
+                    dict.mission3a += 20;}
                 var mission4a = document.getElementById("M04a");
-                if (mission4a.checked) score += 10;
+                if (mission4a.checked){
+                    score += 10;
+                    dict.mission4a += 10;}
                 var mission4b = document.getElementById("M04b");
-                if (mission4b.checked) score += 20;
+                if (mission4b.checked){
+                    score += 20;
+                    dict.mission4b += 20;}
                 var mission5a = document.getElementById("M05a");
-                if (mission5a.checked) score += 30;
+                if (mission5a.checked){
+                    score += 30;
+                    dict.mission5a += 30;}
                 var mission6a = document.getElementById("M06a");
-                if (mission6a.checked) score += 10;
+                if (mission6a.checked){
+                    score += 10;
+                    dict.mission6a += 10;}
                 var mission6b = document.getElementById("M06b");
-                if (mission6b.checked) score += 10;
+                if (mission6b.checked){
+                    score += 10;
+                    dict.mission6b += 10;}
                 var mission7a = document.getElementById("M07a");
-                if (mission7a.checked) score += 20;
+                if (mission7a.checked){
+                    score += 20;
+                    dict.mission7a += 20;}
                 var mission8a = document.getElementById("M08a");
                 score += Number(mission8a.value);
+                dict.mission8a += Number(mission8a.value);
                 var mission9a = document.getElementById("M09a");
-                if (mission9a.checked) score += 10;
+                if (mission9a.checked){
+                    score += 10;
+                    dict.mission9a += 10;}
                 var mission9b = document.getElementById("M09b");
-                if (mission9b.checked) score += 10;
+                if (mission9b.checked){
+                    score += 10;
+                    dict.mission9b += 10;}
                 var mission10a = document.getElementById("M10a");
                 score += Number(mission10a.innerText) * 10;
+                dict.mission10a += Number(mission10a.innerText) * 10;
                 var mission11a = document.getElementById("M11a");
                 score += Number(mission11a.value);
+                dict.mission11a += Number(mission11a.value);
                 var mission12a = document.getElementById("M12a");
-                if (mission12a.checked) score += 10;
+                if (mission12a.checked){
+                    score += 10;
+                    dict.mission12a += 10;}
                 var mission12b = document.getElementById("M12b");
-                if (mission12b.checked) score += 20;
+                if (mission12b.checked){
+                    score += 20;
+                    dict.mission12b += 20;}
                 var mission13a = document.getElementById("M13a");
-                if (mission13a.checked) score += 10;
+                if (mission13a.checked){
+                    score += 10;
+                    dict.mission13a += 10;}
                 var mission13b = document.getElementById("M13b");
-                if (mission13b.checked) score += 20;
+                if (mission13b.checked){
+                    score += 20;
+                    dict.mission13b += 20;}
                 var mission14a = document.getElementById("M14a");
                 score += Number(mission14a.innerText) * 5;
+                dict.mission14a += Number(mission14a.innerText) * 5;
                 var mission14b = document.getElementById("M14b");
                 score += Number(mission14b.innerText) * 5;
+                dict.mission14b += Number(mission14b.innerText) * 5;
                 var mission15a = document.getElementById("M15a");
-                if (mission15a.checked) score += 10;
+                if (mission15a.checked){
+                    score += 10;
+                    dict.mission15a += 10;}
                 var mission15b = document.getElementById("M15b");
-                if (mission15b.checked) score += 10;
+                if (mission15b.checked){
+                    score += 10;
+                    dict.mission15b += 10;}
                 var mission15c = document.getElementById("M15c");
-                if (mission15c.checked) score += 10;
+                if (mission15c.checked){
+                    score += 10;
+                    dict.mission15c += 10;}
                 var mission15d = document.getElementById("M15d");
-                if (mission15d.checked) score += 10;
+                if (mission15d.checked){
+                    score += 10;
+                    dict.mission15d += 10;}
                 var mission15e = document.getElementById("M15e");
-                if (mission15e.checked) score += 10;
+                if (mission15e.checked){
+                    score += 10;
+                    dict.mission15e += 10;}
                 var missionPT = document.getElementById("PrecisionTokens");
                 var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
                 score += scorelookup[missionPT.value];
+                dict.mission1a += scorelookup[missionPT.value];
                 document.getElementById("TotalPoints").value = score;
                 var total_score = score;
                 console.log(total_score);
+                var dictString= JSON.stringify(dict);
             }
 
             function minus(mission) {
@@ -184,6 +238,7 @@
                         GPScore: document.getElementById("GP").value,
                         teamInitials: document.getElementById("TeamInitials").value,
                         precisionTokens: document.getElementById("PrecisionTokens").value,
+                        scoreDetail: dictString,
                         UUId: Math.random()
                     };
 
