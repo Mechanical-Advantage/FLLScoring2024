@@ -57,13 +57,13 @@ class Root(object):
 
     @cherrypy.expose
     def saveMatch(self, team, match, referee, field, score, GPScore, teamInitials, precisionTokens, scoreDetail):
-        print("Team: " + team + "\nMatch: " + match + "\nReferee:  " + referee + "\nfield: " + field + "\nScore " +
-              score + "\nGPScore " + GPScore + "\nTeam Initials: " + teamInitials + "\nPrecision Tokens: " + precisionTokens + "\nScore Detail" + scoreDetail)
+        print("Team: " + team + "\nMatch: " + match + "\nReferee:  " + referee + "\nfield: " + field + "\nScore: " +
+              score + "\nGPScore: " + GPScore + "\nTeam Initials: " + teamInitials + "\nPrecision Tokens: " + precisionTokens + "\nScore Detail: " + scoreDetail)
 
         conn_global = sql.connect("data.db")
         cur_global = conn_global.cursor()
         cur_global.execute(
-            "INSERT INTO matches(team, match, referee, field, score, GPScore, teamInitials, precisionTokens) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (team, match, referee, field, score, GPScore, teamInitials, precisionTokens))
+            "INSERT INTO matches(team, match, referee, field, score, GPScore, teamInitials, precisionTokens, scoreDetail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (team, match, referee, field, score, GPScore, teamInitials, precisionTokens, scoreDetail))
         conn_global.commit()
         conn_global.close()
         return
