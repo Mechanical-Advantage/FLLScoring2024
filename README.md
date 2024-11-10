@@ -1,3 +1,3 @@
-# FLLScoring2023
+# FLLScoring2024
 
-Custom scoring system for 2023 FLL event
+Custom scoring system for 2024 FLL event
