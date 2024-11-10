@@ -29,7 +29,6 @@
                     "mission14b":0,
                     "mission14c":0,
                     "mission14d":0,
-                    "mission14e":0,
                     "mission15a":0,
                     "mission15b":0,
                     "mission15c":0,
@@ -49,13 +48,11 @@
                 var mission1c = document.getElementById("M01c");
                 if (mission1a.checked){
                     score += 20;
-                    dict.mission1a = 1;
-                    if (mission1b.checked) {
-                        score += 10;
-                        dict.mission1b = 1;
+                    dict.mission1a = 1;}
+                if (mission1b.checked) {
+                    score += 10;
+                    dict.mission1b = 1;
                     }
-                } else if (mission1b.checked) {
-                    dict.mission1b = 1;}
                 if (mission1c.checked) {
                     score += 20;
                     dict.mission1c = 1;}
@@ -126,11 +123,9 @@
                 var mission11b = document.getElementById("M11b");
                 if (mission11a.checked) {
                     score += 20
-                    dict.mission11a = 1;
-                    if (mission11b.checked) {
-                        score += 10;
-                        dict.mission11b = 1;}
-                } else if (mission11b.checked) {
+                    dict.mission11a = 1;}
+                if (mission11b.checked) {
+                    score += 10;
                     dict.mission11b = 1;}
 
                 var mission12a = document.getElementById("M12a");
@@ -146,7 +141,6 @@
                 var mission14b = document.getElementById("M14b");
                 var mission14c = document.getElementById("M14c");
                 var mission14d = document.getElementById("M14d");
-                var mission14e = document.getElementById("M14e");
                 if (mission14a.checked) {
                     score += 5;
                     dict.mission14a = 1;}
@@ -156,14 +150,8 @@
                 if (mission14c.checked) {
                     score += 10;
                     dict.mission14c = 1;}
-                if (mission14d.checked) {
-                    score += 20
-                    dict.mission14d = 1;
-                    if (mission14e.checked) {
-                        score += 10;
-                        dict.mission14e = 1;}
-                } else if (mission14e.checked) {
-                    dict.mission14e = 1;}
+                score =+ Number(mission14d.value);
+                dict.mission14d = Number(mission14d.value) / 10;
 
                 var mission15a = document.getElementById("M15a");
                 var mission15b = document.getElementById("M15b");
@@ -228,32 +216,55 @@
             }
 
             function submitMatch() {
-                if (document.getElementById("M02b").checked && document.getElementById("M02a").value == "0") {
-                    alert("Problem with mission 2: Cannot get bonus point without an active scene color.");
-                    return;
-                }
-
-                if (!document.getElementById("M04a").checked && document.getElementById("M04b").checked) {
+                if (document.getElementById("M01b").checked && !document.getElementById("M01a").checked) {
                     alert(
-                        "Problem with mission 4: Cannot get bonus point without the art piece being in the museum."
+                        "Problem with mission 1: Cannot get bonus point without placing coral on the tree support"
                     );
                     return;
                 }
 
-                if (!document.getElementById("M12a").checked && document.getElementById("M12b").checked) {
+                if (document.getElementById("M02b").checked && !document.getElementById("M02a").checked) {
+                    alert(
+                        "Problem with mission 2: Shark cannot be in its habitat without leaving its cave"
+                    );
+                    return;
+                }
+
+                if (document.getElementById("M04b").checked && !document.getElementById("M04a").checked) {
+                    alert(
+                        "Problem with mission 4: Scuba diver cannot hang on coral reef support without leaving the coral nursery "
+                    );
+                    return;
+                }
+
+                if (document.getElementById("M09b").checked && !document.getElementById("M09a").checked) {
+                    alert(
+                        "Problem with mission 9: Sea creature cannot be in cold seep without being released from the AUV"
+                    );
+                    return;
+                }
+
+                if (document.getElementById("M10b").checked && !document.getElementById("M10a").checked) {
+                    alert(
+                        "Problem with mission 10: Submersible cannot be closer to the team's side without the yellow flag being down"
+                    );
+                    return;
+                }
+
+                if (document.getElementById("M11b").checked && !document.getElementById("M11a").checked) {
+                    alert(
+                        "Problem with mission 11: Second whale cannot be revealed without revealing the first whale"
+                    );
+                    return;
+                }
+
+                if (!document.getElementById("M12b").checked && document.getElementById("M12b").checked) {
                     alert(
                         "Problem with mission 12: Cannot get bonus point if the chicken does not move."
                     );
                     return;
                 }
-
-                if (document.getElementById("M14a").innerText != "0" && document.getElementById("M14b").innerText == "0" || document.getElementById("M14a").innerText == "0" && document.getElementById("M14b").innerText != "0") {
-                    alert(
-                        "Problem with mission 14: Audience members cannot be in an area without the area also containing audience members or vice versa."
-                    );
-                    return;
-                }
-
+                
                 if (document.getElementById("PrecisionTokens").value == "") {
                     alert("Cannot submit, please select the number of precision tokens.");
                     return;
@@ -310,7 +321,7 @@
                     document.getElementById("M02b").checked = false;
 
                     document.getElementById("M03a").checked = false;
-                    m3b.innerText = "0"
+                    m03b.innerText = "0"
                     document.getElemendById("M04a").checked = false;
                     document.getElementById("M04b").checked = false;
 
@@ -320,7 +331,7 @@
 
                     document.getElementById("M07a").checked = false;
 
-                    m8a.innerText = "0";
+                    m08a.innerText = "0";
 
                     document.getElementById("M09a").checked = false;
                     document.getElementById("M09b").checked = false;
@@ -339,7 +350,6 @@
                     document.getElementById("M14b").checked = false;
                     document.getElementById("M14c").checked = false;
                     document.getElementById("M14d").checked = false;
-                    document.getElementById("M14e").checked = false;
 
                     m15a.innerText = "0";
                     m15b.innerText = "0"
