@@ -4,133 +4,153 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>FLL Scoring</title>
         <script type="text/javascript">
-            var dict={"mission0a":0,
-                    "mission1a":0,
-                    "mission1b":0,
-                    "mission1c":0,
-                    "mission2a":0,
-                    "mission2b":0,
-                    "mission3a":0,
-                    "mission4a":0,
-                    "mission4b":0,
-                    "mission5a":0,
-                    "mission6a":0,
-                    "mission7a":0,
-                    "mission8a":0,
-                    "mission9a":0,
-                    "mission9b":0,
-                    "mission10a":0,
-                    "mission10b":0,
-                    "mission11a":0,
-                    "mission11b":0,
-                    "mission12a":0,
-                    "mission13a":0,
-                    "mission14a":0,
-                    "mission14b":0,
-                    "mission14c":0,
-                    "mission14d":0,
-                    "mission15a":0,
-                    "mission15b":0,
-                    "mission15c":0,
-                    "mission15d":0,
-                    "missionPT":0}
-                var dictString="text";
+            var dict = {
+                mission0a: 0,
+                mission1a: 0,
+                mission1b: 0,
+                mission1c: 0,
+                mission2a: 0,
+                mission2b: 0,
+                mission3a: 0,
+                mission4a: 0,
+                mission4b: 0,
+                mission5a: 0,
+                mission6a: 0,
+                mission7a: 0,
+                mission8a: 0,
+                mission9a: 0,
+                mission9b: 0,
+                mission10a: 0,
+                mission10b: 0,
+                mission11a: 0,
+                mission11b: 0,
+                mission12a: 0,
+                mission13a: 0,
+                mission14a: 0,
+                mission14b: 0,
+                mission14c: 0,
+                mission14d: 0,
+                mission15a: 0,
+                mission15b: 0,
+                mission15c: 0,
+                mission15d: 0,
+                missionPT: 0
+            };
+            var dictString = "text";
             function total_score() {
                 var score = 0;
 
                 var mission0 = document.getElementById("M00a");
                 if (mission0.checked) {
                     score += 20;
-                    dict.mission0a = 1;}
+                    dict.mission0a = 1;
+                }
 
                 var mission1a = document.getElementById("M01a");
                 var mission1b = document.getElementById("M01b");
                 var mission1c = document.getElementById("M01c");
-                if (mission1a.checked){
+                if (mission1a.checked) {
                     score += 20;
-                    dict.mission1a = 1;}
+                    dict.mission1a = 1;
+                }
                 if (mission1b.checked) {
                     score += 10;
                     dict.mission1b = 1;
-                    }
+                }
                 if (mission1c.checked) {
                     score += 20;
-                    dict.mission1c = 1;}
+                    dict.mission1c = 1;
+                }
 
                 var mission2a = document.getElementById("M02a");
                 var mission2b = document.getElementById("M02b");
                 if (mission2a.checked) {
                     score += 20;
-                    dict.mission2a = 1;}
+                    dict.mission2a = 1;
+                }
                 if (mission2b.checked) {
                     score += 10;
-                    dict.mission2b = 1;}
+                    dict.mission2b = 1;
+                }
 
                 var mission3a = document.getElementById("M03a");
                 var mission3b = document.getElementById("M03b");
-                if (mission3a.checked){
+                if (mission3a.checked) {
                     score += 20;
-                    dict.mission3a = 1;}
+                    dict.mission3a = 1;
+                }
                 score += Number(mission3b.innerText) * 5;
                 dict.mission3b = Number(mission3b.innerText);
 
                 var mission4a = document.getElementById("M04a");
                 var mission4b = document.getElementById("M04b");
-                if (mission4a.checked){
+                if (mission4a.checked) {
                     score += 20;
-                    dict.mission4a = 1;}
-                if (mission4b.checked){
+                    dict.mission4a = 1;
+                }
+                if (mission4b.checked) {
                     score += 20;
-                    dict.mission4b = 1;}
+                    dict.mission4b = 1;
+                }
 
                 var mission5a = document.getElementById("M05a");
-                if (mission5a.checked){
+                if (mission5a.checked) {
                     score += 30;
-                    dict.mission5a = 1;}
+                    dict.mission5a = 1;
+                }
 
                 var mission6a = document.getElementById("M06a");
-                if (mission6a.checked){
+                if (mission6a.checked) {
                     score += 30;
-                    dict.mission6a = 1;}
+                    dict.mission6a = 1;
+                }
 
                 var mission7a = document.getElementById("M07a");
-                if (mission7a.checked){
+                if (mission7a.checked) {
                     score += 20;
-                    dict.mission7a = 1;}
+                    dict.mission7a = 1;
+                }
 
                 var mission8a = document.getElementById("M08a");
-                score += Number(mission8a.value) * 10;
+                score += Number(mission8a.innerText) * 10;
                 dict.mission8a = Number(mission8a.innerText);
 
                 var mission9a = document.getElementById("M09a");
                 var mission9b = document.getElementById("M09b");
-                if (mission9a.checked){
+                if (mission9a.checked) {
                     score += 20;
-                    dict.mission9a = 1;}
-                if (mission9b.checked){
+                    dict.mission9a = 1;
+                }
+                if (mission9b.checked) {
                     score += 10;
-                    dict.mission9b = 1;}
+                    dict.mission9b = 1;
+                }
 
                 var mission10a = document.getElementById("M10a");
+                var mission10b = document.getElementById("M10b");
                 if (mission10a.checked) {
                     score += 30;
-                    dict.mission10a = 1;}
+                    dict.mission10a = 1;
+                }
                 if (mission10b.checked) {
                     score += 10;
-                    dict.mission10b = 1;}
+                    dict.mission10b = 1;
+                }
 
                 var mission11a = document.getElementById("M11a");
-                score += Number(mission11a.value) * 10;
-                dict.mission11a = Number(mission11a.value);
+                var twenty_ten = { "": 0, 0: 0, 1: 20, 2: 30 };
+                score += twenty_ten[Number(mission11a.innerText)];
+                dict.mission11a = Number(mission11a.innerText);
 
                 var mission12a = document.getElementById("M12a");
                 score += Number(mission12a.innerText) * 10;
-                dict.mission12a = Number(mission12b.innerText);
+                dict.mission12a = Number(mission12a.innerText);
 
                 var mission13a = document.getElementById("M13a");
-                if (mission13a.checked){
+                if (mission13a.checked) {
                     score += 20;
-                    dict.mission13a = 1;}
+                    dict.mission13a = 1;
+                }
 
                 var mission14a = document.getElementById("M14a");
                 var mission14b = document.getElementById("M14b");
@@ -138,15 +158,18 @@
                 var mission14d = document.getElementById("M14d");
                 if (mission14a.checked) {
                     score += 5;
-                    dict.mission14a = 1;}
+                    dict.mission14a = 1;
+                }
                 if (mission14b.checked) {
                     score += 10;
-                    dict.mission14b = 1;}
+                    dict.mission14b = 1;
+                }
                 if (mission14c.checked) {
                     score += 10;
-                    dict.mission14c = 1;}
-                score =+ Number(mission14d.value) * 10;
-                dict.mission14d = Number(mission14d.value);
+                    dict.mission14c = 1;
+                }
+                score += twenty_ten[Number(mission14d.innerText)];
+                dict.mission14d = Number(mission14d.innerText);
 
                 var mission15a = document.getElementById("M15a");
                 var mission15b = document.getElementById("M15b");
@@ -157,11 +180,13 @@
                 score += Number(mission15b.innerText) * 5;
                 dict.mission15b = Number(mission15b.innerText);
                 if (mission15c.checked) {
-                    score +=5;
-                    dict.mission15c = 1;}
+                    score += 5;
+                    dict.mission15c = 1;
+                }
                 if (mission15d.checked) {
                     score += 20;
-                    dict.mission15d = 1;}
+                    dict.mission15d = 1;
+                }
 
                 var missionPT = document.getElementById("PrecisionTokens");
                 var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
@@ -171,7 +196,7 @@
                 document.getElementById("TotalPoints").value = score;
                 var total_score = score;
                 console.log(total_score);
-                dictString= JSON.stringify(dict);
+                dictString = JSON.stringify(dict);
                 console.log(dict);
             }
 
@@ -186,9 +211,13 @@
             function plus(mission) {
                 var element = document.getElementById(mission);
                 var value = Number(element.innerText) + 1;
-                if (value > 3 && mission == "M10a") value = 3;
-                if (value > 7 && mission == "M14a") value = 7;
-                if (value > 7 && mission == "M14b") value = 7;
+                if (value > 3 && mission == "M03b") value = 3;
+                if (value > 4 && mission == "M08a") value = 4;
+                if (value > 2 && mission == "M11a") value = 2;
+                if (value > 5 && mission == "M12a") value = 5;
+                if (value > 2 && mission == "M14d") value = 2;
+                if (value > 3 && mission == "M15a") value = 3;
+                if (value > 2 && mission == "M15b") value = 2;
                 element.innerText = value;
                 total_score();
             }
@@ -212,16 +241,12 @@
 
             function submitMatch() {
                 if (document.getElementById("M01b").checked && !document.getElementById("M01a").checked) {
-                    alert(
-                        "Problem with mission 1: Cannot get bonus point without placing coral on the tree support"
-                    );
+                    alert("Problem with mission 1: Cannot get bonus point without placing coral on the tree support");
                     return;
                 }
 
                 if (document.getElementById("M02b").checked && !document.getElementById("M02a").checked) {
-                    alert(
-                        "Problem with mission 2: Shark cannot be in its habitat without leaving its cave"
-                    );
+                    alert("Problem with mission 2: Shark cannot be in its habitat without leaving its cave");
                     return;
                 }
 
@@ -246,20 +271,6 @@
                     return;
                 }
 
-                if (document.getElementById("M11b").checked && !document.getElementById("M11a").checked) {
-                    alert(
-                        "Problem with mission 11: Second whale cannot be revealed without revealing the first whale"
-                    );
-                    return;
-                }
-
-                if (!document.getElementById("M12b").checked && document.getElementById("M12b").checked) {
-                    alert(
-                        "Problem with mission 12: Cannot get bonus point if the chicken does not move."
-                    );
-                    return;
-                }
-                
                 if (document.getElementById("PrecisionTokens").value == "") {
                     alert("Cannot submit, please select the number of precision tokens.");
                     return;
@@ -298,14 +309,10 @@
                     var selection_screen = document.getElementsByClassName("selection-screen")[0];
                     selection_screen.hidden = false;
 
-                    var m10a = document.getElementById("M10a");
-                    var m14a = document.getElementById("M14a");
-                    var m14b = document.getElementById("M14b");
-
                     document.getElementById("name").value = "";
                     document.getElementById("match").value = "";
-                    // document.getElementById("referee").value = "";
-                    // document.getElementById("field").value = "";
+                    document.getElementById("referee").value = "";
+                    document.getElementById("field").value = "";
                     document.getElementById("M00a").checked = false;
 
                     document.getElementById("M01a").checked = false;
@@ -316,8 +323,9 @@
                     document.getElementById("M02b").checked = false;
 
                     document.getElementById("M03a").checked = false;
-                    m03b.innerText = "0"
-                    document.getElemendById("M04a").checked = false;
+                    document.getElementById("M03b").innerText = "";
+
+                    document.getElementById("M04a").checked = false;
                     document.getElementById("M04b").checked = false;
 
                     document.getElementById("M05a").checked = false;
@@ -326,7 +334,7 @@
 
                     document.getElementById("M07a").checked = false;
 
-                    m08a.innerText = "0";
+                    document.getElementById("M08a").innerText = "";
 
                     document.getElementById("M09a").checked = false;
                     document.getElementById("M09b").checked = false;
@@ -334,20 +342,19 @@
                     document.getElementById("M10a").checked = false;
                     document.getElementById("M10b").checked = false;
 
-                    document.getElementById("M11a").checked = false;
-                    document.getElementById("M11b").checked = false;
+                    document.getElementById("M11a").innerText = "";
 
-                    m12a.innerText = "0";
+                    document.getElementById("M12a").innerText = "";
 
                     document.getElementById("M13a").checked = false;
 
                     document.getElementById("M14a").checked = false;
                     document.getElementById("M14b").checked = false;
                     document.getElementById("M14c").checked = false;
-                    m14d.innerText = "0"
+                    document.getElementById("M14d").innerText = "";
 
-                    m15a.innerText = "0";
-                    m15b.innerText = "0"
+                    document.getElementById("M15a").innerText = "";
+                    document.getElementById("M15b").innerText = "";
                     document.getElementById("M15c").checked = false;
                     document.getElementById("M15d").checked = false;
 
@@ -508,7 +515,7 @@
 
             td {
                 padding: 10px;
-                text-align:left;
+                text-align: left;
             }
         </style>
     </head>
@@ -592,6 +599,12 @@
                             <input type="checkbox" id="M01b" onchange="total_score();" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>Are the coral buds flipped up?</td>
+                        <td>
+                            <input type="checkbox" id="M01c" onchange="total_score();" />
+                        </td>
+                    </tr>
 
                     <tr>
                         <th colspan="2">Mission 2: Shark</th>
@@ -603,9 +616,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            Bonus: Is the shark at least partly in the shark habitat?
-                        </td>
+                        <td>Bonus: Is the shark at least partly in the shark habitat?</td>
                         <td>
                             <input type="checkbox" id="M02b" onchange="total_score();" />
                         </td>
@@ -633,11 +644,11 @@
                         <th colspan="2">Mission 4: Scuba Diver</th>
                     </tr>
                     <tr>
-                        <td>Is scuba diver completely off of the coral nursery?</td>
-                            <td>
-                              <input type="checkbox" id="M04a" onchange="total_score();" />
-                            </td>
-                        </tr>
+                        <td>Is the scuba diver completely off of the coral nursery?</td>
+                        <td>
+                            <input type="checkbox" id="M04a" onchange="total_score();" />
+                        </td>
+                    </tr>
                     <tr>
                         <td>Is the scuba diver hanging on the coral reef support?</td>
                         <td>
@@ -695,9 +706,7 @@
                         <td><input type="checkbox" id="M09a" onchange="total_score();" /></td>
                     </tr>
                     <tr>
-                        <td>
-                            Is the unknown creature partly in the cold seep region?
-                        </td>
+                        <td>Is the unknown creature partly in the cold seep region?</td>
                         <td>
                             <input type="checkbox" id="M09b" onchange="total_score();" />
                         </td>
@@ -709,13 +718,13 @@
                     <tr>
                         <td>Is the yellow flag down?</td>
                         <td>
-                            <input type="checkbox" id="M10a" onchange="total_score;" />
+                            <input type="checkbox" id="M10a" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
                         <td>Is the submersible closer to the other table?</td>
                         <td>
-                            <input type="checkbox" id="M10b" onchange="total_score;" />
+                            <input type="checkbox" id="M10b" onchange="total_score();" />
                         </td>
                     </tr>
 
@@ -759,19 +768,19 @@
                     <tr>
                         <td>Is the water sample completely outside the water sample area?</td>
                         <td>
-                            <input type="checkbox" id="M14a" onchange="total_score;" />
+                            <input type="checkbox" id="M14a" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
                         <td>Is the seabed sample completely off of the seabed?</td>
                         <td>
-                            <input type="checkbox" id="M14b" onchange="total_score;" />
+                            <input type="checkbox" id="M14b" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
                         <td>Is the plankton sample completely off of the kelp forest?</td>
                         <td>
-                            <input type="checkbox" id="M14c" onchange="total_score;" />
+                            <input type="checkbox" id="M14c" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
