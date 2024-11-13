@@ -4,154 +4,197 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>FLL Scoring</title>
         <script type="text/javascript">
-            var dict={"mission0a":1,
-                    "mission1a":1,
-                    "mission2a":1,
-                    "mission2b":1,
-                    "mission3a":1,
-                    "mission4a":1,
-                    "mission4b":1,
-                    "mission5a":1,
-                    "mission6a":1,
-                    "mission6b":1,
-                    "mission7a":1,
-                    "mission8a":1,
-                    "mission8a":1,
-                    "mission9a":1,
-                    "mission9b":1,
-                    "mission10a":1,
-                    "mission11a":1,
-                    "mission12a":1,
-                    "mission12b":1,
-                    "mission13a":1,
-                    "mission13b":1,
-                    "mission14a":1,
-                    "mission14b":1,
-                    "mission15a":1,
-                    "mission15b":1,
-                    "mission15c":1,
-                    "mission15d":1,
-                    "mission15e":1,
-                    "missionPT":0}
+            var dict = {
+                "mission0a": 1,
+                "mission1a": 1,
+                "mission1b": 1,
+                "mission1c": 1,
+                "mission2a": 1,
+                "mission2b": 1,
+                "mission3a": 1,
+                "mission4a": 1,
+                "mission4b": 1,
+                "mission5a": 1,
+                "mission6a": 1,
+                "mission7a": 1,
+                "mission8a": 1,
+                "mission9a": 1,
+                "mission9b": 1,
+                "mission10a": 1,
+                "mission10b": 1,
+                "mission11a": 0,
+                "mission12a": 1,
+                "mission13a": 1,
+                "mission14a": 1,
+                "mission14b": 1,
+                "mission14c": 1,
+                "mission14d": 1,
+                "mission15a": 1,
+                "mission15b": 1,
+                "mission15c": 1,
+                "mission15d": 1,
+                "missionPT": 0}
                 var dictString="text";
             function total_score() {
                 var score = 0;
+
                 var mission0a = document.getElementById("M00a");
-                if (dict.mission0a = 1) {
+                if (dict.mission0a == 1) {
                     score += 20;
-                    mission0a.checked = true;}
+                    mission0a.checked = true;
+                }
+
                 var mission1a = document.getElementById("M01a");
-                if (dict.mission1a = 1){
+                var mission1b = document.getElementById("M01b");
+                var mission1c = document.getElementById("M01c");
+                if (dict.mission1a == 1) {
                     score += 20;
-                    mission1a.checked = true;}
+                    mission1a.checked = true;
+                }
+                if (dict.mission1b == 1) {
+                    score += 10;
+                    mission1b.checked = true;
+                }
+                if (dict.mission1c == 1) {
+                    score += 20;
+                    mission1c.checked = true;
+                }
+
                 var mission2a = document.getElementById("M02a");
-                score += Number(mission2a.value);
-                mission2a.value = dict.mission2a * 10;
                 var mission2b = document.getElementById("M02b");
-                if (dict.mission2b == 1 && dict.mission2a == 1){
+                if (dict.mission2a == 1) {
                     score += 20;
-                    mission2b.checked = true;}
-                if (dict.mission2b == 1 && dict.mission2a == 2){
-                    score += 30;
-                    mission2b.checked = true;}
-                if (dict.mission2b == 1 && dict.mission2a == 3){
+                    mission2a.checked = true;
+                }
+                if (dict.mission2b == 1) {
                     score += 10;
-                    mission2b.checked = true;}
+                    mission2b.checked = true;
+                }
+
                 var mission3a = document.getElementById("M03a");
-                if (dict.mission3a == 1){
+                var mission3b = document.getElementById("M03b");
+                if (mission3a.checked) {
                     score += 20;
-                    mission3a.checked = true;}
+                    dict.mission3a = 1;
+                }
+                score += Number(mission3b.innerText) * 5;
+                dict.mission3b = Number(mission3b.innerText);
+
                 var mission4a = document.getElementById("M04a");
-                if (dict.mission4a == 1){
-                    score += 10;
-                    mission4a.checked = true;}
                 var mission4b = document.getElementById("M04b");
-                if (dict.mission4b == 1){
+                if (mission4a.checked) {
                     score += 20;
-                    mission4b.checked = true;}
+                    dict.mission4a = 1;
+                }
+                if (mission4b.checked) {
+                    score += 20;
+                    dict.mission4b = 1;
+                }
+
                 var mission5a = document.getElementById("M05a");
-                if (dict.mission5a == 1){
+                if (mission5a.checked) {
                     score += 30;
-                    mission5a.checked = true;}
+                    dict.mission5a = 1;
+                }
+
                 var mission6a = document.getElementById("M06a");
-                if (dict.mission6a == 1){
-                    score += 10;
-                    mission6a.checked = true;}
-                var mission6b = document.getElementById("M06b");
-                if (dict.mission6b == 1){
-                    score += 10;
-                    mission6b.checked = true;}
+                if (mission6a.checked) {
+                    score += 30;
+                    dict.mission6a = 1;
+                }
+
                 var mission7a = document.getElementById("M07a");
-                if (dict.mission7a == 1){
+                if (mission7a.checked) {
                     score += 20;
-                    mission7a.checked = true;}
+                    dict.mission7a = 1;
+                }
+
                 var mission8a = document.getElementById("M08a");
-                score += Number(mission8a.value);
-                mission8a.value = dict.mission8a * 10;
+                score += Number(mission8a.innerText) * 10;
+                dict.mission8a = Number(mission8a.innerText);
+
                 var mission9a = document.getElementById("M09a");
-                if (dict.mission9a == 1){
-                    score += 10;
-                    mission9a.checked = true;}
                 var mission9b = document.getElementById("M09b");
-                if (dict.mission9b == 1){
+                if (mission9a.checked) {
+                    score += 20;
+                    dict.mission9a = 1;
+                }
+                if (mission9b.checked) {
                     score += 10;
-                    mission9b.checked = true;}
+                    dict.mission9b = 1;
+                }
+
                 var mission10a = document.getElementById("M10a");
-                score += Number(mission10a.innerText) * 10;
-                mission10a.innerText = dict.mission10a;
+                var mission10b = document.getElementById("M10b");
+                if (mission10a.checked) {
+                    score += 30;
+                    dict.mission10a = 1;
+                }
+                if (mission10b.checked) {
+                    score += 10;
+                    dict.mission10b = 1;
+                }
+
                 var mission11a = document.getElementById("M11a");
-                score += Number(mission11a.value);
-                mission11a.value = dict.mission11a * 10;
+                var twenty_ten = { "": 0, 0: 0, 1: 20, 2: 30 };
+                score += twenty_ten[Number(mission11a.innerText)];
+                dict.mission11a = Number(mission11a.innerText);
+
                 var mission12a = document.getElementById("M12a");
-                if (dict.mission12a == 1){
-                    score += 10;
-                    mission12a.checked = true;}
-                var mission12b = document.getElementById("M12b");
-                if (dict.mission12b == 1){
-                    score += 20;
-                    mission12b.checked = true;}
+                score += Number(mission12a.innerText) * 10;
+                dict.mission12a = Number(mission12a.innerText);
+
                 var mission13a = document.getElementById("M13a");
-                if (dict.mission13a == 1){
-                    score += 10;
-                    mission13a.checked = true;}
-                var mission13b = document.getElementById("M13b");
-                if (dict.mission13b == 1){
+                if (mission13a.checked) {
                     score += 20;
-                    mission13b.checked = true;}
+                    dict.mission13a = 1;
+                }
+
                 var mission14a = document.getElementById("M14a");
-                score += Number(mission14a.innerText) * 5;
-                mission14a.innerText = dict.mission14a;
                 var mission14b = document.getElementById("M14b");
-                score += Number(mission14b.innerText) * 5;
-                mission14b.innerText = dict.mission14b;
+                var mission14c = document.getElementById("M14c");
+                var mission14d = document.getElementById("M14d");
+                if (mission14a.checked) {
+                    score += 5;
+                    dict.mission14a = 1;
+                }
+                if (mission14b.checked) {
+                    score += 10;
+                    dict.mission14b = 1;
+                }
+                if (mission14c.checked) {
+                    score += 10;
+                    dict.mission14c = 1;
+                }
+                score += twenty_ten[Number(mission14d.innerText)];
+                dict.mission14d = Number(mission14d.innerText);
+
                 var mission15a = document.getElementById("M15a");
-                if (dict.mission15a == 1){
-                    score += 10;
-                    mission15a.checked = true;}
                 var mission15b = document.getElementById("M15b");
-                if (dict.mission15b == 1){
-                    score += 10;
-                    mission15b.checked = true;}
                 var mission15c = document.getElementById("M15c");
-                if (dict.mission15c = 1){
-                    score += 10;
-                    mission15c.checked = true;}
                 var mission15d = document.getElementById("M15d");
-                if (dict.mission15d == 1){
-                    score += 10;
-                    mission15d.checked = true;}
-                var mission15e = document.getElementById("M15e");
-                if (dict.mission15e = 1){
-                    score += 10;
-                    mission15e.checked = true;}
+                score += Number(mission15a.innerText) * 5;
+                dict.mission15a = Number(mission15a.innerText);
+                score += Number(mission15b.innerText) * 5;
+                dict.mission15b = Number(mission15b.innerText);
+                if (mission15c.checked) {
+                    score += 5;
+                    dict.mission15c = 1;
+                }
+                if (mission15d.checked) {
+                    score += 20;
+                    dict.mission15d = 1;
+                }
+
                 var missionPT = document.getElementById("PrecisionTokens");
                 var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
                 score += scorelookup[missionPT.value];
-                missionPT.value = dict.missionPT;
+                dict.missionPT = missionPT.value;
+
                 document.getElementById("TotalPoints").value = score;
                 var total_score = score;
                 console.log(total_score);
-                dictString= JSON.stringify(dict);
+                dictString = JSON.stringify(dict);
                 console.log(dict);
             }
 
@@ -166,9 +209,13 @@
             function plus(mission) {
                 var element = document.getElementById(mission);
                 var value = Number(element.innerText) + 1;
-                if (value > 3 && mission == "M10a") value = 3;
-                if (value > 7 && mission == "M14a") value = 7;
-                if (value > 7 && mission == "M14b") value = 7;
+                if (value > 3 && mission == "M03b") value = 3;
+                if (value > 4 && mission == "M08a") value = 4;
+                if (value > 2 && mission == "M11a") value = 2;
+                if (value > 5 && mission == "M12a") value = 5;
+                if (value > 2 && mission == "M14d") value = 2;
+                if (value > 3 && mission == "M15a") value = 3;
+                if (value > 2 && mission == "M15b") value = 2;
                 element.innerText = value;
                 total_score();
             }
@@ -306,7 +353,7 @@
 
         <!-- Selection screen -->
         <div class="selection-screen">
-            <p>FLL MASTERPIECE Scoring</p>
+            <p>FLL SUBMERGED Scoring</p>
             <table>
                 <tbody>
                     <tr>
@@ -333,7 +380,7 @@
 
         <!-- Scoring screen -->
         <div hidden class="scoring-screen">
-            <p>FLL MASTERPIECE SCORING APP</p>
+            <p>FLL SUBMERGED SCORING APP</p>
             <table>
                 <tbody>
                     <tr>
@@ -350,244 +397,242 @@
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 1: 3D Cinema</th>
+                        <th colspan="2">Mission 1: Coral Nursery</th>
                     </tr>
                     <tr>
-                        <td>Is the red beam completely to the right?</td>
+                        <td>Is the coral tree hanging on the yellow support beam?</td>
                         <td>
                             <input type="checkbox" id="M01a" onchange="total_score();" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>If the coral tree is hanging, is the bottom of the tree in its holder?</td>
+                        <td>
+                            <input type="checkbox" id="M01b" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Are the coral buds flipped up?</td>
+                        <td>
+                            <input type="checkbox" id="M01c" onchange="total_score();" />
+                        </td>
+                    </tr>
 
                     <tr>
-                        <th colspan="2">Mission 2: Theater Scene Change</th>
+                        <th colspan="2">Mission 2: Shark</th>
                     </tr>
                     <tr>
-                        <td>If the red flag is down, what is the active scene's color?</td>
+                        <td>Is the shark completely off of the cave?</td>
                         <td>
-                            <select id="M02a" name="M02a" onchange="total_score();">
-                            <option value="0">--Choose Option--</option>
-                            <option value="10">Blue</option>
-                            <option value="20">Pink</option>
-                            <option value="30">Orange</option>
-                        </select>
+                            <input type="checkbox" id="M02a" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            Bonus: do both teams have the same colored scene?
-                        </td>
+                        <td>Bonus: Is the shark at least partly in the shark habitat?</td>
                         <td>
                             <input type="checkbox" id="M02b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 3: Immersive Experience</th>
+                        <th colspan="2">Mission 3: Coral Reef</th>
                     </tr>
                     <tr>
-                        <td>Are all three screens raised vertically?</td>
+                        <td>Is the coral reef flipped up?</td>
                         <td>
                             <input type="checkbox" id="M03a" onchange="total_score();" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>How many reef segments are upright, on the mat, and outside of home?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M03b')" />
+                            <span id="M03b">0</span>
+                            <input type="button" value="+" onclick="plus('M03b')" />
+                        </td>
+                    </tr>
 
                     <tr>
-                        <th colspan="2">Mission 4: Masterpiece</th>
+                        <th colspan="2">Mission 4: Scuba Diver</th>
                     </tr>
                     <tr>
-                        <td>Is the art piece at least partially in the museum area?</td>
-                            <td>
-                              <input type="checkbox" id="M04a" onchange="total_score();" />
-                            </td>
-                        </tr>
+                        <td>Is the scuba diver completely off of the coral nursery?</td>
+                        <td>
+                            <input type="checkbox" id="M04a" onchange="total_score();" />
+                        </td>
+                    </tr>
                     <tr>
-                        <td>Is the art piece completely supported by the pedestal?</td>
+                        <td>Is the scuba diver hanging on the coral reef support?</td>
                         <td>
                             <input type="checkbox" id="M04b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 5: Augmented Reality Statue</th>
+                        <th colspan="2">Mission 5: Angler Fish</th>
                     </tr>
                     <tr>
-                        <td>Is your orange lever completely to the right?</td>
+                        <td>Is the angler fish latched within the shipwreck?</td>
                         <td>
                             <input type="checkbox" id="M05a" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 6: Music Concert Lights and Sounds</th>
+                        <th colspan="2">Mission 6: Raise the Mast</th>
                     </tr>
                     <tr>
-                        <td>Is the sound lever completely to the left?</td>
+                        <td>Is the mast completely raised?</td>
                         <td>
                             <input type="checkbox" id="M06a" onchange="total_score();" />
                         </td>
                     </tr>
-                    <tr>
-                        <td>Is the light lever completely down?</td>
-                        <td>
-                            <input type="checkbox" id="M06b" onchange="total_score();" />
-                        </td>
-                    </tr>
 
                     <tr>
-                        <th colspan="2">Mission 7: Hologram Performer</th>
+                        <th colspan="2">Mission 7: Kraken's Treasure</th>
                     </tr>
                     <tr>
-                        <td>Is the orange activator past the black line?</td>
+                        <td>Is the treasure chest completely outside the kraken's nest?</td>
                         <td>
                             <input type="checkbox" id="M07a" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 8: Rolling Camera</th>
+                        <th colspan="2">Mission 8: Artificial Habitat</th>
                     </tr>
                     <tr>
-                        <td>Which color has the camera most recently rolled past?</td>
+                        <td>How many stack segments are flat and upright?</td>
                         <td>
-                        <select id="M08a" name="M08a" onchange="total_score();">
-                            <option value="0">--Choose Option--</option>
-                            <option value="10">Darkest Blue</option>
-                            <option value="20">Medium Blue</option>
-                            <option value="30">Lightest Blue</option>
-                        </select>
-                       </td>
+                            <input type="button" value="-" onclick="minus('M08a')" />
+                            <span id="M08a">0</span>
+                            <input type="button" value="+" onclick="plus('M08a')" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="2">Mission 9: Unexpected Encounter</th>
                     </tr>
                     <tr>
-                        <th colspan="2">Mission 9: Movie Set</th>
-                    </tr>
-                    <tr>
-                        <td>Is the boat past the scene line and touching the mat?</td>
+                        <td>Is the unknown creature released?</td>
                         <td><input type="checkbox" id="M09a" onchange="total_score();" /></td>
                     </tr>
                     <tr>
-                        <td>
-                            Is the camera at least partially inside the target area and touching the mat?
-                        </td>
+                        <td>Is the unknown creature partly in the cold seep region?</td>
                         <td>
                             <input type="checkbox" id="M09b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 10: Sound Mixer</th>
+                        <th colspan="2">Mission 10: Send Over the Submersible</th>
                     </tr>
                     <tr>
-                        <td>How many of the sliders have been raised?</td>
+                        <td>Is the yellow flag down?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M10a')" />
-                            <span id="M10a">0</span>
-                            <input type="button" value="+" onclick="plus('M10a')" />
+                            <input type="checkbox" id="M10a" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is the submersible closer to the other table?</td>
+                        <td>
+                            <input type="checkbox" id="M10b" onchange="total_score();" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 11: Lightshow</th>
+                        <th colspan="2">Mission 11: Sonar Discovery</th>
                     </tr>
                     <tr>
-                        <td>Which color is the arrow pointing at?</td>
-                        <td>    
-                            <select id="M11a" name="M11a" onchange="total_score();">
-                                <option value="0">--Choose Option--</option>
-                                <option value="10">Yellow</option>
-                                <option value="20">Green</option>
-                                <option value="30">Blue</option>
-                            </select>
+                        <td>How many whales are revealed?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M11a')" />
+                            <span id="M11a">0</span>
+                            <input type="button" value="+" onclick="plus('M11a')" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 12: Virtual Reality Artist</th>
+                        <th colspan="2">Mission 12: Feed the Whale</th>
                     </tr>
                     <tr>
-                        <td>Has the chicken moved?</td>
+                        <td>How many krill are at least partly in the whale's mouth?</td>
                         <td>
-                            <input type="checkbox" id="M12a" onchange="total_score();" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Has the chicken moved over or past the lavendar dot?</td>
-                        <td>
-                            <input type="checkbox" id="M12b" onchange="total_score();" />
+                            <input type="button" value="-" onclick="minus('M12a')" />
+                            <span id="M12a">0</span>
+                            <input type="button" value="+" onclick="plus('M12a')" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 13: Craft Creator</th>
+                        <th colspan="2">Mission 13: Change Shipping Lanes</th>
                     </tr>
                     <tr>
-                        <td>Is the orange and white lid completely open?</td>
+                        <td>Is the ship touching the mat and in the new shipping lane?</td>
                         <td>
                             <input type="checkbox" id="M13a" onchange="total_score();" />
                         </td>
                     </tr>
+
                     <tr>
-                        <td>Is the pink latch pointing straight down?</td>
+                        <th colspan="2">Mission 14: Sample Collection</th>
+                    </tr>
+                    <tr>
+                        <td>Is the water sample completely outside the water sample area?</td>
                         <td>
-                            <input type="checkbox" id="M13b" onchange="total_score();" />
+                            <input type="checkbox" id="M14a" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is the seabed sample completely off of the seabed?</td>
+                        <td>
+                            <input type="checkbox" id="M14b" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Is the plankton sample completely off of the kelp forest?</td>
+                        <td>
+                            <input type="checkbox" id="M14c" onchange="total_score();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>How many pieces of the trident have been removed from the shipwreck?</td>
+                        <td>
+                            <input type="button" value="-" onclick="minus('M14d')" />
+                            <span id="M14d">0</span>
+                            <input type="button" value="+" onclick="plus('M14d')" />
                         </td>
                     </tr>
 
                     <tr>
-                        <th colspan="2">Mission 14: Audience Delivery</th>
+                        <th colspan="2">Mission 15: Research Vessel</th>
                     </tr>
                     <tr>
-                        <td>How many audience members are in destinations?</td>
+                        <td>How many samples are in the vessel's cargo area?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M14a')" />
-                            <span id="M14a">0</span>
-                            <input type="button" value="+" onclick="plus('M14a')" />
+                            <input type="button" value="-" onclick="minus('M15a')" />
+                            <span id="M15a">0</span>
+                            <input type="button" value="+" onclick="plus('M15a')" />
                         </td>
                     </tr>
                     <tr>
-                        <td>How many destinations have at least one person fully in them?</td>
+                        <td>How many trident parts are in the vessel's cargo area?</td>
                         <td>
-                            <input type="button" value="-" onclick="minus('M14b');" />
-                            <span id="M14b">0</span>
-                            <input type="button" value="+" onclick="plus('M14b')" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th colspan="2">Mission 15: Expert Delivery</th>
-                    </tr>
-                    <tr>
-                        <td>Which experts have been delivered?</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Sam is in the Movie Set</td>
-                        <td>
-                            <input type="checkbox" id="M15a" onchange="total_score();" />
+                            <input type="button" value="-" onclick="minus('M15b')" />
+                            <span id="M15b">0</span>
+                            <input type="button" value="+" onclick="plus('M15b')" />
                         </td>
                     </tr>
                     <tr>
-                        <td>Anna is in the Museum</td>
-                        <td>
-                            <input type="checkbox" id="M15b" onchange="total_score();" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Noah is in the Music Concert</td>
+                        <td>Is the treasure chest in the vessel cargo area?</td>
                         <td>
                             <input type="checkbox" id="M15c" onchange="total_score();" />
                         </td>
                     </tr>
                     <tr>
-                        <td>Izzy is in the Skate Park</td>
+                        <td>Is port latch at least partly over the vessel loop?</td>
                         <td>
                             <input type="checkbox" id="M15d" onchange="total_score();" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Emily is in the Cinema</td>
-                        <td>
-                            <input type="checkbox" id="M15e" onchange="total_score();" />
                         </td>
                     </tr>
 
@@ -624,12 +669,12 @@
                         <th style="text-align: left">Team Initials</th>
                         <td><input type="text" id="TeamInitials" /></td>
                     </tr>
-
+                    <!--
                     <tr>
                         <th colspan="2">Gracious Professionalism</th>
                     </tr>
 
-                    <!-- <tr>
+                    <tr>
                         <td>Level of Gracious Professionalism displayed at the robot game table:</td>
                         <td>
                             <label for="GP"></label>
@@ -640,8 +685,20 @@
                                 <option value="4">Exceeds</option>
                             </select>
                         </td>
-                    </tr> -->
+                    </tr>
 
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            <input
+                                type="button"
+                                value="Submit"
+                                style="height: 40px; width: 100px"
+                                onchange="total_score();"
+                                onclick="submitMatch();"
+                            />
+                        </td>
+                    </tr>
+                -->
                 </tbody>
             </table>
         </div>

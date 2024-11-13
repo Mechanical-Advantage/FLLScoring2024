@@ -23,7 +23,6 @@
                 mission10a: 0,
                 mission10b: 0,
                 mission11a: 0,
-                mission11b: 0,
                 mission12a: 0,
                 mission13a: 0,
                 mission14a: 0,
@@ -40,8 +39,8 @@
             function total_score() {
                 var score = 0;
 
-                var mission0 = document.getElementById("M00a");
-                if (mission0.checked) {
+                var mission0a = document.getElementById("M00a");
+                if (mission0a.checked) {
                     score += 20;
                     dict.mission0a = 1;
                 }
