@@ -12,6 +12,7 @@
                 mission2a: 0,
                 mission2b: 0,
                 mission3a: 0,
+                mission3b: 0,
                 mission4a: 0,
                 mission4b: 0,
                 mission5a: 0,
@@ -189,8 +190,8 @@
 
                 var missionPT = document.getElementById("PrecisionTokens");
                 var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
-                score += scorelookup[missionPT.value];
-                dict.missionPT = missionPT.value;
+                score += scorelookup[Number(missionPT.value)];
+                dict.missionPT = Number(missionPT.value);
 
                 document.getElementById("TotalPoints").value = score;
                 var total_score = score;
