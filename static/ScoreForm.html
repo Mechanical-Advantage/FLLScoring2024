@@ -1,40 +1,45 @@
+// To view submitted forms (cannot change scores)
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>FLL Scoring</title>
         <script type="text/javascript">
-            var dict = {
-                "mission0a": 1,
-                "mission1a": 1,
-                "mission1b": 1,
-                "mission1c": 1,
-                "mission2a": 1,
-                "mission2b": 1,
-                "mission3a": 1,
-                "mission4a": 1,
-                "mission4b": 1,
-                "mission5a": 1,
-                "mission6a": 1,
-                "mission7a": 1,
-                "mission8a": 1,
-                "mission9a": 1,
-                "mission9b": 1,
-                "mission10a": 1,
-                "mission10b": 1,
-                "mission11a": 0,
-                "mission12a": 1,
-                "mission13a": 1,
-                "mission14a": 1,
-                "mission14b": 1,
-                "mission14c": 1,
-                "mission14d": 1,
-                "mission15a": 1,
-                "mission15b": 1,
-                "mission15c": 1,
-                "mission15d": 1,
-                "missionPT": 0}
-                var dictString="text";
+            var dict = {};// = {
+            //     mission0a: 1,
+            //     mission1a: 1,
+            //     mission1b: 1,
+            //     mission1c: 1,
+            //     mission2a: 1,
+            //     mission2b: 1,
+            //     mission3a: 1,
+            //     mission3b: 1,
+            //     mission4a: 1,
+            //     mission4b: 1,
+            //     mission5a: 1,
+            //     mission6a: 1,
+            //     mission7a: 1,
+            //     mission8a: 1,
+            //     mission9a: 1,
+            //     mission9b: 1,
+            //     mission10a: 1,
+            //     mission10b: 1,
+            //     mission11a: 1,
+            //     mission12a: 1,
+            //     mission13a: 1,
+            //     mission14a: 1,
+            //     mission14b: 1,
+            //     mission14c: 1,
+            //     mission14d: 1,
+            //     mission15a: 1,
+            //     mission15b: 1,
+            //     mission15c: 1,
+            //     mission15d: 1,
+            //     missionPT: 0
+            // };
+            var dictString = "mr.bean";
+
             function total_score() {
                 var score = 0;
 
@@ -73,123 +78,123 @@
 
                 var mission3a = document.getElementById("M03a");
                 var mission3b = document.getElementById("M03b");
-                if (mission3a.checked) {
+                if (dict.mission3a == 1) {
                     score += 20;
-                    dict.mission3a = 1;
+                    mission3a.checked = true;
                 }
-                score += Number(mission3b.innerText) * 5;
-                dict.mission3b = Number(mission3b.innerText);
+                score += dict.mission3b * 5;
+                mission3b.value = dict.mission3b;
 
                 var mission4a = document.getElementById("M04a");
                 var mission4b = document.getElementById("M04b");
-                if (mission4a.checked) {
+                if (dict.mission4a == 1) {
                     score += 20;
-                    dict.mission4a = 1;
+                    mission4a.checked = true;
                 }
-                if (mission4b.checked) {
+                if (dict.mission4b == 1) {
                     score += 20;
-                    dict.mission4b = 1;
+                    mission4b.checked = true;
                 }
 
                 var mission5a = document.getElementById("M05a");
-                if (mission5a.checked) {
+                if (dict.mission5a == 1) {
                     score += 30;
-                    dict.mission5a = 1;
+                    mission5a.checked = true;
                 }
 
                 var mission6a = document.getElementById("M06a");
-                if (mission6a.checked) {
+                if (dict.mission6a == 1) {
                     score += 30;
-                    dict.mission6a = 1;
+                    mission6a.checked = true;
                 }
 
                 var mission7a = document.getElementById("M07a");
-                if (mission7a.checked) {
+                if (dict.mission7a == true) {
                     score += 20;
-                    dict.mission7a = 1;
+                    mission7a.checked = true;
                 }
 
                 var mission8a = document.getElementById("M08a");
-                score += Number(mission8a.innerText) * 10;
-                dict.mission8a = Number(mission8a.innerText);
+                score += dict.mission8a * 10;
+                mission8a.value = dict.mission8a;
 
                 var mission9a = document.getElementById("M09a");
                 var mission9b = document.getElementById("M09b");
-                if (mission9a.checked) {
+                if (dict.mission9a == 1) {
                     score += 20;
-                    dict.mission9a = 1;
+                    mission9a.checked = true;
                 }
-                if (mission9b.checked) {
+                if (dict.mission9b == 1) {
                     score += 10;
-                    dict.mission9b = 1;
+                    mission9b.checked = true;
                 }
 
                 var mission10a = document.getElementById("M10a");
                 var mission10b = document.getElementById("M10b");
-                if (mission10a.checked) {
+                if (dict.mission10a == 1) {
                     score += 30;
-                    dict.mission10a = 1;
+                    mission10a.checked = true;
                 }
-                if (mission10b.checked) {
+                if (dict.mission10b == 1) {
                     score += 10;
-                    dict.mission10b = 1;
+                    mission10b.checked = true;
                 }
 
                 var mission11a = document.getElementById("M11a");
                 var twenty_ten = { "": 0, 0: 0, 1: 20, 2: 30 };
-                score += twenty_ten[Number(mission11a.innerText)];
-                dict.mission11a = Number(mission11a.innerText);
+                score += twenty_ten[dict.mission11a];
+                mission11a.value = dict.mission11a;
 
                 var mission12a = document.getElementById("M12a");
-                score += Number(mission12a.innerText) * 10;
-                dict.mission12a = Number(mission12a.innerText);
+                score += Number(dict.mission12a) * 10;
+                mission12a.innerText = Number(dict.mission12a);
 
                 var mission13a = document.getElementById("M13a");
-                if (mission13a.checked) {
+                if (dict.mission13a == 1) {
                     score += 20;
-                    dict.mission13a = 1;
+                    mission13a.checked = true;
                 }
 
                 var mission14a = document.getElementById("M14a");
                 var mission14b = document.getElementById("M14b");
                 var mission14c = document.getElementById("M14c");
                 var mission14d = document.getElementById("M14d");
-                if (mission14a.checked) {
+                if (mission14a == 1) {
                     score += 5;
-                    dict.mission14a = 1;
+                    mission14a.checked = true;
                 }
-                if (mission14b.checked) {
+                if (mission14b == 1) {
                     score += 10;
-                    dict.mission14b = 1;
+                    mission14b.checked = true;
                 }
-                if (mission14c.checked) {
+                if (mission14c == 1) {
                     score += 10;
-                    dict.mission14c = 1;
+                    mission14c.checked = true;
                 }
-                score += twenty_ten[Number(mission14d.innerText)];
-                dict.mission14d = Number(mission14d.innerText);
+                score += twenty_ten[dict.mission14d];
+                mission14d.value = dict.mission14d;
 
                 var mission15a = document.getElementById("M15a");
                 var mission15b = document.getElementById("M15b");
                 var mission15c = document.getElementById("M15c");
                 var mission15d = document.getElementById("M15d");
-                score += Number(mission15a.innerText) * 5;
-                dict.mission15a = Number(mission15a.innerText);
-                score += Number(mission15b.innerText) * 5;
-                dict.mission15b = Number(mission15b.innerText);
-                if (mission15c.checked) {
+                score += dict.mission15a * 5;
+                mission15a.value = dict.mission15a;
+                score += dict.mission15b * 5;
+                mission15b.value = dict.mission15b;
+                if (dict.mission15c == 1) {
                     score += 5;
-                    dict.mission15c = 1;
+                    mission15c.checked = true;
                 }
-                if (mission15d.checked) {
+                if (dict.mission15d == 1) {
                     score += 20;
-                    dict.mission15d = 1;
+                    mission15d.checked = true;
                 }
 
                 var missionPT = document.getElementById("PrecisionTokens");
                 var scorelookup = { "": 0, 0: 0, 1: 10, 2: 15, 3: 25, 4: 35, 5: 50, 6: 50 };
-                score += scorelookup[missionPT.value];
-                dict.missionPT = missionPT.value;
+                score += scorelookup[dict.missionPT];
+                missionPT.value = dict.missionPT;
 
                 document.getElementById("TotalPoints").value = score;
                 var total_score = score;
@@ -202,7 +207,7 @@
                 var element = document.getElementById(mission);
                 var value = Number(element.innerText) - 1;
                 if (value < 0) value = 0;
-                element.innerText = value;
+                // element.innerText = value;
                 total_score();
             }
 
@@ -216,15 +221,12 @@
                 if (value > 2 && mission == "M14d") value = 2;
                 if (value > 3 && mission == "M15a") value = 3;
                 if (value > 2 && mission == "M15b") value = 2;
-                element.innerText = value;
+                // element.innerText = value;
                 total_score();
             }
 
             function startMatch() {
-                if (
-                    document.getElementById("name").value == "" ||
-                    document.getElementById("match").value == "")
-                {
+                if (document.getElementById("name").value == "" || document.getElementById("match").value == "") {
                     alert("Cannot start, please fill in the boxes.");
                     return;
                 }
@@ -235,6 +237,33 @@
                 scoring_screen.hidden = false;
 
                 total_score();
+            }
+
+            function getMatch() {
+                const http = new XMLHttpRequest();
+                const form = new FormData();
+
+                form.append("team", document.getElementById("name").value);
+                form.append("match", document.getElementById("match").value);
+
+                console.log(document.getElementById("name").value, document.getElementById("match").value);
+
+                http.onreadystatechange = () => {
+                    if (http.readyState == 4) {
+                        if (http.status == 200) {
+                            console.log("Success");
+                            dict = JSON.parse(http.response);
+                            total_score();
+                        } else {
+                            console.log("Failure");
+                        }
+                    }
+                };
+
+                http.open("POST", "/getMatch");
+                http.send(form);
+
+                startMatch();
             }
 
             var matchName = null;
@@ -344,7 +373,7 @@
 
             td {
                 padding: 10px;
-                text-align:left;
+                text-align: left;
             }
         </style>
     </head>
@@ -370,7 +399,7 @@
                                 type="button"
                                 value="Done"
                                 style="height: 40px; width: 100px"
-                                onclick="javascript:startMatch()"
+                                onclick="javascript:getMatch()"
                             />
                         </td>
                     </tr>

@@ -69,6 +69,26 @@ class Root(object):
         return
 
     @cherrypy.expose
+    def getMatch(self, team, match):
+        print("getMatch(", team, ",", match, ")")
+        conn_global = sql.connect("data.db")
+        cur_global = conn_global.cursor()
+        cur_global.execute(
+            'SELECT * FROM matches WHERE team=? and match=?',(team, match))
+        rows = cur_global.fetchall()[0][8]
+        print(rows)
+        conn_global.commit()
+        conn_global.close()
+        return (rows)
+    
+    @cherrypy.expose
+    def getMatches(self):
+        conn_global = sql.connect("data.db")
+        cur_global = conn_global.cursor()
+        matches = cur_global.execute("select * from matches").fetchall()
+        match_data = []
+
+    @cherrypy.expose
     def getData(self):
         conn_global = sql.connect("data.db")
         cur_global = conn_global.cursor()
