@@ -21,6 +21,6 @@ schedule_judging_outlength = 900  # secs, how long should the break between judg
 schedule_judging_teamgrace = 900  # secs, how long before or after judging should a team be excluded from matches?
 
 # General config for playoffs
-playoffs_starttime = 1731828600
+playoffs_starttime = 1731828000
 playoffs_cycletime = 600
 playoffs_matchnumberstart = 100
