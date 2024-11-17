@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>FLL Scoring</title>
         <script type="text/javascript">
-            var dict = {};// = {
+            var dict = {}; // = {
             //     mission0a: 1,
             //     mission1a: 1,
             //     mission1b: 1,
@@ -83,7 +83,7 @@
                     mission3a.checked = true;
                 }
                 score += dict.mission3b * 5;
-                mission3b.value = dict.mission3b;
+                mission3b.innerText = dict.mission3b;
 
                 var mission4a = document.getElementById("M04a");
                 var mission4b = document.getElementById("M04b");
@@ -116,7 +116,7 @@
 
                 var mission8a = document.getElementById("M08a");
                 score += dict.mission8a * 10;
-                mission8a.value = dict.mission8a;
+                mission8a.innerText = dict.mission8a;
 
                 var mission9a = document.getElementById("M09a");
                 var mission9b = document.getElementById("M09b");
@@ -143,7 +143,7 @@
                 var mission11a = document.getElementById("M11a");
                 var twenty_ten = { "": 0, 0: 0, 1: 20, 2: 30 };
                 score += twenty_ten[dict.mission11a];
-                mission11a.value = dict.mission11a;
+                mission11a.innerText = dict.mission11a;
 
                 var mission12a = document.getElementById("M12a");
                 score += Number(dict.mission12a) * 10;
@@ -172,16 +172,16 @@
                     mission14c.checked = true;
                 }
                 score += twenty_ten[dict.mission14d];
-                mission14d.value = dict.mission14d;
+                mission14d.innerText = dict.mission14d;
 
                 var mission15a = document.getElementById("M15a");
                 var mission15b = document.getElementById("M15b");
                 var mission15c = document.getElementById("M15c");
                 var mission15d = document.getElementById("M15d");
                 score += dict.mission15a * 5;
-                mission15a.value = dict.mission15a;
+                mission15a.innerText = dict.mission15a;
                 score += dict.mission15b * 5;
-                mission15b.value = dict.mission15b;
+                mission15b.innerText = dict.mission15b;
                 if (dict.mission15c == 1) {
                     score += 5;
                     mission15c.checked = true;
@@ -727,8 +727,7 @@
                             />
                         </td>
                     </tr>
-                -->
-                </tbody>
+                --></tbody>
             </table>
         </div>
     </body>

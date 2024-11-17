@@ -270,7 +270,10 @@ def websocket_send_timer_thread():
                 data = 150 - math.floor(elapsed_time)
         message = TextMessage(json.dumps({"type": "timer", "data": data}))
         for client in websocket_clients:
-            client.send(message)
+            try:
+                client.send(message)
+            except:
+                pass
 
 
 def websocket_send_matches():
@@ -287,7 +290,10 @@ def websocket_send_matches():
     conn.close()
     message = TextMessage(json.dumps({"type": "matches", "data": matches}))
     for client in websocket_clients:
-        client.send(message)
+        try:
+            client.send(message)
+        except:
+            pass
 
 
 class WebSocketHandler(WebSocket):
